@@ -22,7 +22,7 @@ WORLD_DIM = 10
 OBS_DIM = 4
 MSG_DIM = 5
 HIDDEN_DIM = 64  # Increased for more capacity
-NUM_EPISODES = 2000
+NUM_EPISODES = 5000  # Increased for stronger emergence (was 2000)
 LEARNING_RATE = 0.001  # Reduced from 0.01 to prevent gradient explosion
 MAX_GRAD_NORM = 1.0  # Gradient clipping threshold
 BATCH_SIZE = 256  # Increased for RTX 4090 (24GB VRAM)
@@ -30,10 +30,10 @@ VOCAB_SIZE = 64
 TAU_START = 1.0
 ANNEAL_RATE = 0.995
 ANNEAL_EVERY = 10
-ENTROPY_WEIGHT = 0.01
-ACTION_DIM = 4  # New: Dim for agent actions (e.g., forces on particles)
-REWARD_WEIGHT = 1.0  # Weight for cooperative reward loss
-COMM_COST_WEIGHT = 0.001  # L1 penalty on message to encourage sparsity
+ENTROPY_WEIGHT = 0.001  # Reduced to encourage vocab specialization (was 0.01)
+ACTION_DIM = 4  # Dim for agent actions
+REWARD_WEIGHT = 2.0  # Increased to emphasize coordination (was 1.0)
+COMM_COST_WEIGHT = 0.01  # Increased to force concise messaging (was 0.001)
 TIMESTEPS_PER_EPISODE = 5  # New for multi-step rollouts (priority 1)
 
 # Topology settings
