@@ -295,12 +295,11 @@ class Agent(nn.Module):
         
         self.to(device)  # Move model to device
         
-        # NOTE: torch.compile disabled - requires Triton which is not available on Windows
-        # To enable on Linux: uncomment the lines below
-        # if hasattr(torch, 'compile') and device.type == 'cuda':
-        #     self.encoder = torch.compile(self.encoder)
-        #     self.decoder = torch.compile(self.decoder)
-        #     self.world_attention = torch.compile(self.world_attention)
+        # Compile model for faster execution (PyTorch 2.0+)
+        if hasattr(torch, 'compile') and device.type == 'cuda':
+            self.encoder = torch.compile(self.encoder)
+            self.decoder = torch.compile(self.decoder)
+            self.world_attention = torch.compile(self.world_attention)
     
     def reset_hidden(self):
         """Reset hidden state at the start of a new trajectory."""
@@ -452,7 +451,7 @@ def train(num_episodes=NUM_EPISODES, verbose=True):
     
     # Mixed precision for RTX 4090
     use_amp = device.type == 'cuda'
-    scaler = torch.amp.GradScaler('cuda', enabled=use_amp)
+    scaler = torch.cuda.amp.GradScaler(enabled=use_amp)
 
     for episode in range(num_episodes):
         # Reset LSTM hidden states at start of each episode (new trajectory)
