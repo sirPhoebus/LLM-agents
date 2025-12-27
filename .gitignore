@@ -1,0 +1,5 @@
+.venv
+*.pth
+*.png
+*.md
+__pycache__
