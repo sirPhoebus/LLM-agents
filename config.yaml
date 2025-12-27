@@ -1,0 +1,75 @@
+# Emergent Communication Training Configuration
+
+training:
+  num_episodes: 3000
+  learning_rate: 0.0003
+  max_grad_norm: 1.0
+  batch_size: 512
+  timesteps_per_episode: 9
+  eval_interval: 1000
+  device: "auto"  # "cuda", "cpu", or "auto"
+
+agents:
+  num_agents: 24
+  obs_dim: 4
+  msg_dim: 2
+  hidden_dim: 64
+  latent_dim: 8
+  vocab_size: 16
+  action_dim: 4
+
+curriculum:
+  # Gumbel-Softmax Temperature Annealing
+  tau_start: 1.5
+  tau_min: 0.05
+  anneal_rate: 0.999
+  anneal_every: 10
+  
+  # Entropy Weight
+  entropy_weight_start: 0.01
+  entropy_weight_end: 0.0
+  entropy_decay_episodes: 1500
+  
+  # Communication Cost
+  comm_cost_start: 0.0
+  comm_cost_end: 0.1
+  comm_cost_ramp_episodes: 3000
+
+  # Stochasticity & Exploration
+  exploration_std_start: 0.5
+  exploration_std_min: 0.1
+  policy_temp_start: 1.0
+  policy_temp_min: 0.1
+  stochastic_decay_rate: 0.995
+
+topology:
+  type: "knearest"
+  k_neighbors_start: 8
+  k_neighbors_end: 2
+  k_decay_episodes: 3000
+
+evolution:
+  selection_interval: 500
+  num_elite: 3
+  num_replace: 3
+
+environment:
+  world_dim: 10
+  reward_weight: 2.0
+  swarm:
+    cohesion_factor: 0.01
+    separation_factor: 0.05
+    noise_factor: 0.05
+    action_scale: 0.1
+  oscillatory:
+    amplitude: 0.1
+    frequencies: [0.05, 0.08, 0.12]
+
+llm:
+  provider: "local"  # "local" or "hub"
+  local:
+    endpoint: "http://localhost:1234/v1/chat/completions"
+    model: "google/gemma-3n-e4b"
+  hub:
+    endpoint: "https://api-inference.huggingface.co/models/Qwen/Qwen2.5-3B-Instruct"
+    model: "Qwen/Qwen2.5-3B-Instruct"

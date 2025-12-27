@@ -16,23 +16,14 @@ import json
 import numpy as np
 from typing import List, Dict, Optional, Tuple
 
-from utils import load_config
-
-# Load config
-try:
-    config = load_config("config.yaml")
-    llm_cfg = config.get('llm', {})
-except:
-    llm_cfg = {}
-
 # LLM Configuration
-LOCAL_ENDPOINT = llm_cfg.get('local', {}).get('endpoint', "http://localhost:1234/v1/chat/completions")
-LOCAL_MODEL = llm_cfg.get('local', {}).get('model', "google/gemma-3n-e4b")
-HUB_ENDPOINT = llm_cfg.get('hub', {}).get('endpoint', "https://api-inference.huggingface.co/models/Qwen/Qwen2.5-3B-Instruct")
-HUB_MODEL = llm_cfg.get('hub', {}).get('model', "Qwen/Qwen2.5-3B-Instruct")
+LOCAL_ENDPOINT = "http://localhost:1234/v1/chat/completions"
+LOCAL_MODEL = "google/gemma-3n-e4b"
+HUB_ENDPOINT = "https://api-inference.huggingface.co/models/Qwen/Qwen2.5-3B-Instruct"
+HUB_MODEL = "Qwen/Qwen2.5-3B-Instruct"
 
-# Global provider selection
-_current_provider = llm_cfg.get('provider', "local")
+# Global provider selection (set via create_llm_client)
+_current_provider = "local"
 
 
 class LLMClient:
@@ -334,18 +325,21 @@ def goal_to_action_bias(goal: str, action_dim: int = 4) -> np.ndarray:
 # ============ INTEGRATION FUNCTION ============
 
 def run_llm_interpretation(
-    swarm,
+    agents,
     neighbors: Dict,
     tau: float,
     device,
-    env,
     provider: str = "local",
     verbose: bool = True
 ) -> Optional[Dict]:
     """
-    Run LLM interpretation on trained swarm.
+    Run LLM interpretation on trained agents.
+    
+    Args:
+        provider: "local" for localhost:1234, "hub" for HuggingFace
     """
     import torch
+    from main import BATCH_SIZE, LATENT_DIM, PROJECTION_MAT, get_partial_obs, OBS_DIM, NUM_AGENTS, VOCAB_SIZE
     
     # Initialize LLM with chosen provider
     llm = create_llm_client(provider)
@@ -362,26 +356,20 @@ def run_llm_interpretation(
         print("LLM connected successfully!")
     
     # Collect symbol sequences
-    swarm.reset_hidden(device)
-    
-    # Needs some constants from environment/config
-    from main import BATCH_SIZE, LATENT_DIM, OBS_DIM, NUM_AGENTS, VOCAB_SIZE
+    for agent in agents:
+        agent.reset_hidden()
     
     z_t = torch.randn(BATCH_SIZE, LATENT_DIM, device=device)
     symbol_sequences = [[] for _ in range(NUM_AGENTS)]
     
     with torch.no_grad():
         for t in range(5):
-            current_world, _, _, _, _ = env.generate_world_batch(BATCH_SIZE, None, z_t)
-            obs = torch.stack([env.get_partial_obs(current_world, i, OBS_DIM) for i in range(NUM_AGENTS)])
+            current_world = z_t @ PROJECTION_MAT
+            obs_list = [get_partial_obs(current_world, i, OBS_DIM) for i in range(NUM_AGENTS)]
             
-            msgs_hard, _, _ = swarm.forward_policy(obs, tau, temperature=1.0)
-            # msgs_hard: (N, B, msg_dim, vocab_size)
-            symbols = msgs_hard[0, 0].argmax().item() # Just sample first batch/agent for text sequence
-            
-            # Actually, let's get sequences for first 5 agents
-            for i in range(min(5, NUM_AGENTS)):
-                symbol = msgs_hard[i, 0].argmax().item()
+            for i in range(NUM_AGENTS):
+                msg_hard, _ = agents[i].generate_message(obs_list[i], tau)
+                symbol = msg_hard[0, 0].argmax().item()
                 symbol_sequences[i].append(symbol)
             
             z_t = torch.randn(BATCH_SIZE, LATENT_DIM, device=device)
@@ -389,16 +377,15 @@ def run_llm_interpretation(
     # Collect hub counts from attention weights
     import collections
     hub_counts = collections.Counter()
-    if swarm.last_attn_weights is not None:
-        # last_attn_weights: (B, N, N)
-        avg_weights = swarm.last_attn_weights.mean(dim=0).cpu().numpy() # (N, N)
-        for i in range(NUM_AGENTS):
-            hub_idx = int(np.argmax(avg_weights[i]))
-            if avg_weights[i, hub_idx] > 0.2:
-                hub_counts[hub_idx] += 1
+    for i in range(NUM_AGENTS):
+        if agents[i].last_attn_weights is not None:
+            avg_weights = agents[i].last_attn_weights.mean(dim=0).cpu().numpy()
+            hub_idx = int(np.argmax(avg_weights))
+            if avg_weights[hub_idx] > 0.2:
+                hub_counts[neighbors[i][hub_idx]] += 1
     
     # Get vocab stats
-    all_symbols = [s for seq in symbol_sequences if seq for s in seq]
+    all_symbols = [s for seq in symbol_sequences for s in seq]
     vocab_used = len(set(all_symbols))
     
     # Get LLM interpretation
