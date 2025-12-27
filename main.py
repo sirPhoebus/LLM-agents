@@ -401,10 +401,44 @@ def apply_swarm_dynamics(z: torch.Tensor, aggregated_actions: torch.Tensor) -> t
     delta = cohesion + separation + NOISE_FACTOR * torch.randn_like(positions) + action_applied
     new_positions = positions + delta
     
+    # Kuramoto-like phase coupling for synchronization
+    new_positions = kuramoto_coupling_torch(new_positions)
+    
     # Compute reward: negative variance (encourage clustering)
     reward = -new_positions.var(dim=1).mean(dim=-1)
     
     return new_positions.view(-1, LATENT_DIM), reward
+
+
+# Kuramoto-like coupling between agent phases
+KURAMOTO_COUPLING = 0.1  # Coupling strength
+
+def kuramoto_coupling_torch(positions, coupling_strength=KURAMOTO_COUPLING):
+    """
+    Apply Kuramoto-like phase synchronization to positions.
+    Treats position angles as phases and couples them via sine of phase differences.
+    This encourages emergent synchronization patterns.
+    """
+    batch_size, num_particles, dims = positions.shape
+    
+    # Extract phases from position angles (atan2 of y/x)
+    phases = torch.atan2(positions[:, :, 1], positions[:, :, 0] + 1e-6)  # (B, N)
+    
+    # Compute phase coupling (Kuramoto model)
+    # Each particle's phase is adjusted based on sine of differences with all others
+    phase_diffs = phases.unsqueeze(2) - phases.unsqueeze(1)  # (B, N, N)
+    coupling = coupling_strength * torch.sin(phase_diffs).mean(dim=2)  # (B, N)
+    
+    # Apply coupling as angular adjustment
+    new_phases = phases + coupling
+    
+    # Convert back to positions (preserve radius)
+    radii = torch.sqrt(positions[:, :, 0]**2 + positions[:, :, 1]**2 + 1e-6)
+    new_positions = positions.clone()
+    new_positions[:, :, 0] = radii * torch.cos(new_phases)
+    new_positions[:, :, 1] = radii * torch.sin(new_phases)
+    
+    return new_positions
 
 
 def generate_world_batch(batch_size, world_dim, aggregated_actions, z_t=None):
