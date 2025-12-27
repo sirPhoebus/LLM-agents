@@ -592,7 +592,7 @@ def evaluate(agents, tau, neighbors, verbose=True):
         recon_losses = []
         pred_losses = []
         for i in range(NUM_AGENTS):
-            _, recon_loss, pred_loss, _ = agents[i].compute_loss(received_msgs_list[i], obs_list[i], msgs_hard[i], torch.zeros_like(msgs_hard[i]), z_tp1, reward)
+            _, recon_loss, pred_loss, _, _ = agents[i].compute_loss(received_msgs_list[i], obs_list[i], msgs_hard[i], torch.zeros_like(msgs_hard[i]), z_tp1, reward)
             recon_losses.append(recon_loss.item())
             pred_losses.append(pred_loss.item())
         
@@ -720,16 +720,25 @@ def save_agents(agents, prefix="agent"):
 
 
 if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser(description='Emergent Communication Training')
+    parser.add_argument('--local', action='store_true', help='Use local LLM (localhost:1234)')
+    parser.add_argument('--hub', action='store_true', help='Use HuggingFace Hub (Qwen2.5-3B)')
+    args = parser.parse_args()
+    
+    # Determine LLM provider
+    llm_provider = "hub" if args.hub else "local"
+    
     trained_agents, final_tau, neighbors = train()
     visualize_topology(neighbors, NUM_AGENTS)
     evaluate(trained_agents, final_tau, neighbors)
     save_agents(trained_agents)
     
-    # LLM Interpretation (optional - requires localhost:1234 running)
+    # LLM Interpretation
     try:
         from llm_bridge import run_llm_interpretation
-        print("\nAttempting LLM interpretation...")
-        llm_result = run_llm_interpretation(trained_agents, neighbors, final_tau, device)
+        print(f"\nAttempting LLM interpretation (provider: {llm_provider})...")
+        llm_result = run_llm_interpretation(trained_agents, neighbors, final_tau, device, provider=llm_provider)
         if llm_result:
             print("\nLLM successfully interpreted emergent patterns!")
     except ImportError:

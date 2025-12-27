@@ -5,6 +5,10 @@ Connects the multi-agent emergent communication to a local LLM for:
 - Symbol interpretation (converting agent symbols to text)
 - Collective model analysis (LLM interprets emergent patterns)
 - Goal generation (LLM proposes high-level goals for swarm)
+
+Usage:
+  --local : Use local LLM at localhost:1234 (default)
+  --hub   : Use HuggingFace Hub (Qwen2.5-3B)
 """
 
 import requests
@@ -13,16 +17,22 @@ import numpy as np
 from typing import List, Dict, Optional, Tuple
 
 # LLM Configuration
-LLM_ENDPOINT = "http://localhost:1234/v1/chat/completions"
-LLM_MODEL = "google/gemma-3n-e4b"
+LOCAL_ENDPOINT = "http://localhost:1234/v1/chat/completions"
+LOCAL_MODEL = "google/gemma-3n-e4b"
+HUB_ENDPOINT = "https://api-inference.huggingface.co/models/Qwen/Qwen2.5-3B-Instruct"
+HUB_MODEL = "Qwen/Qwen2.5-3B-Instruct"
+
+# Global provider selection (set via create_llm_client)
+_current_provider = "local"
 
 
 class LLMClient:
     """OpenAI-compatible client for local LLM."""
     
-    def __init__(self, endpoint: str = LLM_ENDPOINT, model: str = LLM_MODEL):
+    def __init__(self, endpoint: str = LOCAL_ENDPOINT, model: str = LOCAL_MODEL):
         self.endpoint = endpoint
         self.model = model
+        self.provider = "local"
     
     def chat(self, messages: List[Dict], max_tokens: int = 512, temperature: float = 0.7) -> str:
         """Send chat completion request to local LLM."""
@@ -49,6 +59,87 @@ class LLMClient:
             return "OK" in response or len(response) > 0
         except:
             return False
+
+
+class HuggingFaceClient:
+    """Client for HuggingFace Inference API (Qwen2.5-3B)."""
+    
+    def __init__(self, api_key: Optional[str] = None):
+        self.endpoint = HUB_ENDPOINT
+        self.model = HUB_MODEL
+        self.provider = "hub"
+        self.headers = {"Content-Type": "application/json"}
+        if api_key:
+            self.headers["Authorization"] = f"Bearer {api_key}"
+        else:
+            # Try to get from environment
+            import os
+            key = os.environ.get("HF_TOKEN") or os.environ.get("HUGGINGFACE_TOKEN")
+            if key:
+                self.headers["Authorization"] = f"Bearer {key}"
+    
+    def chat(self, messages: List[Dict], max_tokens: int = 512, temperature: float = 0.7) -> str:
+        """Send chat completion request to HuggingFace."""
+        # Format messages for Qwen
+        prompt = ""
+        for msg in messages:
+            role = msg.get("role", "user")
+            content = msg.get("content", "")
+            if role == "user":
+                prompt += f"<|im_start|>user\n{content}<|im_end|>\n"
+            elif role == "assistant":
+                prompt += f"<|im_start|>assistant\n{content}<|im_end|>\n"
+        prompt += "<|im_start|>assistant\n"
+        
+        payload = {
+            "inputs": prompt,
+            "parameters": {
+                "max_new_tokens": max_tokens,
+                "temperature": temperature,
+                "return_full_text": False
+            }
+        }
+        
+        try:
+            response = requests.post(self.endpoint, headers=self.headers, json=payload, timeout=60)
+            response.raise_for_status()
+            result = response.json()
+            if isinstance(result, list) and len(result) > 0:
+                return result[0].get("generated_text", str(result))
+            return str(result)
+        except requests.exceptions.RequestException as e:
+            print(f"HuggingFace request failed: {e}")
+            return f"[HF Error: {e}]"
+    
+    def test_connection(self) -> bool:
+        """Test if HuggingFace API is accessible."""
+        try:
+            response = self.chat([{"role": "user", "content": "Hi"}], max_tokens=10)
+            return len(response) > 0 and "[HF Error" not in response
+        except:
+            return False
+
+
+def create_llm_client(provider: str = "local", api_key: Optional[str] = None):
+    """
+    Factory function to create LLM client.
+    
+    Args:
+        provider: "local" for localhost:1234, "hub" for HuggingFace
+        api_key: Optional API key for HuggingFace
+    
+    Returns:
+        LLMClient or HuggingFaceClient instance
+    """
+    global _current_provider
+    _current_provider = provider
+    
+    if provider == "hub":
+        print(f"Using HuggingFace Hub: {HUB_MODEL}")
+        return HuggingFaceClient(api_key)
+    else:
+        print(f"Using Local LLM: {LOCAL_MODEL} at {LOCAL_ENDPOINT}")
+        return LLMClient()
 
 
 def symbols_to_text(symbol_sequences: List[List[int]], vocab_size: int = 64) -> str:
@@ -238,25 +329,27 @@ def run_llm_interpretation(
     neighbors: Dict,
     tau: float,
     device,
+    provider: str = "local",
     verbose: bool = True
 ) -> Optional[Dict]:
     """
     Run LLM interpretation on trained agents.
     
-    Call this after training to get LLM analysis of emergent patterns.
+    Args:
+        provider: "local" for localhost:1234, "hub" for HuggingFace
     """
     import torch
     from main import BATCH_SIZE, LATENT_DIM, PROJECTION_MAT, get_partial_obs, OBS_DIM, NUM_AGENTS, VOCAB_SIZE
     
-    # Initialize LLM
-    llm = LLMClient()
+    # Initialize LLM with chosen provider
+    llm = create_llm_client(provider)
     
     if verbose:
         print("\n" + "="*50)
-        print("LLM BRIDGE: Testing connection...")
+        print(f"LLM BRIDGE: Testing connection ({provider})...")
     
     if not llm.test_connection():
-        print("LLM not available at", LLM_ENDPOINT)
+        print(f"LLM not available ({provider})")
         return None
     
     if verbose:
