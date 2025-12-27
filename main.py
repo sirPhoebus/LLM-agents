@@ -552,6 +552,13 @@ def train(num_episodes=NUM_EPISODES, verbose=True):
             
             if verbose:
                 print(f"Episode {episode}: Avg Recon Loss = {avg_recon:.4f}, Avg Pred Loss = {avg_pred:.4f}, Avg Reward Loss = {avg_reward:.4f}, Tau = {tau:.4f}")
+        
+        # Periodic evaluation every 200 episodes to monitor emergence live
+        if episode > 0 and episode % 200 == 0:
+            print(f"\n{'='*50}")
+            print(f"PERIODIC EVALUATION (Episode {episode})")
+            print(f"{'='*50}")
+            evaluate(agents, tau, neighbors, verbose=True)
 
     plt.ioff()
     plt.savefig('training_progress.png')
@@ -717,4 +724,17 @@ if __name__ == "__main__":
     visualize_topology(neighbors, NUM_AGENTS)
     evaluate(trained_agents, final_tau, neighbors)
     save_agents(trained_agents)
+    
+    # LLM Interpretation (optional - requires localhost:1234 running)
+    try:
+        from llm_bridge import run_llm_interpretation
+        print("\nAttempting LLM interpretation...")
+        llm_result = run_llm_interpretation(trained_agents, neighbors, final_tau, device)
+        if llm_result:
+            print("\nLLM successfully interpreted emergent patterns!")
+    except ImportError:
+        print("LLM bridge not available (llm_bridge.py missing)")
+    except Exception as e:
+        print(f"LLM interpretation skipped: {e}")
+    
     print("Done.")
