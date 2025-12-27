@@ -192,7 +192,7 @@ class Decoder(nn.Module):
 
 
 class MessageAttention(nn.Module):
-    """Multi-head attention over received messages."""
+    """Multi-head attention over received messages with LayerNorm for stability."""
     def __init__(self, msg_dim, vocab_size, hidden_dim, num_heads=4):
         super(MessageAttention, self).__init__()
         self.msg_dim = msg_dim
@@ -206,6 +206,12 @@ class MessageAttention(nn.Module):
         self.key_proj = nn.Linear(self.msg_flat_dim, hidden_dim)
         self.value_proj = nn.Linear(self.msg_flat_dim, hidden_dim)
         
+        # LayerNorm for stability (prevents variance explosion)
+        self.norm_query = nn.LayerNorm(hidden_dim)
+        self.norm_key = nn.LayerNorm(hidden_dim)
+        self.norm_value = nn.LayerNorm(hidden_dim)
+        self.norm_out = nn.LayerNorm(hidden_dim)
+        
         # Multi-head attention
         self.attention = nn.MultiheadAttention(hidden_dim, num_heads, batch_first=True)
         
@@ -213,11 +219,6 @@ class MessageAttention(nn.Module):
         self.out_proj = nn.Linear(hidden_dim, hidden_dim)
     
     def forward(self, own_msg, received_msgs):
-        """
-        own_msg: (B, msg_dim, vocab_size) - agent's own message (query source)
-        received_msgs: list of (B, msg_dim, vocab_size) tensors from neighbors
-        Returns: (B, hidden_dim) - attended representation
-        """
         batch_size = own_msg.size(0)
         num_neighbors = len(received_msgs)
         
@@ -227,17 +228,17 @@ class MessageAttention(nn.Module):
         # Stack neighbors: (B, num_neighbors, msg_flat_dim)
         neighbors_flat = torch.stack([m.view(batch_size, -1) for m in received_msgs], dim=1)
         
-        # Query from own message, keys/values from neighbors
-        query = self.query_proj(own_flat).unsqueeze(1)  # (B, 1, hidden_dim)
-        keys = self.key_proj(neighbors_flat)  # (B, num_neighbors, hidden_dim)
-        values = self.value_proj(neighbors_flat)  # (B, num_neighbors, hidden_dim)
+        # Query from own message, keys/values from neighbors (with LayerNorm)
+        query = self.norm_query(self.query_proj(own_flat)).unsqueeze(1)  # (B, 1, hidden_dim)
+        keys = self.norm_key(self.key_proj(neighbors_flat))  # (B, num_neighbors, hidden_dim)
+        values = self.norm_value(self.value_proj(neighbors_flat))  # (B, num_neighbors, hidden_dim)
         
         # Multi-head attention
-        attn_out, attn_weights = self.attention(query, keys, values)  # (B, 1, hidden_dim), (B, 1, num_neighbors)
+        attn_out, attn_weights = self.attention(query, keys, values)
         attn_out = attn_out.squeeze(1)  # (B, hidden_dim)
         
-        # Output projection
-        out = self.out_proj(attn_out)
+        # Output projection with LayerNorm
+        out = self.norm_out(self.out_proj(attn_out))
         
         return out, attn_weights.squeeze(1)  # (B, hidden_dim), (B, num_neighbors)
 
@@ -291,7 +292,13 @@ class Agent(nn.Module):
             nn.Linear(hidden_dim, latent_dim)
         )
         self.optimizer = optim.Adam(self.parameters(), lr=LEARNING_RATE)
-        self.scheduler = optim.lr_scheduler.ExponentialLR(self.optimizer, gamma=0.995)
+        
+        # Warm-up LR scheduler (100 episode linear ramp, then constant)
+        def warm_up_lambda(epoch):
+            if epoch < 100:
+                return epoch / 100.0  # Linear warm-up
+            return 1.0
+        self.scheduler = optim.lr_scheduler.LambdaLR(self.optimizer, lr_lambda=warm_up_lambda)
         
         self.to(device)  # Move model to device
         
@@ -508,8 +515,8 @@ def train(num_episodes=NUM_EPISODES, verbose=True):
             pred_losses_episode.extend(pred_losses_timestep)
             reward_losses_episode.extend(reward_losses_timestep)
             
-            # Update z_t for next timestep
-            z_t = z_tp1
+            # Update z_t for next timestep (detach to break gradient chain)
+            z_t = z_tp1.detach()
         
         # Backward and step after full rollout (with AMP + gradient clipping)
         scaler.scale(total_loss).backward()
@@ -522,9 +529,9 @@ def train(num_episodes=NUM_EPISODES, verbose=True):
         if episode % ANNEAL_EVERY == 0:
             tau = max(0.01, tau * ANNEAL_RATE)
         
-        if episode % 100 == 0 and episode > 0:
-            for agent in agents:
-                agent.scheduler.step()
+        # Scheduler step every episode (for warm-up to work properly)
+        for agent in agents:
+            agent.scheduler.step()
         
         if episode % 10 == 0:
             episodes_list.append(episode)
@@ -634,14 +641,15 @@ def evaluate(agents, tau, neighbors, verbose=True):
         if verbose:
             print("\n--- Symbol Specialization ---")
             current_vocab_used = len(freq)
-            if current_vocab_used < VOCAB_SIZE * 0.7:
-                print(f"Symbol specialization detected: Using {current_vocab_used}/{VOCAB_SIZE} symbols")
-                # Find specialized symbols (high usage)
-                threshold = BATCH_SIZE * NUM_AGENTS * MSG_DIM * 0.05
-                specialized = [sym for sym, count in freq.most_common() if count > threshold]
-                print(f"  Specialized symbols (high usage): {specialized[:10]}")
+            total_symbols = BATCH_SIZE * NUM_AGENTS * MSG_DIM
+            dominance = sum(count for _, count in freq.most_common(10)) / total_symbols
+            
+            if current_vocab_used < VOCAB_SIZE * 0.7 or dominance > 0.5:
+                print(f"Specialization detected: {current_vocab_used}/{VOCAB_SIZE} symbols, top 10 dominate {dominance:.1%}")
+                specialized = [sym for sym, _ in freq.most_common(10)]
+                print(f"  Top 10 symbols: {specialized}")
             else:
-                print(f"Vocab still diverse: {current_vocab_used}/{VOCAB_SIZE} symbols in use")
+                print(f"Vocab diverse: {current_vocab_used}/{VOCAB_SIZE} symbols, top 10 = {dominance:.1%}")
         
         # 3. Temporal Patterns - LSTM Grammar
         if verbose:
