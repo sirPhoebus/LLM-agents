@@ -6,7 +6,7 @@ training:
   max_grad_norm: 1.0
   batch_size: 512
   timesteps_per_episode: 9
-  eval_interval: 1000
+  eval_interval: 500
   device: "auto"  # "cuda", "cpu", or "auto"
 
 agents:
@@ -15,8 +15,14 @@ agents:
   msg_dim: 2
   hidden_dim: 64
   latent_dim: 8
-  vocab_size: 16
+  vocab_size: 64
   action_dim: 4
+
+composition:
+  use_transformer_decoder: true
+  transformer_layers: 2
+  transformer_heads: 4
+  embedding_dim: 32
 
 curriculum:
   # Gumbel-Softmax Temperature Annealing
@@ -49,9 +55,12 @@ topology:
   k_decay_episodes: 3000
 
 evolution:
+  pbt_enabled: true
+  num_species: 4
   selection_interval: 500
-  num_elite: 3
-  num_replace: 3
+  mutation_rate: 0.01
+  num_elite: 1
+  num_replace: 1
 
 environment:
   world_dim: 10

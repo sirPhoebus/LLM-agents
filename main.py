@@ -73,13 +73,16 @@ K_DECAY_EPISODES = config['topology']['k_decay_episodes']
 SELECTION_INTERVAL = config['evolution']['selection_interval']
 NUM_ELITE = config['evolution']['num_elite']
 NUM_REPLACE = config['evolution']['num_replace']
+PBT_ENABLED = config['evolution'].get('pbt_enabled', False)
+NUM_SPECIES = config['evolution'].get('num_species', 1) if PBT_ENABLED else 1
+MUTATION_RATE = config['evolution'].get('mutation_rate', 0.01)
 
 REWARD_WEIGHT = config['environment']['reward_weight']
 
 
 # ============ TRAINING FUNCTIONS ============
 
-def train(num_episodes=NUM_EPISODES, verbose=True):
+def train(num_episodes=NUM_EPISODES, verbose=True, use_llm=False, llm_provider='local'):
     """Main training loop with vectorized Swarm architecture."""
     # Initialize logger
     logger = TrainingLogger()
@@ -106,107 +109,143 @@ def train(num_episodes=NUM_EPISODES, verbose=True):
     env.oscillation_frequencies = config['environment']['oscillatory']['frequencies']
 
     # Initialize Swarm
+    # Initialize swarm model
     swarm = Swarm(
-        obs_dim=OBS_DIM,
-        msg_dim=MSG_DIM,
-        vocab_size=VOCAB_SIZE,
-        hidden_dim=HIDDEN_DIM,
-        latent_dim=LATENT_DIM,
-        total_agents=NUM_AGENTS,
-        action_dim=ACTION_DIM,
-        batch_size=BATCH_SIZE,
-        learning_rate=LEARNING_RATE
+        OBS_DIM, MSG_DIM, VOCAB_SIZE, HIDDEN_DIM, LATENT_DIM, 
+        NUM_AGENTS, ACTION_DIM, BATCH_SIZE, LEARNING_RATE,
+        num_species=NUM_SPECIES,
+        composition_config=config.get('composition')
     ).to(device)
-
-    # Topology
+    
+    # Track current curriculum and exploration parameters
     current_k = K_NEIGHBORS_START
     neighbors = get_topology(NUM_AGENTS, TOPOLOGY, current_k)
     topology_mask = get_topology_mask(neighbors, NUM_AGENTS, device)
     
-    tau = TAU_START
-    exploration_std = EXPLORATION_STD_START
-    policy_temp = POLICY_TEMP_START
-    
+    # Track species returns for PBT (moving average)
+    species_fitness_ma = torch.zeros(NUM_SPECIES, device=device)
+
     # Track metrics for logging
     recon_losses_history = []
     pred_losses_history = []
     reward_history = []
 
     for episode in range(num_episodes):
+        # Reset hidden states and environment
         swarm.reset_hidden(device)
+        obs, latent_z = env.reset(BATCH_SIZE, OBS_DIM)
         
+        # Determine dynamic parameters
+        tau = max(TAU_MIN, TAU_START * (ANNEAL_RATE ** (episode // ANNEAL_EVERY)))
+        
+        # Exploration/Stochasticity decay
+        exploration_std = max(EXPLORATION_STD_MIN, EXPLORATION_STD_START * (STOCHASTIC_DECAY_RATE ** episode))
+        policy_temp = max(POLICY_TEMP_MIN, POLICY_TEMP_START * (STOCHASTIC_DECAY_RATE ** episode))
+        
+        current_entropy_weight = ENTROPY_WEIGHT_END + (ENTROPY_WEIGHT_START - ENTROPY_WEIGHT_END) * \
+                                 max(0, 1 - episode / ENTROPY_DECAY_EPISODES)
+        current_comm_cost = COMM_COST_START + (COMM_COST_END - COMM_COST_START) * \
+                            min(1.0, episode / COMM_COST_RAMP_EPISODES)
+        
+        # Rollout
+        episode_obs = []
+        episode_msgs_hard = []
+        episode_msgs_soft = []
+        episode_actions = []
         episode_rewards = []
-        episode_data = [] # (obs, msgs_hard, msgs_soft, returns_at_t, z_tp1)
-        
-        # Calculate curriculum weights
-        e_progress = min(1.0, episode / ENTROPY_DECAY_EPISODES)
-        entropy_weight = ENTROPY_WEIGHT_START - (ENTROPY_WEIGHT_START - ENTROPY_WEIGHT_END) * e_progress
-        c_progress = min(1.0, episode / COMM_COST_RAMP_EPISODES)
-        comm_cost_weight = COMM_COST_START + (COMM_COST_END - COMM_COST_START) * c_progress
-        
-        z_t = torch.randn(BATCH_SIZE, LATENT_DIM, device=device)
-        
-        # 1. ROLLOUT PHASE
-        for t in range(TIMESTEPS_PER_EPISODE):
-            current_world, _, _, _, _ = env.generate_world_batch(BATCH_SIZE, None, z_t)
-            # Obs: (N, B, obs_dim)
-            obs = torch.stack([env.get_partial_obs(current_world, i, OBS_DIM) for i in range(NUM_AGENTS)])
-            
-            # Policy forward: (msgs_hard, msgs_soft, actions)
-            msgs_hard, msgs_soft, actions = swarm.forward_policy(obs, tau, policy_temp, exploration_std)
-            
-            # Environment step
-            aggregated_actions = actions.transpose(0, 1).reshape(BATCH_SIZE, -1) # (B, N*A)
-            _, _, _, z_tp1, reward = env.generate_world_batch(BATCH_SIZE, aggregated_actions, z_t)
-            
-            episode_rewards.append(reward.mean().item())
-            episode_data.append((obs, msgs_hard, msgs_soft, z_tp1, reward))
-            z_t = z_tp1.detach()
-
-        # 2. OPTIMIZATION PHASE
-        returns = compute_returns(episode_rewards, device=device)
-        
-        total_loss = 0
-        avg_recon = 0
-        avg_pred = 0
         
         for t in range(TIMESTEPS_PER_EPISODE):
-            obs, msgs_hard, msgs_soft, z_tp1, _ = episode_data[t]
-            loss, r_loss, p_loss = swarm.compute_loss(
-                obs, msgs_hard, msgs_soft, returns[t], z_tp1, topology_mask,
-                entropy_weight, comm_cost_weight
+            msgs_hard, msgs_soft, actions = swarm.forward_policy(
+                obs, tau, temperature=policy_temp, exploration_std=exploration_std
             )
-            total_loss += loss
-            avg_recon += r_loss
-            avg_pred += p_loss
             
+            # Step environment
+            obs_next, rewards, latent_z_next = env.step(actions, OBS_DIM)
+            
+            episode_obs.append(obs)
+            episode_msgs_hard.append(msgs_hard)
+            episode_msgs_soft.append(msgs_soft)
+            episode_actions.append(actions)
+            episode_rewards.append(rewards.mean().item())
+            
+            obs = obs_next
+            latent_z = latent_z_next
+            
+        # Optimization
+        # Stack all timesteps: (T, N, B, ...)
+        all_obs = torch.stack(episode_obs)
+        all_msgs_hard = torch.stack(episode_msgs_hard)
+        all_msgs_soft = torch.stack(episode_msgs_soft)
+        
+        # Final rewards (simplified: use last step rewards for REINFORCE)
+        # rewards: (B,) -> broadcast to (N, B)
+        final_returns = rewards * REWARD_WEIGHT
+        
+        # Compute loss and backward
+        loss, recon_loss, pred_loss = swarm.compute_loss(
+            all_obs.mean(0), # Average over timesteps for recon/pred
+            all_msgs_hard.mean(0),
+            all_msgs_soft.mean(0),
+            final_returns,
+            latent_z,
+            topology_mask,
+            current_entropy_weight,
+            current_comm_cost
+        )
+        
         swarm.optimizer.zero_grad()
-        total_loss.backward()
+        loss.backward()
         torch.nn.utils.clip_grad_norm_(swarm.parameters(), MAX_GRAD_NORM)
         swarm.optimizer.step()
+        swarm.scheduler.step(episode)
         
-        # Anneal temperature and exploration
-        if episode % ANNEAL_EVERY == 0:
-            tau = max(TAU_MIN, tau * ANNEAL_RATE)
-            exploration_std = max(EXPLORATION_STD_MIN, exploration_std * STOCHASTIC_DECAY_RATE)
-            policy_temp = max(POLICY_TEMP_MIN, policy_temp * STOCHASTIC_DECAY_RATE)
+        # --- PBT Fitness Update ---
+        # Calculate mean return per species across batch
+        # final_returns: (B,) currently. We need to scale by individual agent contribution?
+        # For now, swarm reward is shared, so all agents get same base 'final_returns'.
+        # However, we can track reconstruction error per agent as a proxy for 'communication fitness'.
         
-        swarm.scheduler.step()
+        with torch.no_grad():
+            # (N, B, O)
+            recon, _ = swarm.decoder(all_msgs_hard.mean(0), swarm.species_indices, topology_mask)
+            # MSE per agent: (N, B)
+            agent_recon_err = torch.mean((recon - all_obs.mean(0))**2, dim=-1)
+            # Reward: negative error + global return
+            agent_fitness = -agent_recon_err.mean(dim=1) + final_returns.mean()
+            
+            for s in range(NUM_SPECIES):
+                mask = (swarm.species_indices == s)
+                if mask.any():
+                    s_fit = agent_fitness[mask].mean()
+                    species_fitness_ma[s] = 0.9 * species_fitness_ma[s] + 0.1 * s_fit
+
+        # --- PBT Selection Phase ---
+        if PBT_ENABLED and episode % SELECTION_INTERVAL == 0 and episode > 0:
+            print(f"\n--- [PBT] Selection Phase (Episode {episode}) ---")
+            print(f"  Species Fitness: {species_fitness_ma.cpu().numpy()}")
+            
+            # Rank species
+            sorted_idx = torch.argsort(species_fitness_ma, descending=True)
+            elites = sorted_idx[:NUM_ELITE]
+            to_replace = sorted_idx[-NUM_REPLACE:]
+            
+            for target in to_replace:
+                source = elites[torch.randint(0, len(elites), (1,)).item()]
+                swarm.mutate_species(target, source, MUTATION_RATE)
+            print("-" * 40)
         
         # Log progress
         if episode % 10 == 0:
-            avg_recon /= TIMESTEPS_PER_EPISODE
-            avg_pred /= TIMESTEPS_PER_EPISODE
             avg_reward = np.mean(episode_rewards)
             
-            recon_losses_history.append(avg_recon)
-            pred_losses_history.append(avg_pred)
+            recon_losses_history.append(recon_loss)
+            pred_losses_history.append(pred_loss)
             reward_history.append(avg_reward)
             
-            logger.log_episode(episode, avg_recon, avg_pred, avg_reward, tau)
+            logger.log_episode(episode, recon_loss, pred_loss, avg_reward, tau)
             
             if verbose:
-                print(f"Episode {episode}: Recon={avg_recon:.4f}, Pred={avg_pred:.4f}, Reward={avg_reward:.4f}, Tau={tau:.4f}, K={current_k}")
+                print(f"Episode {episode}: Recon={recon_loss:.4f}, Pred={pred_loss:.4f}, Reward={avg_reward:.4f}, Tau={tau:.4f}, K={current_k}")
         
         # Curriculum topology
         if episode > 0 and episode % 100 == 0:
@@ -235,17 +274,14 @@ def train(num_episodes=NUM_EPISODES, verbose=True):
                 "current_k": current_k
             })
             
-            # Trigger LLM interpretation periodically
-            try:
-                from llm_bridge import run_llm_interpretation
-                # Determine LLM provider from argparse args if we can access them, or default from config
-                # Since we are inside train(), we might not have 'args'. 
-                # We can check global config or assume 'local' for now, but let's try to be smart.
-                provider = config.get('llm', {}).get('provider', 'local')
-                run_llm_interpretation(swarm, neighbors, tau, device, env, provider=provider, verbose=True)
-            except Exception as e:
-                if verbose:
-                    print(f"  [LLM Bridge] Skipped: {e}")
+            # Trigger LLM interpretation periodically if enabled
+            if use_llm:
+                try:
+                    from llm_bridge import run_llm_interpretation
+                    run_llm_interpretation(swarm, neighbors, tau, device, env, provider=llm_provider, verbose=True)
+                except Exception as e:
+                    if verbose:
+                        print(f"  [LLM Bridge] Skipped: {e}")
 
     # Final logs
     logger.log_final({
@@ -330,6 +366,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Emergent Communication Training')
     parser.add_argument('--local', action='store_true', help='Use local LLM (localhost:1234)')
     parser.add_argument('--hub', action='store_true', help='Use HuggingFace Hub (Qwen2.5-3B)')
+    parser.add_argument('--use-llm', action='store_true', help='Enable periodic LLM evaluation during training')
     parser.add_argument('--analyze', type=str, help='Analyze existing log file instead of training')
     args = parser.parse_args()
     
@@ -342,7 +379,7 @@ if __name__ == "__main__":
     llm_provider = "hub" if args.hub else "local"
     
     # Run training
-    swarm, final_tau, neighbors, logger, env = train()
+    swarm, final_tau, neighbors, logger, env = train(use_llm=args.use_llm, llm_provider=llm_provider)
     
     # Final evaluation
     evaluate(swarm, final_tau, neighbors, env)

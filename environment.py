@@ -102,3 +102,23 @@ class WorldSimulator:
     def reset_time(self):
         """Reset the global time step for oscillatory forces."""
         self.global_time_step = 0
+
+    def reset(self, batch_size, obs_dim):
+        """Initialize environment state."""
+        self.reset_time()
+        self.last_z = torch.randn(batch_size, self.latent_dim, device=self.device)
+        world = self.last_z @ self.projection_mat
+        obs = torch.stack([self.get_partial_obs(world, i, obs_dim) for i in range(self.num_agents)])
+        return obs, self.last_z
+
+    def step(self, actions, obs_dim):
+        """
+        Advance one step.
+        actions: (num_agents, batch_size, action_dim)
+        """
+        aggregated = actions.transpose(0, 1).reshape(actions.shape[1], -1) # (B, N*A)
+        z_tp1, reward = self.apply_swarm_dynamics(self.last_z, aggregated)
+        world_next = z_tp1 @ self.projection_mat
+        obs_next = torch.stack([self.get_partial_obs(world_next, i, obs_dim) for i in range(self.num_agents)])
+        self.last_z = z_tp1
+        return obs_next, reward, z_tp1

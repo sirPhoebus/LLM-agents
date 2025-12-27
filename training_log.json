@@ -1,13 +1,13 @@
 {
-  "run_id": "20251227_222557",
-  "start_time": "2025-12-27T22:25:57.453901",
+  "run_id": "20251227_230033",
+  "start_time": "2025-12-27T23:00:33.998873",
   "hyperparameters": {
-    "num_agents": 10,
+    "num_agents": 24,
     "world_dim": 10,
     "obs_dim": 4,
     "msg_dim": 2,
     "hidden_dim": 64,
-    "vocab_size": 16,
+    "vocab_size": 64,
     "batch_size": 512,
     "learning_rate": 0.0003,
     "entropy_start": 0.01,
@@ -18,36 +18,62 @@
     "topology": "knearest",
     "k_start": 8,
     "k_end": 2,
-    "selection_interval": 500,
-    "oscillation_amplitude": 0.1
+    "selection_interval": 10
   },
   "episodes": [
     {
       "episode": 0,
-      "recon_loss": 49.590279293060306,
-      "pred_loss": 6.684074501196544,
-      "reward_loss": -5.96585570441352,
-      "tau": 1.4985,
+      "recon_loss": 39.24502182006836,
+      "pred_loss": 17.007810592651367,
+      "reward_loss": -7.208350857098897,
+      "tau": 1.5,
       "vocab_used": null,
-      "elapsed_sec": 2.419264078140259
+      "elapsed_sec": 1.1866462230682373
     },
     {
       "episode": 10,
-      "recon_loss": 40.56162134806315,
-      "pred_loss": 6.381785827212863,
-      "reward_loss": -6.250949793391758,
-      "tau": 1.4970014999999999,
+      "recon_loss": 39.491451263427734,
+      "pred_loss": 17.525423049926758,
+      "reward_loss": -7.252228140830994,
+      "tau": 1.4985,
       "vocab_used": null,
-      "elapsed_sec": 16.066213369369507
+      "elapsed_sec": 1.914144515991211
+    },
+    {
+      "episode": 20,
+      "recon_loss": 60.216461181640625,
+      "pred_loss": 34.000423431396484,
+      "reward_loss": -11.678907977210152,
+      "tau": 1.4970015,
+      "vocab_used": null,
+      "elapsed_sec": 2.6023528575897217
+    },
+    {
+      "episode": 30,
+      "recon_loss": 27.810142517089844,
+      "pred_loss": 15.011796951293945,
+      "reward_loss": -5.438961505889893,
+      "tau": 1.4955044985,
+      "vocab_used": null,
+      "elapsed_sec": 3.2766144275665283
+    },
+    {
+      "episode": 40,
+      "recon_loss": 29.984725952148438,
+      "pred_loss": 16.242401123046875,
+      "reward_loss": -6.43867630428738,
+      "tau": 1.4940089940015,
+      "vocab_used": null,
+      "elapsed_sec": 3.943035364151001
     }
   ],
   "evaluations": [],
   "final_metrics": {
-    "final_recon_loss": 40.56162134806315,
-    "final_pred_loss": 6.381785827212863,
-    "final_tau": 1.4970014999999999,
-    "total_episodes": 11
+    "final_recon": 29.984725952148438,
+    "final_pred": 16.242401123046875,
+    "final_reward": -6.43867630428738,
+    "total_episodes": 50
   },
-  "end_time": "2025-12-27T22:26:13.601868",
-  "total_duration_sec": 16.147966384887695
+  "end_time": "2025-12-27T23:00:38.571797",
+  "total_duration_sec": 4.572923421859741
 }
