@@ -24,7 +24,7 @@ class TrainingLogger:
         self.data["hyperparameters"] = kwargs
     
     def log_episode(self, episode: int, recon_loss: float, pred_loss: float, 
-                    reward_loss: float, tau: float, vocab_used: int = None):
+                    reward_loss: float, tau: float, vocab_used: int = None, goal_dist: float = None):
         """Log metrics for an episode."""
         self.data["episodes"].append({
             "episode": episode,
@@ -33,6 +33,7 @@ class TrainingLogger:
             "reward_loss": reward_loss,
             "tau": tau,
             "vocab_used": vocab_used,
+            "goal_dist": goal_dist,
             "elapsed_sec": time.time() - self.start_time
         })
     
@@ -103,6 +104,11 @@ def analyze_run(log_file: str = "training_log.json"):
         print("\n--- Loss Trajectory ---")
         print(f"  Recon Loss: {avg_recon_start:.4f} -> {avg_recon_end:.4f} ({(1-avg_recon_end/avg_recon_start)*100:.1f}% reduction)")
         print(f"  Pred Loss:  {avg_pred_start:.4f} -> {avg_pred_end:.4f} ({(1-avg_pred_end/avg_pred_start)*100:.1f}% reduction)")
+        
+        if "goal_dist" in episodes[0] and episodes[0]["goal_dist"] is not None:
+            avg_dist_start = np.mean([e["goal_dist"] for e in first_10 if e["goal_dist"] is not None])
+            avg_dist_end = np.mean([e["goal_dist"] for e in last_10 if e["goal_dist"] is not None])
+            print(f"  Goal Dist:  {avg_dist_start:.4f} -> {avg_dist_end:.4f} ({(1-avg_dist_end/avg_dist_start)*100:.1f}% reduction)")
     
     # Emergence signals
     print("\n--- Emergence Signals ---")

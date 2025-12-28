@@ -1,18 +1,18 @@
 # Emergent Communication Training Configuration
 
 training:
-  num_episodes: 3000
+  num_episodes: 5000 # Production: 5000
   learning_rate: 0.0003
   max_grad_norm: 1.0
   batch_size: 512
   timesteps_per_episode: 9
-  eval_interval: 500
+  eval_interval: 500 # Log full evaluation stats every N episodes
   device: "auto"  # "cuda", "cpu", or "auto"
 
 agents:
-  num_agents: 24
+  num_agents: 32
   obs_dim: 4
-  msg_dim: 2
+  msg_dim: 4
   hidden_dim: 64
   latent_dim: 8
   vocab_size: 64
@@ -23,6 +23,31 @@ composition:
   transformer_layers: 2
   transformer_heads: 4
   embedding_dim: 32
+
+task:
+  type: "target_seeking"
+  num_scouts: 2
+  target_range: 5.0
+  proximity_weight: 5.0
+
+adversarial:
+  enabled: true
+  num_adversaries: 4
+  strategy: "anti_grounding" # "anti_grounding" or "noise"
+  adversarial_weight: 2.0
+  curriculum:
+    enabled: false
+    start_episode: 1000
+    ramp_episodes: 2000
+    initial_weight: 0.0
+    final_weight: 2.0
+
+verification:
+  enabled: true
+  prob: 0.05 # 5% check probability
+  penalty: 0.0 # Disabled penalty
+  bonus: 2.0 # Induce leadership with positive reinforcement
+  angle_threshold: 45.0 # Tighter threshold for "Truth" (must be well-aligned)
 
 curriculum:
   # Gumbel-Softmax Temperature Annealing
@@ -55,12 +80,12 @@ topology:
   k_decay_episodes: 3000
 
 evolution:
-  pbt_enabled: true
+  pbt_enabled: false # Disable PBT for now to focus on adversarial dynamics
   num_species: 4
-  selection_interval: 500
-  mutation_rate: 0.01
-  num_elite: 1
-  num_replace: 1
+  selection_interval: 500 # Evolve every N episodes
+  mutation_rate: 0.1
+  num_elite: 2
+  num_replace: 2
 
 environment:
   world_dim: 10

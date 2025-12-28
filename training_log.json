@@ -1,11 +1,11 @@
 {
-  "run_id": "20251227_230033",
-  "start_time": "2025-12-27T23:00:33.998873",
+  "run_id": "20251228_004955",
+  "start_time": "2025-12-28T00:49:55.626391",
   "hyperparameters": {
-    "num_agents": 24,
+    "num_agents": 32,
     "world_dim": 10,
     "obs_dim": 4,
-    "msg_dim": 2,
+    "msg_dim": 4,
     "hidden_dim": 64,
     "vocab_size": 64,
     "batch_size": 512,
@@ -18,62 +18,5413 @@
     "topology": "knearest",
     "k_start": 8,
     "k_end": 2,
-    "selection_interval": 10
+    "selection_interval": 500
   },
   "episodes": [
     {
       "episode": 0,
-      "recon_loss": 39.24502182006836,
-      "pred_loss": 17.007810592651367,
-      "reward_loss": -7.208350857098897,
+      "recon_loss": 7.817233085632324,
+      "pred_loss": 4.229825019836426,
+      "reward_loss": -5.035239219665527,
       "tau": 1.5,
       "vocab_used": null,
-      "elapsed_sec": 1.1866462230682373
+      "goal_dist": 4.151376724243164,
+      "elapsed_sec": 1.1958873271942139
     },
     {
       "episode": 10,
-      "recon_loss": 39.491451263427734,
-      "pred_loss": 17.525423049926758,
-      "reward_loss": -7.252228140830994,
+      "recon_loss": 7.280189037322998,
+      "pred_loss": 3.9622559547424316,
+      "reward_loss": -4.112270355224609,
       "tau": 1.4985,
       "vocab_used": null,
-      "elapsed_sec": 1.914144515991211
+      "goal_dist": 4.050393104553223,
+      "elapsed_sec": 2.5554516315460205
     },
     {
       "episode": 20,
-      "recon_loss": 60.216461181640625,
-      "pred_loss": 34.000423431396484,
-      "reward_loss": -11.678907977210152,
+      "recon_loss": 6.822030067443848,
+      "pred_loss": 3.918984889984131,
+      "reward_loss": -4.3296403884887695,
       "tau": 1.4970015,
       "vocab_used": null,
-      "elapsed_sec": 2.6023528575897217
+      "goal_dist": 4.097570419311523,
+      "elapsed_sec": 3.7454590797424316
     },
     {
       "episode": 30,
-      "recon_loss": 27.810142517089844,
-      "pred_loss": 15.011796951293945,
-      "reward_loss": -5.438961505889893,
+      "recon_loss": 6.513580322265625,
+      "pred_loss": 4.327330589294434,
+      "reward_loss": -5.590792655944824,
       "tau": 1.4955044985,
       "vocab_used": null,
-      "elapsed_sec": 3.2766144275665283
+      "goal_dist": 4.166276931762695,
+      "elapsed_sec": 4.9126880168914795
     },
     {
       "episode": 40,
-      "recon_loss": 29.984725952148438,
-      "pred_loss": 16.242401123046875,
-      "reward_loss": -6.43867630428738,
+      "recon_loss": 7.554088592529297,
+      "pred_loss": 6.541191577911377,
+      "reward_loss": -10.901309967041016,
       "tau": 1.4940089940015,
       "vocab_used": null,
-      "elapsed_sec": 3.943035364151001
+      "goal_dist": 4.30748176574707,
+      "elapsed_sec": 6.15789532661438
+    },
+    {
+      "episode": 50,
+      "recon_loss": 10.95273208618164,
+      "pred_loss": 12.305124282836914,
+      "reward_loss": -23.13385009765625,
+      "tau": 1.4925149850074986,
+      "vocab_used": null,
+      "goal_dist": 4.387642860412598,
+      "elapsed_sec": 7.324021339416504
+    },
+    {
+      "episode": 60,
+      "recon_loss": 17.472145080566406,
+      "pred_loss": 22.96908950805664,
+      "reward_loss": -47.60203170776367,
+      "tau": 1.491022470022491,
+      "vocab_used": null,
+      "goal_dist": 5.158712863922119,
+      "elapsed_sec": 8.580517292022705
+    },
+    {
+      "episode": 70,
+      "recon_loss": 26.873289108276367,
+      "pred_loss": 36.52318572998047,
+      "reward_loss": -79.7867431640625,
+      "tau": 1.4895314475524686,
+      "vocab_used": null,
+      "goal_dist": 5.590903282165527,
+      "elapsed_sec": 9.792291402816772
+    },
+    {
+      "episode": 80,
+      "recon_loss": 38.38390350341797,
+      "pred_loss": 50.606361389160156,
+      "reward_loss": -118.43049621582031,
+      "tau": 1.4880419161049159,
+      "vocab_used": null,
+      "goal_dist": 6.563467979431152,
+      "elapsed_sec": 11.077182531356812
+    },
+    {
+      "episode": 90,
+      "recon_loss": 50.45856857299805,
+      "pred_loss": 61.57738494873047,
+      "reward_loss": -156.26547241210938,
+      "tau": 1.4865538741888111,
+      "vocab_used": null,
+      "goal_dist": 6.988532066345215,
+      "elapsed_sec": 12.290881872177124
+    },
+    {
+      "episode": 100,
+      "recon_loss": 62.99736785888672,
+      "pred_loss": 68.61353302001953,
+      "reward_loss": -195.91842651367188,
+      "tau": 1.4850673203146223,
+      "vocab_used": null,
+      "goal_dist": 7.675500392913818,
+      "elapsed_sec": 13.492810726165771
+    },
+    {
+      "episode": 110,
+      "recon_loss": 72.83955383300781,
+      "pred_loss": 65.17988586425781,
+      "reward_loss": -229.045654296875,
+      "tau": 1.4835822529943077,
+      "vocab_used": null,
+      "goal_dist": 7.906499862670898,
+      "elapsed_sec": 14.655139446258545
+    },
+    {
+      "episode": 120,
+      "recon_loss": 80.59294128417969,
+      "pred_loss": 52.91402816772461,
+      "reward_loss": -256.8363037109375,
+      "tau": 1.4820986707413133,
+      "vocab_used": null,
+      "goal_dist": 8.49342155456543,
+      "elapsed_sec": 15.888644933700562
+    },
+    {
+      "episode": 130,
+      "recon_loss": 82.93160247802734,
+      "pred_loss": 33.00938034057617,
+      "reward_loss": -274.3652648925781,
+      "tau": 1.4806165720705722,
+      "vocab_used": null,
+      "goal_dist": 9.054035186767578,
+      "elapsed_sec": 17.20871663093567
+    },
+    {
+      "episode": 140,
+      "recon_loss": 86.67245483398438,
+      "pred_loss": 15.618155479431152,
+      "reward_loss": -289.8403015136719,
+      "tau": 1.4791359554985015,
+      "vocab_used": null,
+      "goal_dist": 9.415735244750977,
+      "elapsed_sec": 18.46637463569641
+    },
+    {
+      "episode": 150,
+      "recon_loss": 87.96142578125,
+      "pred_loss": 8.188854217529297,
+      "reward_loss": -298.4717712402344,
+      "tau": 1.4776568195430029,
+      "vocab_used": null,
+      "goal_dist": 9.600183486938477,
+      "elapsed_sec": 19.661947011947632
+    },
+    {
+      "episode": 160,
+      "recon_loss": 89.93424987792969,
+      "pred_loss": 3.9892237186431885,
+      "reward_loss": -306.9312438964844,
+      "tau": 1.47617916272346,
+      "vocab_used": null,
+      "goal_dist": 9.80772876739502,
+      "elapsed_sec": 20.9603374004364
+    },
+    {
+      "episode": 170,
+      "recon_loss": 90.97126770019531,
+      "pred_loss": 2.2726564407348633,
+      "reward_loss": -312.7191162109375,
+      "tau": 1.4747029835607366,
+      "vocab_used": null,
+      "goal_dist": 9.696076393127441,
+      "elapsed_sec": 22.146690130233765
+    },
+    {
+      "episode": 180,
+      "recon_loss": 92.12413787841797,
+      "pred_loss": 1.7186901569366455,
+      "reward_loss": -323.150390625,
+      "tau": 1.4732282805771757,
+      "vocab_used": null,
+      "goal_dist": 9.805343627929688,
+      "elapsed_sec": 23.332474946975708
+    },
+    {
+      "episode": 190,
+      "recon_loss": 94.13075256347656,
+      "pred_loss": 1.8015137910842896,
+      "reward_loss": -339.3737487792969,
+      "tau": 1.4717550522965985,
+      "vocab_used": null,
+      "goal_dist": 9.498678207397461,
+      "elapsed_sec": 24.61454963684082
+    },
+    {
+      "episode": 200,
+      "recon_loss": 103.2953109741211,
+      "pred_loss": 3.8610265254974365,
+      "reward_loss": -380.3204040527344,
+      "tau": 1.470283297244302,
+      "vocab_used": null,
+      "goal_dist": 8.228630065917969,
+      "elapsed_sec": 25.853185653686523
+    },
+    {
+      "episode": 210,
+      "recon_loss": 112.79102325439453,
+      "pred_loss": 6.062214374542236,
+      "reward_loss": -422.3977966308594,
+      "tau": 1.4688130139470577,
+      "vocab_used": null,
+      "goal_dist": 7.619275093078613,
+      "elapsed_sec": 27.07927393913269
+    },
+    {
+      "episode": 220,
+      "recon_loss": 116.52921295166016,
+      "pred_loss": 6.809167861938477,
+      "reward_loss": -458.26806640625,
+      "tau": 1.4673442009331106,
+      "vocab_used": null,
+      "goal_dist": 6.936008930206299,
+      "elapsed_sec": 28.333882808685303
+    },
+    {
+      "episode": 230,
+      "recon_loss": 123.01799011230469,
+      "pred_loss": 6.665514945983887,
+      "reward_loss": -495.8318786621094,
+      "tau": 1.4658768567321776,
+      "vocab_used": null,
+      "goal_dist": 6.236078262329102,
+      "elapsed_sec": 29.588602781295776
+    },
+    {
+      "episode": 240,
+      "recon_loss": 126.98075866699219,
+      "pred_loss": 5.558407783508301,
+      "reward_loss": -531.8638916015625,
+      "tau": 1.4644109798754452,
+      "vocab_used": null,
+      "goal_dist": 5.697843551635742,
+      "elapsed_sec": 30.80208468437195
+    },
+    {
+      "episode": 250,
+      "recon_loss": 135.02720642089844,
+      "pred_loss": 4.2339863777160645,
+      "reward_loss": -565.073486328125,
+      "tau": 1.4629465688955698,
+      "vocab_used": null,
+      "goal_dist": 5.336404323577881,
+      "elapsed_sec": 32.00294589996338
+    },
+    {
+      "episode": 260,
+      "recon_loss": 137.18353271484375,
+      "pred_loss": 2.6977405548095703,
+      "reward_loss": -594.5245971679688,
+      "tau": 1.4614836223266745,
+      "vocab_used": null,
+      "goal_dist": 5.362330436706543,
+      "elapsed_sec": 33.20301818847656
+    },
+    {
+      "episode": 270,
+      "recon_loss": 143.4482421875,
+      "pred_loss": 2.385983467102051,
+      "reward_loss": -641.1612548828125,
+      "tau": 1.4600221387043477,
+      "vocab_used": null,
+      "goal_dist": 5.581976413726807,
+      "elapsed_sec": 34.44567513465881
+    },
+    {
+      "episode": 280,
+      "recon_loss": 149.67849731445312,
+      "pred_loss": 2.4849681854248047,
+      "reward_loss": -674.9197998046875,
+      "tau": 1.4585621165656435,
+      "vocab_used": null,
+      "goal_dist": 5.047862529754639,
+      "elapsed_sec": 35.70545768737793
+    },
+    {
+      "episode": 290,
+      "recon_loss": 153.35845947265625,
+      "pred_loss": 2.422032117843628,
+      "reward_loss": -706.12451171875,
+      "tau": 1.4571035544490776,
+      "vocab_used": null,
+      "goal_dist": 4.950409412384033,
+      "elapsed_sec": 36.94544529914856
+    },
+    {
+      "episode": 300,
+      "recon_loss": 157.96450805664062,
+      "pred_loss": 1.988323450088501,
+      "reward_loss": -731.9490966796875,
+      "tau": 1.4556464508946285,
+      "vocab_used": null,
+      "goal_dist": 5.154923439025879,
+      "elapsed_sec": 38.1858274936676
+    },
+    {
+      "episode": 310,
+      "recon_loss": 161.0885467529297,
+      "pred_loss": 2.108215808868408,
+      "reward_loss": -758.0706787109375,
+      "tau": 1.454190804443734,
+      "vocab_used": null,
+      "goal_dist": 5.463588714599609,
+      "elapsed_sec": 39.494914531707764
+    },
+    {
+      "episode": 320,
+      "recon_loss": 166.6595458984375,
+      "pred_loss": 2.214648723602295,
+      "reward_loss": -791.0462036132812,
+      "tau": 1.45273661363929,
+      "vocab_used": null,
+      "goal_dist": 5.398385047912598,
+      "elapsed_sec": 40.75678515434265
+    },
+    {
+      "episode": 330,
+      "recon_loss": 169.54103088378906,
+      "pred_loss": 3.15702223777771,
+      "reward_loss": -827.4951171875,
+      "tau": 1.4512838770256509,
+      "vocab_used": null,
+      "goal_dist": 5.656964302062988,
+      "elapsed_sec": 42.06158518791199
+    },
+    {
+      "episode": 340,
+      "recon_loss": 175.1456298828125,
+      "pred_loss": 3.4869346618652344,
+      "reward_loss": -857.6642456054688,
+      "tau": 1.4498325931486251,
+      "vocab_used": null,
+      "goal_dist": 6.056971073150635,
+      "elapsed_sec": 43.243967056274414
+    },
+    {
+      "episode": 350,
+      "recon_loss": 179.4517822265625,
+      "pred_loss": 2.846081256866455,
+      "reward_loss": -883.748046875,
+      "tau": 1.4483827605554767,
+      "vocab_used": null,
+      "goal_dist": 5.990456581115723,
+      "elapsed_sec": 44.500693798065186
+    },
+    {
+      "episode": 360,
+      "recon_loss": 184.92999267578125,
+      "pred_loss": 2.150975227355957,
+      "reward_loss": -903.0882568359375,
+      "tau": 1.446934377794921,
+      "vocab_used": null,
+      "goal_dist": 6.369602680206299,
+      "elapsed_sec": 45.80958032608032
+    },
+    {
+      "episode": 370,
+      "recon_loss": 187.45851135253906,
+      "pred_loss": 1.9684573411941528,
+      "reward_loss": -916.0364990234375,
+      "tau": 1.445487443417126,
+      "vocab_used": null,
+      "goal_dist": 6.429998397827148,
+      "elapsed_sec": 47.049232482910156
+    },
+    {
+      "episode": 380,
+      "recon_loss": 190.34487915039062,
+      "pred_loss": 1.6779465675354004,
+      "reward_loss": -930.3499145507812,
+      "tau": 1.444041955973709,
+      "vocab_used": null,
+      "goal_dist": 6.426631927490234,
+      "elapsed_sec": 48.286396741867065
+    },
+    {
+      "episode": 390,
+      "recon_loss": 192.3873291015625,
+      "pred_loss": 1.5097594261169434,
+      "reward_loss": -946.2607421875,
+      "tau": 1.4425979140177354,
+      "vocab_used": null,
+      "goal_dist": 6.027647018432617,
+      "elapsed_sec": 49.503145694732666
+    },
+    {
+      "episode": 400,
+      "recon_loss": 194.63380432128906,
+      "pred_loss": 1.648658037185669,
+      "reward_loss": -955.6983032226562,
+      "tau": 1.4411553161037176,
+      "vocab_used": null,
+      "goal_dist": 6.079571723937988,
+      "elapsed_sec": 50.72074604034424
+    },
+    {
+      "episode": 410,
+      "recon_loss": 195.7937469482422,
+      "pred_loss": 1.8471710681915283,
+      "reward_loss": -960.99658203125,
+      "tau": 1.439714160787614,
+      "vocab_used": null,
+      "goal_dist": 5.740094184875488,
+      "elapsed_sec": 52.03001642227173
+    },
+    {
+      "episode": 420,
+      "recon_loss": 196.8885040283203,
+      "pred_loss": 1.6396241188049316,
+      "reward_loss": -967.9385986328125,
+      "tau": 1.4382744466268265,
+      "vocab_used": null,
+      "goal_dist": 5.78178596496582,
+      "elapsed_sec": 53.24044942855835
+    },
+    {
+      "episode": 430,
+      "recon_loss": 196.60877990722656,
+      "pred_loss": 1.4946796894073486,
+      "reward_loss": -977.2401733398438,
+      "tau": 1.4368361721801994,
+      "vocab_used": null,
+      "goal_dist": 5.657038688659668,
+      "elapsed_sec": 54.455570459365845
+    },
+    {
+      "episode": 440,
+      "recon_loss": 196.7657470703125,
+      "pred_loss": 1.4708914756774902,
+      "reward_loss": -981.2947998046875,
+      "tau": 1.4353993360080195,
+      "vocab_used": null,
+      "goal_dist": 5.614189147949219,
+      "elapsed_sec": 55.75874209403992
+    },
+    {
+      "episode": 450,
+      "recon_loss": 197.41143798828125,
+      "pred_loss": 1.8695452213287354,
+      "reward_loss": -1003.1461181640625,
+      "tau": 1.4339639366720112,
+      "vocab_used": null,
+      "goal_dist": 5.361932754516602,
+      "elapsed_sec": 56.99531054496765
+    },
+    {
+      "episode": 460,
+      "recon_loss": 199.0960693359375,
+      "pred_loss": 1.724764108657837,
+      "reward_loss": -1031.2362060546875,
+      "tau": 1.4325299727353393,
+      "vocab_used": null,
+      "goal_dist": 5.180652141571045,
+      "elapsed_sec": 58.23787212371826
+    },
+    {
+      "episode": 470,
+      "recon_loss": 198.20867919921875,
+      "pred_loss": 1.635751724243164,
+      "reward_loss": -1050.40673828125,
+      "tau": 1.431097442762604,
+      "vocab_used": null,
+      "goal_dist": 5.129146575927734,
+      "elapsed_sec": 59.60974931716919
+    },
+    {
+      "episode": 480,
+      "recon_loss": 194.31283569335938,
+      "pred_loss": 1.8034238815307617,
+      "reward_loss": -1053.616455078125,
+      "tau": 1.4296663453198413,
+      "vocab_used": null,
+      "goal_dist": 5.156506538391113,
+      "elapsed_sec": 60.83283352851868
+    },
+    {
+      "episode": 490,
+      "recon_loss": 193.68301391601562,
+      "pred_loss": 1.8568886518478394,
+      "reward_loss": -1063.655029296875,
+      "tau": 1.4282366789745216,
+      "vocab_used": null,
+      "goal_dist": 5.362051010131836,
+      "elapsed_sec": 62.19440793991089
+    },
+    {
+      "episode": 500,
+      "recon_loss": 195.02911376953125,
+      "pred_loss": 1.8844261169433594,
+      "reward_loss": -1070.15087890625,
+      "tau": 1.4268084422955472,
+      "vocab_used": null,
+      "goal_dist": 5.185988426208496,
+      "elapsed_sec": 63.533174991607666
+    },
+    {
+      "episode": 510,
+      "recon_loss": 189.479248046875,
+      "pred_loss": 2.036536693572998,
+      "reward_loss": -1072.011474609375,
+      "tau": 1.4253816338532515,
+      "vocab_used": null,
+      "goal_dist": 5.318844795227051,
+      "elapsed_sec": 64.83491730690002
+    },
+    {
+      "episode": 520,
+      "recon_loss": 190.16966247558594,
+      "pred_loss": 1.8173413276672363,
+      "reward_loss": -1074.2998046875,
+      "tau": 1.423956252219398,
+      "vocab_used": null,
+      "goal_dist": 4.959178924560547,
+      "elapsed_sec": 66.1142590045929
+    },
+    {
+      "episode": 530,
+      "recon_loss": 190.3971710205078,
+      "pred_loss": 1.811568021774292,
+      "reward_loss": -1084.786376953125,
+      "tau": 1.4225322959671787,
+      "vocab_used": null,
+      "goal_dist": 4.953359603881836,
+      "elapsed_sec": 67.34947371482849
+    },
+    {
+      "episode": 540,
+      "recon_loss": 187.98826599121094,
+      "pred_loss": 1.6006581783294678,
+      "reward_loss": -1090.78955078125,
+      "tau": 1.4211097636712116,
+      "vocab_used": null,
+      "goal_dist": 5.156216621398926,
+      "elapsed_sec": 68.5724356174469
+    },
+    {
+      "episode": 550,
+      "recon_loss": 183.13189697265625,
+      "pred_loss": 1.454261064529419,
+      "reward_loss": -1088.688232421875,
+      "tau": 1.4196886539075404,
+      "vocab_used": null,
+      "goal_dist": 4.993119716644287,
+      "elapsed_sec": 69.89827919006348
+    },
+    {
+      "episode": 560,
+      "recon_loss": 177.37762451171875,
+      "pred_loss": 1.4753934144973755,
+      "reward_loss": -1090.0087890625,
+      "tau": 1.4182689652536329,
+      "vocab_used": null,
+      "goal_dist": 4.9660844802856445,
+      "elapsed_sec": 71.31250619888306
+    },
+    {
+      "episode": 570,
+      "recon_loss": 175.47869873046875,
+      "pred_loss": 1.3609189987182617,
+      "reward_loss": -1095.0009765625,
+      "tau": 1.4168506962883791,
+      "vocab_used": null,
+      "goal_dist": 4.809165000915527,
+      "elapsed_sec": 72.658864736557
+    },
+    {
+      "episode": 580,
+      "recon_loss": 170.4427490234375,
+      "pred_loss": 1.445305347442627,
+      "reward_loss": -1098.8143310546875,
+      "tau": 1.4154338455920907,
+      "vocab_used": null,
+      "goal_dist": 4.700786113739014,
+      "elapsed_sec": 73.88276553153992
+    },
+    {
+      "episode": 590,
+      "recon_loss": 164.6771240234375,
+      "pred_loss": 1.4082106351852417,
+      "reward_loss": -1096.816650390625,
+      "tau": 1.4140184117464987,
+      "vocab_used": null,
+      "goal_dist": 4.7920026779174805,
+      "elapsed_sec": 75.08641624450684
+    },
+    {
+      "episode": 600,
+      "recon_loss": 162.68899536132812,
+      "pred_loss": 1.427198886871338,
+      "reward_loss": -1100.659912109375,
+      "tau": 1.4126043933347523,
+      "vocab_used": null,
+      "goal_dist": 4.753178596496582,
+      "elapsed_sec": 76.29746556282043
+    },
+    {
+      "episode": 610,
+      "recon_loss": 145.50967407226562,
+      "pred_loss": 11.007001876831055,
+      "reward_loss": -782.6166381835938,
+      "tau": 1.4111917889414174,
+      "vocab_used": null,
+      "goal_dist": 5.6032209396362305,
+      "elapsed_sec": 77.56456112861633
+    },
+    {
+      "episode": 620,
+      "recon_loss": 138.08912658691406,
+      "pred_loss": 8.380043029785156,
+      "reward_loss": -839.0716552734375,
+      "tau": 1.4097805971524762,
+      "vocab_used": null,
+      "goal_dist": 5.858761787414551,
+      "elapsed_sec": 78.97463035583496
+    },
+    {
+      "episode": 630,
+      "recon_loss": 142.99563598632812,
+      "pred_loss": 5.789866924285889,
+      "reward_loss": -879.215576171875,
+      "tau": 1.4083708165553235,
+      "vocab_used": null,
+      "goal_dist": 6.199591636657715,
+      "elapsed_sec": 80.29601407051086
+    },
+    {
+      "episode": 640,
+      "recon_loss": 140.848388671875,
+      "pred_loss": 4.0293803215026855,
+      "reward_loss": -904.9266967773438,
+      "tau": 1.4069624457387682,
+      "vocab_used": null,
+      "goal_dist": 6.457554817199707,
+      "elapsed_sec": 81.5231454372406
+    },
+    {
+      "episode": 650,
+      "recon_loss": 146.5804901123047,
+      "pred_loss": 2.058913469314575,
+      "reward_loss": -934.1491088867188,
+      "tau": 1.4055554832930295,
+      "vocab_used": null,
+      "goal_dist": 6.153729438781738,
+      "elapsed_sec": 82.74561810493469
+    },
+    {
+      "episode": 660,
+      "recon_loss": 148.6766357421875,
+      "pred_loss": 1.7650471925735474,
+      "reward_loss": -957.939453125,
+      "tau": 1.4041499278097365,
+      "vocab_used": null,
+      "goal_dist": 6.228032112121582,
+      "elapsed_sec": 83.95699906349182
+    },
+    {
+      "episode": 670,
+      "recon_loss": 150.41000366210938,
+      "pred_loss": 1.9199596643447876,
+      "reward_loss": -989.6641845703125,
+      "tau": 1.4027457778819268,
+      "vocab_used": null,
+      "goal_dist": 6.113735198974609,
+      "elapsed_sec": 85.17944717407227
+    },
+    {
+      "episode": 680,
+      "recon_loss": 150.54644775390625,
+      "pred_loss": 1.760556697845459,
+      "reward_loss": -1006.478759765625,
+      "tau": 1.4013430321040448,
+      "vocab_used": null,
+      "goal_dist": 6.165896415710449,
+      "elapsed_sec": 86.42078113555908
+    },
+    {
+      "episode": 690,
+      "recon_loss": 154.14028930664062,
+      "pred_loss": 1.679173469543457,
+      "reward_loss": -1027.7625732421875,
+      "tau": 1.3999416890719407,
+      "vocab_used": null,
+      "goal_dist": 5.848517894744873,
+      "elapsed_sec": 87.65004873275757
+    },
+    {
+      "episode": 700,
+      "recon_loss": 155.9798126220703,
+      "pred_loss": 2.2082433700561523,
+      "reward_loss": -1045.7958984375,
+      "tau": 1.3985417473828687,
+      "vocab_used": null,
+      "goal_dist": 5.959430694580078,
+      "elapsed_sec": 88.94239282608032
+    },
+    {
+      "episode": 710,
+      "recon_loss": 156.4635772705078,
+      "pred_loss": 2.1425185203552246,
+      "reward_loss": -1049.26953125,
+      "tau": 1.397143205635486,
+      "vocab_used": null,
+      "goal_dist": 6.041964530944824,
+      "elapsed_sec": 90.29572176933289
+    },
+    {
+      "episode": 720,
+      "recon_loss": 156.79623413085938,
+      "pred_loss": 1.4816827774047852,
+      "reward_loss": -1059.93603515625,
+      "tau": 1.3957460624298503,
+      "vocab_used": null,
+      "goal_dist": 5.926855564117432,
+      "elapsed_sec": 91.55000472068787
+    },
+    {
+      "episode": 730,
+      "recon_loss": 154.34902954101562,
+      "pred_loss": 1.394212007522583,
+      "reward_loss": -1058.943115234375,
+      "tau": 1.3943503163674205,
+      "vocab_used": null,
+      "goal_dist": 6.149078369140625,
+      "elapsed_sec": 92.88694763183594
+    },
+    {
+      "episode": 740,
+      "recon_loss": 154.55020141601562,
+      "pred_loss": 1.3981547355651855,
+      "reward_loss": -1066.3365478515625,
+      "tau": 1.392955966051053,
+      "vocab_used": null,
+      "goal_dist": 6.044415473937988,
+      "elapsed_sec": 94.19232869148254
+    },
+    {
+      "episode": 750,
+      "recon_loss": 154.037353515625,
+      "pred_loss": 1.4399256706237793,
+      "reward_loss": -1075.141845703125,
+      "tau": 1.391563010085002,
+      "vocab_used": null,
+      "goal_dist": 6.054591178894043,
+      "elapsed_sec": 95.40096139907837
+    },
+    {
+      "episode": 760,
+      "recon_loss": 152.58151245117188,
+      "pred_loss": 1.610764503479004,
+      "reward_loss": -1081.943115234375,
+      "tau": 1.3901714470749171,
+      "vocab_used": null,
+      "goal_dist": 5.975959300994873,
+      "elapsed_sec": 96.63933372497559
+    },
+    {
+      "episode": 770,
+      "recon_loss": 152.77249145507812,
+      "pred_loss": 1.576117753982544,
+      "reward_loss": -1088.866455078125,
+      "tau": 1.3887812756278421,
+      "vocab_used": null,
+      "goal_dist": 5.957638740539551,
+      "elapsed_sec": 97.86573839187622
+    },
+    {
+      "episode": 780,
+      "recon_loss": 152.6374053955078,
+      "pred_loss": 1.5576825141906738,
+      "reward_loss": -1089.1669921875,
+      "tau": 1.3873924943522142,
+      "vocab_used": null,
+      "goal_dist": 6.256731986999512,
+      "elapsed_sec": 99.16256093978882
+    },
+    {
+      "episode": 790,
+      "recon_loss": 151.89532470703125,
+      "pred_loss": 1.632507562637329,
+      "reward_loss": -1095.9912109375,
+      "tau": 1.386005101857862,
+      "vocab_used": null,
+      "goal_dist": 6.160313606262207,
+      "elapsed_sec": 100.42726969718933
+    },
+    {
+      "episode": 800,
+      "recon_loss": 150.57269287109375,
+      "pred_loss": 1.5433201789855957,
+      "reward_loss": -1094.322509765625,
+      "tau": 1.3846190967560044,
+      "vocab_used": null,
+      "goal_dist": 6.016924858093262,
+      "elapsed_sec": 101.68514966964722
+    },
+    {
+      "episode": 810,
+      "recon_loss": 147.64599609375,
+      "pred_loss": 1.5173546075820923,
+      "reward_loss": -1083.369384765625,
+      "tau": 1.3832344776592482,
+      "vocab_used": null,
+      "goal_dist": 6.126410484313965,
+      "elapsed_sec": 102.98366069793701
+    },
+    {
+      "episode": 820,
+      "recon_loss": 149.28555297851562,
+      "pred_loss": 1.4105812311172485,
+      "reward_loss": -1106.1361083984375,
+      "tau": 1.381851243181589,
+      "vocab_used": null,
+      "goal_dist": 6.203878402709961,
+      "elapsed_sec": 104.26391339302063
+    },
+    {
+      "episode": 830,
+      "recon_loss": 149.81637573242188,
+      "pred_loss": 1.3394849300384521,
+      "reward_loss": -1102.7113037109375,
+      "tau": 1.3804693919384075,
+      "vocab_used": null,
+      "goal_dist": 6.291204929351807,
+      "elapsed_sec": 105.57564115524292
+    },
+    {
+      "episode": 840,
+      "recon_loss": 150.14535522460938,
+      "pred_loss": 1.4536805152893066,
+      "reward_loss": -1106.6236572265625,
+      "tau": 1.379088922546469,
+      "vocab_used": null,
+      "goal_dist": 6.323939323425293,
+      "elapsed_sec": 106.93331956863403
+    },
+    {
+      "episode": 850,
+      "recon_loss": 149.83279418945312,
+      "pred_loss": 1.3891701698303223,
+      "reward_loss": -1121.65673828125,
+      "tau": 1.3777098336239224,
+      "vocab_used": null,
+      "goal_dist": 6.044517517089844,
+      "elapsed_sec": 108.1618709564209
+    },
+    {
+      "episode": 860,
+      "recon_loss": 148.4003448486328,
+      "pred_loss": 1.4164555072784424,
+      "reward_loss": -1117.1337890625,
+      "tau": 1.3763321237902986,
+      "vocab_used": null,
+      "goal_dist": 6.227278709411621,
+      "elapsed_sec": 109.39958620071411
+    },
+    {
+      "episode": 870,
+      "recon_loss": 148.7015380859375,
+      "pred_loss": 1.3137071132659912,
+      "reward_loss": -1122.5169677734375,
+      "tau": 1.3749557916665083,
+      "vocab_used": null,
+      "goal_dist": 6.0825018882751465,
+      "elapsed_sec": 110.7567150592804
+    },
+    {
+      "episode": 880,
+      "recon_loss": 147.44134521484375,
+      "pred_loss": 1.3464158773422241,
+      "reward_loss": -1118.4793701171875,
+      "tau": 1.3735808358748418,
+      "vocab_used": null,
+      "goal_dist": 5.843072891235352,
+      "elapsed_sec": 112.02722930908203
+    },
+    {
+      "episode": 890,
+      "recon_loss": 146.711181640625,
+      "pred_loss": 1.4180009365081787,
+      "reward_loss": -1134.12646484375,
+      "tau": 1.372207255038967,
+      "vocab_used": null,
+      "goal_dist": 5.967383861541748,
+      "elapsed_sec": 113.25585389137268
+    },
+    {
+      "episode": 900,
+      "recon_loss": 146.75303649902344,
+      "pred_loss": 1.3435139656066895,
+      "reward_loss": -1130.83984375,
+      "tau": 1.370835047783928,
+      "vocab_used": null,
+      "goal_dist": 6.200292587280273,
+      "elapsed_sec": 114.5763053894043
+    },
+    {
+      "episode": 910,
+      "recon_loss": 145.09445190429688,
+      "pred_loss": 1.3458435535430908,
+      "reward_loss": -1130.4019775390625,
+      "tau": 1.369464212736144,
+      "vocab_used": null,
+      "goal_dist": 6.145416259765625,
+      "elapsed_sec": 115.94265103340149
+    },
+    {
+      "episode": 920,
+      "recon_loss": 144.84750366210938,
+      "pred_loss": 1.348124623298645,
+      "reward_loss": -1133.02001953125,
+      "tau": 1.3680947485234078,
+      "vocab_used": null,
+      "goal_dist": 6.185992240905762,
+      "elapsed_sec": 117.17511796951294
+    },
+    {
+      "episode": 930,
+      "recon_loss": 143.44976806640625,
+      "pred_loss": 1.4061245918273926,
+      "reward_loss": -1134.967529296875,
+      "tau": 1.3667266537748846,
+      "vocab_used": null,
+      "goal_dist": 6.158877372741699,
+      "elapsed_sec": 118.49363231658936
+    },
+    {
+      "episode": 940,
+      "recon_loss": 142.84295654296875,
+      "pred_loss": 1.3546898365020752,
+      "reward_loss": -1136.709228515625,
+      "tau": 1.3653599271211097,
+      "vocab_used": null,
+      "goal_dist": 6.422050476074219,
+      "elapsed_sec": 119.74666810035706
+    },
+    {
+      "episode": 950,
+      "recon_loss": 141.56036376953125,
+      "pred_loss": 1.323336124420166,
+      "reward_loss": -1140.120361328125,
+      "tau": 1.3639945671939886,
+      "vocab_used": null,
+      "goal_dist": 6.4682817459106445,
+      "elapsed_sec": 121.0136649608612
+    },
+    {
+      "episode": 960,
+      "recon_loss": 142.17633056640625,
+      "pred_loss": 1.3254122734069824,
+      "reward_loss": -1148.236572265625,
+      "tau": 1.3626305726267944,
+      "vocab_used": null,
+      "goal_dist": 6.529098987579346,
+      "elapsed_sec": 122.22928762435913
+    },
+    {
+      "episode": 970,
+      "recon_loss": 139.5634765625,
+      "pred_loss": 1.3983793258666992,
+      "reward_loss": -1147.3916015625,
+      "tau": 1.3612679420541678,
+      "vocab_used": null,
+      "goal_dist": 6.261750221252441,
+      "elapsed_sec": 123.53566002845764
+    },
+    {
+      "episode": 980,
+      "recon_loss": 135.87570190429688,
+      "pred_loss": 1.4261324405670166,
+      "reward_loss": -1151.49169921875,
+      "tau": 1.3599066741121135,
+      "vocab_used": null,
+      "goal_dist": 6.1714067459106445,
+      "elapsed_sec": 124.81965899467468
+    },
+    {
+      "episode": 990,
+      "recon_loss": 134.62954711914062,
+      "pred_loss": 1.3970141410827637,
+      "reward_loss": -1158.585693359375,
+      "tau": 1.3585467674380016,
+      "vocab_used": null,
+      "goal_dist": 6.362506866455078,
+      "elapsed_sec": 126.15967178344727
+    },
+    {
+      "episode": 1000,
+      "recon_loss": 131.8961181640625,
+      "pred_loss": 1.4318119287490845,
+      "reward_loss": -1154.1490478515625,
+      "tau": 1.3571882206705634,
+      "vocab_used": null,
+      "goal_dist": 6.240586280822754,
+      "elapsed_sec": 127.46902966499329
+    },
+    {
+      "episode": 1010,
+      "recon_loss": 130.55682373046875,
+      "pred_loss": 1.4325358867645264,
+      "reward_loss": -1156.719482421875,
+      "tau": 1.3558310324498928,
+      "vocab_used": null,
+      "goal_dist": 6.261207580566406,
+      "elapsed_sec": 128.8145124912262
+    },
+    {
+      "episode": 1020,
+      "recon_loss": 130.560302734375,
+      "pred_loss": 1.424757480621338,
+      "reward_loss": -1162.4736328125,
+      "tau": 1.354475201417443,
+      "vocab_used": null,
+      "goal_dist": 6.334716320037842,
+      "elapsed_sec": 130.11922097206116
+    },
+    {
+      "episode": 1030,
+      "recon_loss": 129.31924438476562,
+      "pred_loss": 1.345339298248291,
+      "reward_loss": -1159.38916015625,
+      "tau": 1.3531207262160254,
+      "vocab_used": null,
+      "goal_dist": 6.286504745483398,
+      "elapsed_sec": 131.5246090888977
+    },
+    {
+      "episode": 1040,
+      "recon_loss": 135.91946411132812,
+      "pred_loss": 1.3460581302642822,
+      "reward_loss": -1168.294189453125,
+      "tau": 1.3517676054898096,
+      "vocab_used": null,
+      "goal_dist": 6.261703014373779,
+      "elapsed_sec": 132.76015448570251
+    },
+    {
+      "episode": 1050,
+      "recon_loss": 126.78580474853516,
+      "pred_loss": 1.3855222463607788,
+      "reward_loss": -1168.91845703125,
+      "tau": 1.3504158378843196,
+      "vocab_used": null,
+      "goal_dist": 6.258672714233398,
+      "elapsed_sec": 134.11850452423096
+    },
+    {
+      "episode": 1060,
+      "recon_loss": 128.05250549316406,
+      "pred_loss": 1.332686424255371,
+      "reward_loss": -1171.891845703125,
+      "tau": 1.3490654220464353,
+      "vocab_used": null,
+      "goal_dist": 6.1167497634887695,
+      "elapsed_sec": 135.37521362304688
+    },
+    {
+      "episode": 1070,
+      "recon_loss": 126.18018341064453,
+      "pred_loss": 1.3422961235046387,
+      "reward_loss": -1169.55712890625,
+      "tau": 1.3477163566243888,
+      "vocab_used": null,
+      "goal_dist": 6.277758598327637,
+      "elapsed_sec": 136.629234790802
+    },
+    {
+      "episode": 1080,
+      "recon_loss": 124.73815155029297,
+      "pred_loss": 1.3984551429748535,
+      "reward_loss": -1178.8150634765625,
+      "tau": 1.3463686402677646,
+      "vocab_used": null,
+      "goal_dist": 6.053414344787598,
+      "elapsed_sec": 137.8923032283783
+    },
+    {
+      "episode": 1090,
+      "recon_loss": 126.21922302246094,
+      "pred_loss": 1.3396904468536377,
+      "reward_loss": -1181.39404296875,
+      "tau": 1.3450222716274969,
+      "vocab_used": null,
+      "goal_dist": 6.156233310699463,
+      "elapsed_sec": 139.12807965278625
+    },
+    {
+      "episode": 1100,
+      "recon_loss": 123.44064331054688,
+      "pred_loss": 1.2870986461639404,
+      "reward_loss": -1186.135498046875,
+      "tau": 1.3436772493558693,
+      "vocab_used": null,
+      "goal_dist": 5.974564552307129,
+      "elapsed_sec": 140.46656489372253
+    },
+    {
+      "episode": 1110,
+      "recon_loss": 191.87570190429688,
+      "pred_loss": 63.95973205566406,
+      "reward_loss": -689.9278564453125,
+      "tau": 1.3423335721065135,
+      "vocab_used": null,
+      "goal_dist": 5.192959785461426,
+      "elapsed_sec": 141.75432205200195
+    },
+    {
+      "episode": 1120,
+      "recon_loss": 181.14675903320312,
+      "pred_loss": 51.66942596435547,
+      "reward_loss": -789.12744140625,
+      "tau": 1.3409912385344067,
+      "vocab_used": null,
+      "goal_dist": 5.003564834594727,
+      "elapsed_sec": 142.99447202682495
+    },
+    {
+      "episode": 1130,
+      "recon_loss": 177.3411865234375,
+      "pred_loss": 30.744243621826172,
+      "reward_loss": -846.6444702148438,
+      "tau": 1.3396502472958725,
+      "vocab_used": null,
+      "goal_dist": 4.379493713378906,
+      "elapsed_sec": 144.26455664634705
+    },
+    {
+      "episode": 1140,
+      "recon_loss": 174.06854248046875,
+      "pred_loss": 16.231929779052734,
+      "reward_loss": -877.5856323242188,
+      "tau": 1.3383105970485767,
+      "vocab_used": null,
+      "goal_dist": 4.3709001541137695,
+      "elapsed_sec": 145.52602648735046
+    },
+    {
+      "episode": 1150,
+      "recon_loss": 162.23818969726562,
+      "pred_loss": 7.359371185302734,
+      "reward_loss": -894.8975219726562,
+      "tau": 1.336972286451528,
+      "vocab_used": null,
+      "goal_dist": 4.401800155639648,
+      "elapsed_sec": 146.75454425811768
+    },
+    {
+      "episode": 1160,
+      "recon_loss": 159.10633850097656,
+      "pred_loss": 3.55894136428833,
+      "reward_loss": -907.9107666015625,
+      "tau": 1.3356353141650765,
+      "vocab_used": null,
+      "goal_dist": 4.214200973510742,
+      "elapsed_sec": 147.9732780456543
+    },
+    {
+      "episode": 1170,
+      "recon_loss": 157.9798583984375,
+      "pred_loss": 2.203660011291504,
+      "reward_loss": -946.635986328125,
+      "tau": 1.3342996788509114,
+      "vocab_used": null,
+      "goal_dist": 4.041181564331055,
+      "elapsed_sec": 149.24063682556152
+    },
+    {
+      "episode": 1180,
+      "recon_loss": 163.30621337890625,
+      "pred_loss": 2.639281749725342,
+      "reward_loss": -1021.1712646484375,
+      "tau": 1.3329653791720606,
+      "vocab_used": null,
+      "goal_dist": 3.9043314456939697,
+      "elapsed_sec": 150.58974385261536
+    },
+    {
+      "episode": 1190,
+      "recon_loss": 163.1519012451172,
+      "pred_loss": 2.0976405143737793,
+      "reward_loss": -1070.0650634765625,
+      "tau": 1.3316324137928885,
+      "vocab_used": null,
+      "goal_dist": 3.992053985595703,
+      "elapsed_sec": 151.97741556167603
+    },
+    {
+      "episode": 1200,
+      "recon_loss": 161.3798828125,
+      "pred_loss": 1.8047484159469604,
+      "reward_loss": -1098.2138671875,
+      "tau": 1.3303007813790957,
+      "vocab_used": null,
+      "goal_dist": 4.0051655769348145,
+      "elapsed_sec": 153.21404266357422
+    },
+    {
+      "episode": 1210,
+      "recon_loss": 158.46058654785156,
+      "pred_loss": 1.497838020324707,
+      "reward_loss": -1130.953369140625,
+      "tau": 1.3289704805977165,
+      "vocab_used": null,
+      "goal_dist": 4.084634304046631,
+      "elapsed_sec": 154.44669103622437
+    },
+    {
+      "episode": 1220,
+      "recon_loss": 151.65126037597656,
+      "pred_loss": 1.4783309698104858,
+      "reward_loss": -1148.291259765625,
+      "tau": 1.3276415101171188,
+      "vocab_used": null,
+      "goal_dist": 4.014659881591797,
+      "elapsed_sec": 155.76206469535828
+    },
+    {
+      "episode": 1230,
+      "recon_loss": 152.0855255126953,
+      "pred_loss": 1.3222942352294922,
+      "reward_loss": -1166.53173828125,
+      "tau": 1.3263138686070017,
+      "vocab_used": null,
+      "goal_dist": 3.9539718627929688,
+      "elapsed_sec": 156.99392771720886
+    },
+    {
+      "episode": 1240,
+      "recon_loss": 154.27781677246094,
+      "pred_loss": 1.3447157144546509,
+      "reward_loss": -1178.3848876953125,
+      "tau": 1.3249875547383947,
+      "vocab_used": null,
+      "goal_dist": 3.9653472900390625,
+      "elapsed_sec": 158.2425467967987
+    },
+    {
+      "episode": 1250,
+      "recon_loss": 146.66241455078125,
+      "pred_loss": 1.5634000301361084,
+      "reward_loss": -1205.687744140625,
+      "tau": 1.3236625671836564,
+      "vocab_used": null,
+      "goal_dist": 3.9271275997161865,
+      "elapsed_sec": 159.47334814071655
+    },
+    {
+      "episode": 1260,
+      "recon_loss": 138.73544311523438,
+      "pred_loss": 1.9721928834915161,
+      "reward_loss": -1229.9466552734375,
+      "tau": 1.3223389046164726,
+      "vocab_used": null,
+      "goal_dist": 3.8708059787750244,
+      "elapsed_sec": 160.76100492477417
+    },
+    {
+      "episode": 1270,
+      "recon_loss": 132.630615234375,
+      "pred_loss": 1.4876327514648438,
+      "reward_loss": -1234.0260009765625,
+      "tau": 1.3210165657118562,
+      "vocab_used": null,
+      "goal_dist": 3.9003326892852783,
+      "elapsed_sec": 162.03330659866333
+    },
+    {
+      "episode": 1280,
+      "recon_loss": 128.43905639648438,
+      "pred_loss": 1.4224393367767334,
+      "reward_loss": -1249.3831787109375,
+      "tau": 1.3196955491461442,
+      "vocab_used": null,
+      "goal_dist": 3.9254117012023926,
+      "elapsed_sec": 163.28241419792175
+    },
+    {
+      "episode": 1290,
+      "recon_loss": 126.94296264648438,
+      "pred_loss": 1.6350797414779663,
+      "reward_loss": -1258.76513671875,
+      "tau": 1.318375853596998,
+      "vocab_used": null,
+      "goal_dist": 3.9488959312438965,
+      "elapsed_sec": 164.49713277816772
+    },
+    {
+      "episode": 1300,
+      "recon_loss": 125.82839965820312,
+      "pred_loss": 1.5398335456848145,
+      "reward_loss": -1274.2939453125,
+      "tau": 1.3170574777434012,
+      "vocab_used": null,
+      "goal_dist": 3.9566168785095215,
+      "elapsed_sec": 165.74094676971436
+    },
+    {
+      "episode": 1310,
+      "recon_loss": 125.10429382324219,
+      "pred_loss": 1.4750432968139648,
+      "reward_loss": -1268.430908203125,
+      "tau": 1.3157404202656577,
+      "vocab_used": null,
+      "goal_dist": 3.868943691253662,
+      "elapsed_sec": 167.01720023155212
+    },
+    {
+      "episode": 1320,
+      "recon_loss": 125.68888854980469,
+      "pred_loss": 1.5345664024353027,
+      "reward_loss": -1284.86279296875,
+      "tau": 1.3144246798453922,
+      "vocab_used": null,
+      "goal_dist": 3.658442497253418,
+      "elapsed_sec": 168.3602101802826
+    },
+    {
+      "episode": 1330,
+      "recon_loss": 122.40397644042969,
+      "pred_loss": 1.4959193468093872,
+      "reward_loss": -1286.377197265625,
+      "tau": 1.3131102551655467,
+      "vocab_used": null,
+      "goal_dist": 3.9743316173553467,
+      "elapsed_sec": 169.70431971549988
+    },
+    {
+      "episode": 1340,
+      "recon_loss": 120.8620834350586,
+      "pred_loss": 1.483957290649414,
+      "reward_loss": -1284.7242431640625,
+      "tau": 1.3117971449103811,
+      "vocab_used": null,
+      "goal_dist": 4.015913963317871,
+      "elapsed_sec": 171.0556240081787
+    },
+    {
+      "episode": 1350,
+      "recon_loss": 121.82992553710938,
+      "pred_loss": 1.745810627937317,
+      "reward_loss": -1268.593505859375,
+      "tau": 1.3104853477654708,
+      "vocab_used": null,
+      "goal_dist": 3.952059745788574,
+      "elapsed_sec": 172.40902829170227
+    },
+    {
+      "episode": 1360,
+      "recon_loss": 124.09637451171875,
+      "pred_loss": 1.406956434249878,
+      "reward_loss": -1308.91064453125,
+      "tau": 1.3091748624177053,
+      "vocab_used": null,
+      "goal_dist": 3.871232509613037,
+      "elapsed_sec": 173.66597962379456
+    },
+    {
+      "episode": 1370,
+      "recon_loss": 120.539306640625,
+      "pred_loss": 1.6692041158676147,
+      "reward_loss": -1298.700927734375,
+      "tau": 1.3078656875552874,
+      "vocab_used": null,
+      "goal_dist": 3.980943202972412,
+      "elapsed_sec": 175.01320123672485
+    },
+    {
+      "episode": 1380,
+      "recon_loss": 120.33863067626953,
+      "pred_loss": 1.4556970596313477,
+      "reward_loss": -1321.049072265625,
+      "tau": 1.3065578218677323,
+      "vocab_used": null,
+      "goal_dist": 3.9338457584381104,
+      "elapsed_sec": 176.2834496498108
+    },
+    {
+      "episode": 1390,
+      "recon_loss": 120.07243347167969,
+      "pred_loss": 1.317774772644043,
+      "reward_loss": -1329.68505859375,
+      "tau": 1.3052512640458644,
+      "vocab_used": null,
+      "goal_dist": 3.8165621757507324,
+      "elapsed_sec": 177.51580214500427
+    },
+    {
+      "episode": 1400,
+      "recon_loss": 113.23795318603516,
+      "pred_loss": 1.5299901962280273,
+      "reward_loss": -1315.780517578125,
+      "tau": 1.3039460127818185,
+      "vocab_used": null,
+      "goal_dist": 3.9542250633239746,
+      "elapsed_sec": 178.81750893592834
+    },
+    {
+      "episode": 1410,
+      "recon_loss": 110.77631378173828,
+      "pred_loss": 1.4581842422485352,
+      "reward_loss": -1307.649169921875,
+      "tau": 1.3026420667690368,
+      "vocab_used": null,
+      "goal_dist": 3.85739803314209,
+      "elapsed_sec": 180.1183249950409
+    },
+    {
+      "episode": 1420,
+      "recon_loss": 112.63980102539062,
+      "pred_loss": 1.4112803936004639,
+      "reward_loss": -1316.262939453125,
+      "tau": 1.3013394247022678,
+      "vocab_used": null,
+      "goal_dist": 3.8105480670928955,
+      "elapsed_sec": 181.3837535381317
+    },
+    {
+      "episode": 1430,
+      "recon_loss": 108.28231048583984,
+      "pred_loss": 1.3550760746002197,
+      "reward_loss": -1318.907470703125,
+      "tau": 1.3000380852775655,
+      "vocab_used": null,
+      "goal_dist": 3.983097553253174,
+      "elapsed_sec": 182.6043930053711
+    },
+    {
+      "episode": 1440,
+      "recon_loss": 111.22284698486328,
+      "pred_loss": 1.34358549118042,
+      "reward_loss": -1332.5166015625,
+      "tau": 1.298738047192288,
+      "vocab_used": null,
+      "goal_dist": 4.012129783630371,
+      "elapsed_sec": 183.88072323799133
+    },
+    {
+      "episode": 1450,
+      "recon_loss": 109.65664672851562,
+      "pred_loss": 1.51084566116333,
+      "reward_loss": -1331.51953125,
+      "tau": 1.2974393091450955,
+      "vocab_used": null,
+      "goal_dist": 3.9664230346679688,
+      "elapsed_sec": 185.35803294181824
+    },
+    {
+      "episode": 1460,
+      "recon_loss": 109.1505126953125,
+      "pred_loss": 1.466010332107544,
+      "reward_loss": -1339.8203125,
+      "tau": 1.2961418698359506,
+      "vocab_used": null,
+      "goal_dist": 3.9015562534332275,
+      "elapsed_sec": 186.73962998390198
+    },
+    {
+      "episode": 1470,
+      "recon_loss": 109.6340560913086,
+      "pred_loss": 1.3652575016021729,
+      "reward_loss": -1347.893798828125,
+      "tau": 1.2948457279661145,
+      "vocab_used": null,
+      "goal_dist": 3.8947179317474365,
+      "elapsed_sec": 188.02754378318787
+    },
+    {
+      "episode": 1480,
+      "recon_loss": 108.76432037353516,
+      "pred_loss": 1.409533143043518,
+      "reward_loss": -1351.0103759765625,
+      "tau": 1.2935508822381485,
+      "vocab_used": null,
+      "goal_dist": 3.9858803749084473,
+      "elapsed_sec": 189.36586713790894
+    },
+    {
+      "episode": 1490,
+      "recon_loss": 105.4632339477539,
+      "pred_loss": 1.3972262144088745,
+      "reward_loss": -1353.548828125,
+      "tau": 1.2922573313559105,
+      "vocab_used": null,
+      "goal_dist": 3.864348888397217,
+      "elapsed_sec": 190.6209728717804
+    },
+    {
+      "episode": 1500,
+      "recon_loss": 102.859375,
+      "pred_loss": 1.3844380378723145,
+      "reward_loss": -1358.6864013671875,
+      "tau": 1.2909650740245544,
+      "vocab_used": null,
+      "goal_dist": 3.9553544521331787,
+      "elapsed_sec": 191.9366021156311
+    },
+    {
+      "episode": 1510,
+      "recon_loss": 102.72460174560547,
+      "pred_loss": 1.4208452701568604,
+      "reward_loss": -1358.623779296875,
+      "tau": 1.28967410895053,
+      "vocab_used": null,
+      "goal_dist": 3.8430185317993164,
+      "elapsed_sec": 193.31454229354858
+    },
+    {
+      "episode": 1520,
+      "recon_loss": 100.6942138671875,
+      "pred_loss": 1.517383337020874,
+      "reward_loss": -1358.0133056640625,
+      "tau": 1.2883844348415794,
+      "vocab_used": null,
+      "goal_dist": 3.8604660034179688,
+      "elapsed_sec": 194.60300087928772
+    },
+    {
+      "episode": 1530,
+      "recon_loss": 98.3153076171875,
+      "pred_loss": 1.6374143362045288,
+      "reward_loss": -1377.421142578125,
+      "tau": 1.287096050406738,
+      "vocab_used": null,
+      "goal_dist": 3.9894185066223145,
+      "elapsed_sec": 195.94426846504211
+    },
+    {
+      "episode": 1540,
+      "recon_loss": 96.42117309570312,
+      "pred_loss": 1.4384164810180664,
+      "reward_loss": -1382.216064453125,
+      "tau": 1.2858089543563311,
+      "vocab_used": null,
+      "goal_dist": 3.959721565246582,
+      "elapsed_sec": 197.3092818260193
+    },
+    {
+      "episode": 1550,
+      "recon_loss": 97.07369995117188,
+      "pred_loss": 1.442704439163208,
+      "reward_loss": -1395.8714599609375,
+      "tau": 1.2845231454019748,
+      "vocab_used": null,
+      "goal_dist": 3.898902654647827,
+      "elapsed_sec": 198.6101677417755
+    },
+    {
+      "episode": 1560,
+      "recon_loss": 93.71334075927734,
+      "pred_loss": 1.4324344396591187,
+      "reward_loss": -1395.23291015625,
+      "tau": 1.2832386222565728,
+      "vocab_used": null,
+      "goal_dist": 3.9264180660247803,
+      "elapsed_sec": 199.8658287525177
+    },
+    {
+      "episode": 1570,
+      "recon_loss": 91.7852783203125,
+      "pred_loss": 1.4023430347442627,
+      "reward_loss": -1397.466064453125,
+      "tau": 1.2819553836343163,
+      "vocab_used": null,
+      "goal_dist": 3.9574790000915527,
+      "elapsed_sec": 201.2102518081665
+    },
+    {
+      "episode": 1580,
+      "recon_loss": 91.81353759765625,
+      "pred_loss": 1.3708866834640503,
+      "reward_loss": -1402.806884765625,
+      "tau": 1.2806734282506818,
+      "vocab_used": null,
+      "goal_dist": 3.7682149410247803,
+      "elapsed_sec": 202.49829387664795
+    },
+    {
+      "episode": 1590,
+      "recon_loss": 91.72826385498047,
+      "pred_loss": 1.4222975969314575,
+      "reward_loss": -1413.228271484375,
+      "tau": 1.279392754822431,
+      "vocab_used": null,
+      "goal_dist": 3.84268856048584,
+      "elapsed_sec": 203.74264240264893
+    },
+    {
+      "episode": 1600,
+      "recon_loss": 88.92506408691406,
+      "pred_loss": 1.34344482421875,
+      "reward_loss": -1409.168212890625,
+      "tau": 1.2781133620676086,
+      "vocab_used": null,
+      "goal_dist": 3.991048574447632,
+      "elapsed_sec": 205.0832097530365
+    },
+    {
+      "episode": 1610,
+      "recon_loss": 93.36416625976562,
+      "pred_loss": 46.502723693847656,
+      "reward_loss": -549.5064697265625,
+      "tau": 1.2768352487055412,
+      "vocab_used": null,
+      "goal_dist": 4.3003435134887695,
+      "elapsed_sec": 206.4081163406372
+    },
+    {
+      "episode": 1620,
+      "recon_loss": 79.31533813476562,
+      "pred_loss": 14.702259063720703,
+      "reward_loss": -559.6593017578125,
+      "tau": 1.2755584134568356,
+      "vocab_used": null,
+      "goal_dist": 4.418982982635498,
+      "elapsed_sec": 207.7198326587677
+    },
+    {
+      "episode": 1630,
+      "recon_loss": 78.01486206054688,
+      "pred_loss": 19.252628326416016,
+      "reward_loss": -712.0177001953125,
+      "tau": 1.2742828550433787,
+      "vocab_used": null,
+      "goal_dist": 4.290371894836426,
+      "elapsed_sec": 209.0111951828003
+    },
+    {
+      "episode": 1640,
+      "recon_loss": 67.2516860961914,
+      "pred_loss": 7.566531181335449,
+      "reward_loss": -806.0582275390625,
+      "tau": 1.2730085721883353,
+      "vocab_used": null,
+      "goal_dist": 3.9691338539123535,
+      "elapsed_sec": 210.349351644516
+    },
+    {
+      "episode": 1650,
+      "recon_loss": 62.84264373779297,
+      "pred_loss": 5.341822624206543,
+      "reward_loss": -874.0482177734375,
+      "tau": 1.271735563616147,
+      "vocab_used": null,
+      "goal_dist": 4.011329650878906,
+      "elapsed_sec": 211.68996167182922
+    },
+    {
+      "episode": 1660,
+      "recon_loss": 59.675994873046875,
+      "pred_loss": 2.8951005935668945,
+      "reward_loss": -912.1920776367188,
+      "tau": 1.2704638280525309,
+      "vocab_used": null,
+      "goal_dist": 4.075502395629883,
+      "elapsed_sec": 212.96283555030823
+    },
+    {
+      "episode": 1670,
+      "recon_loss": 66.33815002441406,
+      "pred_loss": 4.691753387451172,
+      "reward_loss": -1000.4490966796875,
+      "tau": 1.2691933642244784,
+      "vocab_used": null,
+      "goal_dist": 4.28706169128418,
+      "elapsed_sec": 214.24303150177002
+    },
+    {
+      "episode": 1680,
+      "recon_loss": 61.31208801269531,
+      "pred_loss": 3.314357042312622,
+      "reward_loss": -1020.189453125,
+      "tau": 1.2679241708602538,
+      "vocab_used": null,
+      "goal_dist": 4.320867538452148,
+      "elapsed_sec": 215.4682970046997
+    },
+    {
+      "episode": 1690,
+      "recon_loss": 52.991416931152344,
+      "pred_loss": 2.182224750518799,
+      "reward_loss": -1028.6688232421875,
+      "tau": 1.2666562466893936,
+      "vocab_used": null,
+      "goal_dist": 4.4922404289245605,
+      "elapsed_sec": 216.7340292930603
+    },
+    {
+      "episode": 1700,
+      "recon_loss": 49.84135437011719,
+      "pred_loss": 1.5875916481018066,
+      "reward_loss": -1046.5863037109375,
+      "tau": 1.2653895904427042,
+      "vocab_used": null,
+      "goal_dist": 4.574183464050293,
+      "elapsed_sec": 217.9673981666565
+    },
+    {
+      "episode": 1710,
+      "recon_loss": 49.276397705078125,
+      "pred_loss": 1.3974899053573608,
+      "reward_loss": -1069.49755859375,
+      "tau": 1.2641242008522615,
+      "vocab_used": null,
+      "goal_dist": 4.608453750610352,
+      "elapsed_sec": 219.24044919013977
+    },
+    {
+      "episode": 1720,
+      "recon_loss": 46.604434967041016,
+      "pred_loss": 1.4097239971160889,
+      "reward_loss": -1079.06884765625,
+      "tau": 1.2628600766514093,
+      "vocab_used": null,
+      "goal_dist": 4.660460472106934,
+      "elapsed_sec": 220.45105862617493
+    },
+    {
+      "episode": 1730,
+      "recon_loss": 44.22328186035156,
+      "pred_loss": 1.3095825910568237,
+      "reward_loss": -1086.633056640625,
+      "tau": 1.2615972165747578,
+      "vocab_used": null,
+      "goal_dist": 4.628488540649414,
+      "elapsed_sec": 221.6839292049408
+    },
+    {
+      "episode": 1740,
+      "recon_loss": 41.04499816894531,
+      "pred_loss": 1.3957535028457642,
+      "reward_loss": -1094.176513671875,
+      "tau": 1.260335619358183,
+      "vocab_used": null,
+      "goal_dist": 4.622737884521484,
+      "elapsed_sec": 222.9657473564148
+    },
+    {
+      "episode": 1750,
+      "recon_loss": 40.16349792480469,
+      "pred_loss": 1.4919681549072266,
+      "reward_loss": -1100.870361328125,
+      "tau": 1.2590752837388248,
+      "vocab_used": null,
+      "goal_dist": 4.698443412780762,
+      "elapsed_sec": 224.19574570655823
+    },
+    {
+      "episode": 1760,
+      "recon_loss": 38.589630126953125,
+      "pred_loss": 1.5620176792144775,
+      "reward_loss": -1116.3433837890625,
+      "tau": 1.2578162084550861,
+      "vocab_used": null,
+      "goal_dist": 4.464529037475586,
+      "elapsed_sec": 225.44892287254333
+    },
+    {
+      "episode": 1770,
+      "recon_loss": 36.95940017700195,
+      "pred_loss": 1.4768235683441162,
+      "reward_loss": -1129.31591796875,
+      "tau": 1.256558392246631,
+      "vocab_used": null,
+      "goal_dist": 4.717036247253418,
+      "elapsed_sec": 226.64689421653748
+    },
+    {
+      "episode": 1780,
+      "recon_loss": 38.79133605957031,
+      "pred_loss": 2.1872925758361816,
+      "reward_loss": -1114.635009765625,
+      "tau": 1.2553018338543844,
+      "vocab_used": null,
+      "goal_dist": 4.827270030975342,
+      "elapsed_sec": 227.8800528049469
+    },
+    {
+      "episode": 1790,
+      "recon_loss": 37.160682678222656,
+      "pred_loss": 1.7440471649169922,
+      "reward_loss": -1135.342041015625,
+      "tau": 1.25404653202053,
+      "vocab_used": null,
+      "goal_dist": 4.626655101776123,
+      "elapsed_sec": 229.1509301662445
+    },
+    {
+      "episode": 1800,
+      "recon_loss": 35.82037353515625,
+      "pred_loss": 1.5114266872406006,
+      "reward_loss": -1156.3682861328125,
+      "tau": 1.2527924854885093,
+      "vocab_used": null,
+      "goal_dist": 4.705392837524414,
+      "elapsed_sec": 230.40110850334167
+    },
+    {
+      "episode": 1810,
+      "recon_loss": 37.36886978149414,
+      "pred_loss": 1.4572309255599976,
+      "reward_loss": -1174.8868408203125,
+      "tau": 1.251539693003021,
+      "vocab_used": null,
+      "goal_dist": 4.8887200355529785,
+      "elapsed_sec": 231.65192341804504
+    },
+    {
+      "episode": 1820,
+      "recon_loss": 41.93825912475586,
+      "pred_loss": 1.4664595127105713,
+      "reward_loss": -1175.7313232421875,
+      "tau": 1.2502881533100179,
+      "vocab_used": null,
+      "goal_dist": 4.526028633117676,
+      "elapsed_sec": 232.96114206314087
+    },
+    {
+      "episode": 1830,
+      "recon_loss": 37.09198760986328,
+      "pred_loss": 1.5830528736114502,
+      "reward_loss": -1186.034423828125,
+      "tau": 1.249037865156708,
+      "vocab_used": null,
+      "goal_dist": 4.641637325286865,
+      "elapsed_sec": 234.26829886436462
+    },
+    {
+      "episode": 1840,
+      "recon_loss": 38.943260192871094,
+      "pred_loss": 1.4623509645462036,
+      "reward_loss": -1209.1964111328125,
+      "tau": 1.2477888272915512,
+      "vocab_used": null,
+      "goal_dist": 4.432748794555664,
+      "elapsed_sec": 235.53001832962036
+    },
+    {
+      "episode": 1850,
+      "recon_loss": 37.211456298828125,
+      "pred_loss": 1.3872873783111572,
+      "reward_loss": -1216.9990234375,
+      "tau": 1.2465410384642597,
+      "vocab_used": null,
+      "goal_dist": 4.566980361938477,
+      "elapsed_sec": 236.83025979995728
+    },
+    {
+      "episode": 1860,
+      "recon_loss": 39.104454040527344,
+      "pred_loss": 1.4011409282684326,
+      "reward_loss": -1219.5009765625,
+      "tau": 1.2452944974257953,
+      "vocab_used": null,
+      "goal_dist": 4.548736572265625,
+      "elapsed_sec": 238.04541158676147
+    },
+    {
+      "episode": 1870,
+      "recon_loss": 36.66767120361328,
+      "pred_loss": 1.3260263204574585,
+      "reward_loss": -1225.3505859375,
+      "tau": 1.2440492029283696,
+      "vocab_used": null,
+      "goal_dist": 4.468923091888428,
+      "elapsed_sec": 239.2928168773651
+    },
+    {
+      "episode": 1880,
+      "recon_loss": 36.41777038574219,
+      "pred_loss": 1.320267677307129,
+      "reward_loss": -1232.2811279296875,
+      "tau": 1.2428051537254412,
+      "vocab_used": null,
+      "goal_dist": 4.609719276428223,
+      "elapsed_sec": 240.54562616348267
+    },
+    {
+      "episode": 1890,
+      "recon_loss": 37.28900909423828,
+      "pred_loss": 1.2796871662139893,
+      "reward_loss": -1236.002197265625,
+      "tau": 1.2415623485717158,
+      "vocab_used": null,
+      "goal_dist": 4.494969367980957,
+      "elapsed_sec": 241.7749161720276
+    },
+    {
+      "episode": 1900,
+      "recon_loss": 34.308650970458984,
+      "pred_loss": 1.4099233150482178,
+      "reward_loss": -1233.5888671875,
+      "tau": 1.240320786223144,
+      "vocab_used": null,
+      "goal_dist": 4.640969276428223,
+      "elapsed_sec": 243.00424981117249
+    },
+    {
+      "episode": 1910,
+      "recon_loss": 32.40080261230469,
+      "pred_loss": 1.306689739227295,
+      "reward_loss": -1241.005859375,
+      "tau": 1.239080465436921,
+      "vocab_used": null,
+      "goal_dist": 4.5462236404418945,
+      "elapsed_sec": 244.2838671207428
+    },
+    {
+      "episode": 1920,
+      "recon_loss": 33.094871520996094,
+      "pred_loss": 1.3917522430419922,
+      "reward_loss": -1240.23095703125,
+      "tau": 1.237841384971484,
+      "vocab_used": null,
+      "goal_dist": 4.76495361328125,
+      "elapsed_sec": 245.5723261833191
+    },
+    {
+      "episode": 1930,
+      "recon_loss": 33.217124938964844,
+      "pred_loss": 1.348912000656128,
+      "reward_loss": -1254.397705078125,
+      "tau": 1.2366035435865124,
+      "vocab_used": null,
+      "goal_dist": 4.715959548950195,
+      "elapsed_sec": 246.8658516407013
+    },
+    {
+      "episode": 1940,
+      "recon_loss": 33.915931701660156,
+      "pred_loss": 1.2787089347839355,
+      "reward_loss": -1263.138916015625,
+      "tau": 1.235366940042926,
+      "vocab_used": null,
+      "goal_dist": 4.8474836349487305,
+      "elapsed_sec": 248.08655285835266
+    },
+    {
+      "episode": 1950,
+      "recon_loss": 34.934959411621094,
+      "pred_loss": 1.504506230354309,
+      "reward_loss": -1271.274658203125,
+      "tau": 1.234131573102883,
+      "vocab_used": null,
+      "goal_dist": 4.9404120445251465,
+      "elapsed_sec": 249.33153986930847
+    },
+    {
+      "episode": 1960,
+      "recon_loss": 35.220027923583984,
+      "pred_loss": 1.3327407836914062,
+      "reward_loss": -1282.94482421875,
+      "tau": 1.2328974415297802,
+      "vocab_used": null,
+      "goal_dist": 4.8394904136657715,
+      "elapsed_sec": 250.58555340766907
+    },
+    {
+      "episode": 1970,
+      "recon_loss": 35.714256286621094,
+      "pred_loss": 1.355065107345581,
+      "reward_loss": -1289.333251953125,
+      "tau": 1.2316645440882503,
+      "vocab_used": null,
+      "goal_dist": 5.056253433227539,
+      "elapsed_sec": 251.80452489852905
+    },
+    {
+      "episode": 1980,
+      "recon_loss": 36.12797546386719,
+      "pred_loss": 1.4013360738754272,
+      "reward_loss": -1301.252685546875,
+      "tau": 1.2304328795441621,
+      "vocab_used": null,
+      "goal_dist": 5.065748691558838,
+      "elapsed_sec": 253.11486983299255
+    },
+    {
+      "episode": 1990,
+      "recon_loss": 35.252723693847656,
+      "pred_loss": 1.3776628971099854,
+      "reward_loss": -1302.438232421875,
+      "tau": 1.2292024466646179,
+      "vocab_used": null,
+      "goal_dist": 4.6362738609313965,
+      "elapsed_sec": 254.3173861503601
+    },
+    {
+      "episode": 2000,
+      "recon_loss": 35.363922119140625,
+      "pred_loss": 1.2500075101852417,
+      "reward_loss": -1310.760986328125,
+      "tau": 1.2279732442179534,
+      "vocab_used": null,
+      "goal_dist": 4.944798946380615,
+      "elapsed_sec": 255.60109210014343
+    },
+    {
+      "episode": 2010,
+      "recon_loss": 35.23779296875,
+      "pred_loss": 1.3045536279678345,
+      "reward_loss": -1317.3089599609375,
+      "tau": 1.2267452709737354,
+      "vocab_used": null,
+      "goal_dist": 5.106213569641113,
+      "elapsed_sec": 256.8492455482483
+    },
+    {
+      "episode": 2020,
+      "recon_loss": 34.676544189453125,
+      "pred_loss": 1.2995760440826416,
+      "reward_loss": -1321.22412109375,
+      "tau": 1.2255185257027617,
+      "vocab_used": null,
+      "goal_dist": 5.063209056854248,
+      "elapsed_sec": 258.07075595855713
+    },
+    {
+      "episode": 2030,
+      "recon_loss": 35.43544387817383,
+      "pred_loss": 1.3032771348953247,
+      "reward_loss": -1318.2666015625,
+      "tau": 1.2242930071770588,
+      "vocab_used": null,
+      "goal_dist": 4.9310102462768555,
+      "elapsed_sec": 259.3016126155853
+    },
+    {
+      "episode": 2040,
+      "recon_loss": 33.57959747314453,
+      "pred_loss": 1.277470588684082,
+      "reward_loss": -1320.626708984375,
+      "tau": 1.2230687141698817,
+      "vocab_used": null,
+      "goal_dist": 4.980072498321533,
+      "elapsed_sec": 260.5530278682709
+    },
+    {
+      "episode": 2050,
+      "recon_loss": 32.88090133666992,
+      "pred_loss": 1.2782710790634155,
+      "reward_loss": -1322.4068603515625,
+      "tau": 1.221845645455712,
+      "vocab_used": null,
+      "goal_dist": 5.022375583648682,
+      "elapsed_sec": 261.8030438423157
+    },
+    {
+      "episode": 2060,
+      "recon_loss": 32.90146255493164,
+      "pred_loss": 1.2821407318115234,
+      "reward_loss": -1328.39013671875,
+      "tau": 1.2206237998102563,
+      "vocab_used": null,
+      "goal_dist": 4.986200332641602,
+      "elapsed_sec": 263.04838156700134
+    },
+    {
+      "episode": 2070,
+      "recon_loss": 31.888652801513672,
+      "pred_loss": 1.3461514711380005,
+      "reward_loss": -1320.2578125,
+      "tau": 1.219403176010446,
+      "vocab_used": null,
+      "goal_dist": 5.044435501098633,
+      "elapsed_sec": 264.2795088291168
+    },
+    {
+      "episode": 2080,
+      "recon_loss": 42.00196075439453,
+      "pred_loss": 1.3575012683868408,
+      "reward_loss": -1320.21923828125,
+      "tau": 1.2181837728344354,
+      "vocab_used": null,
+      "goal_dist": 5.098045349121094,
+      "elapsed_sec": 265.48405742645264
+    },
+    {
+      "episode": 2090,
+      "recon_loss": 32.42316436767578,
+      "pred_loss": 1.344233751296997,
+      "reward_loss": -1319.876953125,
+      "tau": 1.2169655890616011,
+      "vocab_used": null,
+      "goal_dist": 4.855806827545166,
+      "elapsed_sec": 266.7029275894165
+    },
+    {
+      "episode": 2100,
+      "recon_loss": 32.18034362792969,
+      "pred_loss": 1.3063015937805176,
+      "reward_loss": -1329.5916748046875,
+      "tau": 1.2157486234725394,
+      "vocab_used": null,
+      "goal_dist": 4.992953300476074,
+      "elapsed_sec": 267.94568061828613
+    },
+    {
+      "episode": 2110,
+      "recon_loss": 92.89759826660156,
+      "pred_loss": 24.470130920410156,
+      "reward_loss": -402.47174072265625,
+      "tau": 1.214532874849067,
+      "vocab_used": null,
+      "goal_dist": 4.706732273101807,
+      "elapsed_sec": 269.19049549102783
+    },
+    {
+      "episode": 2120,
+      "recon_loss": 41.422401428222656,
+      "pred_loss": 10.320526123046875,
+      "reward_loss": -508.58111572265625,
+      "tau": 1.213318341974218,
+      "vocab_used": null,
+      "goal_dist": 3.9869847297668457,
+      "elapsed_sec": 270.42967081069946
+    },
+    {
+      "episode": 2130,
+      "recon_loss": 47.61937713623047,
+      "pred_loss": 10.553730010986328,
+      "reward_loss": -634.844970703125,
+      "tau": 1.2121050236322435,
+      "vocab_used": null,
+      "goal_dist": 4.0541791915893555,
+      "elapsed_sec": 271.65266466140747
+    },
+    {
+      "episode": 2140,
+      "recon_loss": 41.49496841430664,
+      "pred_loss": 8.492154121398926,
+      "reward_loss": -724.2230834960938,
+      "tau": 1.2108929186086115,
+      "vocab_used": null,
+      "goal_dist": 4.074924468994141,
+      "elapsed_sec": 272.9249129295349
+    },
+    {
+      "episode": 2150,
+      "recon_loss": 45.852813720703125,
+      "pred_loss": 5.928193092346191,
+      "reward_loss": -833.8523559570312,
+      "tau": 1.2096820256900027,
+      "vocab_used": null,
+      "goal_dist": 4.249018669128418,
+      "elapsed_sec": 274.1568441390991
+    },
+    {
+      "episode": 2160,
+      "recon_loss": 40.563011169433594,
+      "pred_loss": 4.65260648727417,
+      "reward_loss": -899.7340087890625,
+      "tau": 1.2084723436643128,
+      "vocab_used": null,
+      "goal_dist": 4.0951104164123535,
+      "elapsed_sec": 275.4143588542938
+    },
+    {
+      "episode": 2170,
+      "recon_loss": 37.72465133666992,
+      "pred_loss": 1.9921656847000122,
+      "reward_loss": -917.377197265625,
+      "tau": 1.2072638713206485,
+      "vocab_used": null,
+      "goal_dist": 4.208377361297607,
+      "elapsed_sec": 276.762535572052
+    },
+    {
+      "episode": 2180,
+      "recon_loss": 35.372833251953125,
+      "pred_loss": 1.5786832571029663,
+      "reward_loss": -932.252685546875,
+      "tau": 1.206056607449328,
+      "vocab_used": null,
+      "goal_dist": 4.357766151428223,
+      "elapsed_sec": 277.98152804374695
+    },
+    {
+      "episode": 2190,
+      "recon_loss": 34.22777557373047,
+      "pred_loss": 1.6682915687561035,
+      "reward_loss": -943.2769775390625,
+      "tau": 1.2048505508418785,
+      "vocab_used": null,
+      "goal_dist": 4.43131685256958,
+      "elapsed_sec": 279.22747468948364
+    },
+    {
+      "episode": 2200,
+      "recon_loss": 34.959571838378906,
+      "pred_loss": 1.621024250984192,
+      "reward_loss": -971.3289184570312,
+      "tau": 1.2036457002910366,
+      "vocab_used": null,
+      "goal_dist": 4.633210182189941,
+      "elapsed_sec": 280.52803683280945
+    },
+    {
+      "episode": 2210,
+      "recon_loss": 32.798213958740234,
+      "pred_loss": 1.3705427646636963,
+      "reward_loss": -987.2120361328125,
+      "tau": 1.2024420545907457,
+      "vocab_used": null,
+      "goal_dist": 4.802859306335449,
+      "elapsed_sec": 281.7578899860382
+    },
+    {
+      "episode": 2220,
+      "recon_loss": 29.80620574951172,
+      "pred_loss": 1.3597168922424316,
+      "reward_loss": -996.6810302734375,
+      "tau": 1.2012396125361549,
+      "vocab_used": null,
+      "goal_dist": 4.88733434677124,
+      "elapsed_sec": 283.0247597694397
+    },
+    {
+      "episode": 2230,
+      "recon_loss": 27.572160720825195,
+      "pred_loss": 1.3057775497436523,
+      "reward_loss": -1009.3676147460938,
+      "tau": 1.2000383729236188,
+      "vocab_used": null,
+      "goal_dist": 4.740819931030273,
+      "elapsed_sec": 284.34434962272644
+    },
+    {
+      "episode": 2240,
+      "recon_loss": 26.294010162353516,
+      "pred_loss": 1.5834927558898926,
+      "reward_loss": -1016.0279541015625,
+      "tau": 1.198838334550695,
+      "vocab_used": null,
+      "goal_dist": 4.758672714233398,
+      "elapsed_sec": 285.6508038043976
+    },
+    {
+      "episode": 2250,
+      "recon_loss": 24.58964729309082,
+      "pred_loss": 1.4300413131713867,
+      "reward_loss": -1027.1400146484375,
+      "tau": 1.1976394962161443,
+      "vocab_used": null,
+      "goal_dist": 4.794091701507568,
+      "elapsed_sec": 286.81987285614014
+    },
+    {
+      "episode": 2260,
+      "recon_loss": 22.150989532470703,
+      "pred_loss": 1.2743301391601562,
+      "reward_loss": -1029.937744140625,
+      "tau": 1.1964418567199282,
+      "vocab_used": null,
+      "goal_dist": 4.77039098739624,
+      "elapsed_sec": 288.05212450027466
+    },
+    {
+      "episode": 2270,
+      "recon_loss": 21.523653030395508,
+      "pred_loss": 1.4025118350982666,
+      "reward_loss": -1037.3162841796875,
+      "tau": 1.1952454148632083,
+      "vocab_used": null,
+      "goal_dist": 5.002073287963867,
+      "elapsed_sec": 289.26973605155945
+    },
+    {
+      "episode": 2280,
+      "recon_loss": 21.074726104736328,
+      "pred_loss": 1.330389142036438,
+      "reward_loss": -1042.72802734375,
+      "tau": 1.194050169448345,
+      "vocab_used": null,
+      "goal_dist": 4.838732719421387,
+      "elapsed_sec": 290.53607058525085
+    },
+    {
+      "episode": 2290,
+      "recon_loss": 19.34349822998047,
+      "pred_loss": 1.420053482055664,
+      "reward_loss": -1038.992919921875,
+      "tau": 1.192856119278897,
+      "vocab_used": null,
+      "goal_dist": 4.8109331130981445,
+      "elapsed_sec": 291.77640080451965
+    },
+    {
+      "episode": 2300,
+      "recon_loss": 19.59442138671875,
+      "pred_loss": 1.3783038854599,
+      "reward_loss": -1040.4481201171875,
+      "tau": 1.1916632631596178,
+      "vocab_used": null,
+      "goal_dist": 4.8715667724609375,
+      "elapsed_sec": 293.0647346973419
+    },
+    {
+      "episode": 2310,
+      "recon_loss": 17.876604080200195,
+      "pred_loss": 1.3202474117279053,
+      "reward_loss": -1038.2529296875,
+      "tau": 1.1904715998964583,
+      "vocab_used": null,
+      "goal_dist": 4.992183685302734,
+      "elapsed_sec": 294.3372142314911
+    },
+    {
+      "episode": 2320,
+      "recon_loss": 18.39533233642578,
+      "pred_loss": 1.3498072624206543,
+      "reward_loss": -1045.4122314453125,
+      "tau": 1.1892811282965619,
+      "vocab_used": null,
+      "goal_dist": 4.9848432540893555,
+      "elapsed_sec": 295.6300024986267
+    },
+    {
+      "episode": 2330,
+      "recon_loss": 17.305156707763672,
+      "pred_loss": 1.2290966510772705,
+      "reward_loss": -1042.367919921875,
+      "tau": 1.188091847168265,
+      "vocab_used": null,
+      "goal_dist": 4.954221725463867,
+      "elapsed_sec": 296.8541576862335
+    },
+    {
+      "episode": 2340,
+      "recon_loss": 17.059574127197266,
+      "pred_loss": 1.2766180038452148,
+      "reward_loss": -1042.167236328125,
+      "tau": 1.1869037553210968,
+      "vocab_used": null,
+      "goal_dist": 4.8581342697143555,
+      "elapsed_sec": 298.0657994747162
+    },
+    {
+      "episode": 2350,
+      "recon_loss": 16.6307373046875,
+      "pred_loss": 1.2980586290359497,
+      "reward_loss": -1040.72265625,
+      "tau": 1.1857168515657759,
+      "vocab_used": null,
+      "goal_dist": 5.045156955718994,
+      "elapsed_sec": 299.2732894420624
+    },
+    {
+      "episode": 2360,
+      "recon_loss": 16.194669723510742,
+      "pred_loss": 1.2943307161331177,
+      "reward_loss": -1041.6591796875,
+      "tau": 1.18453113471421,
+      "vocab_used": null,
+      "goal_dist": 5.048683166503906,
+      "elapsed_sec": 300.48363065719604
+    },
+    {
+      "episode": 2370,
+      "recon_loss": 16.348133087158203,
+      "pred_loss": 1.406585693359375,
+      "reward_loss": -1057.184814453125,
+      "tau": 1.183346603579496,
+      "vocab_used": null,
+      "goal_dist": 4.889477729797363,
+      "elapsed_sec": 301.7248728275299
+    },
+    {
+      "episode": 2380,
+      "recon_loss": 16.25637435913086,
+      "pred_loss": 1.635512351989746,
+      "reward_loss": -1103.791259765625,
+      "tau": 1.1821632569759164,
+      "vocab_used": null,
+      "goal_dist": 5.293307304382324,
+      "elapsed_sec": 303.02195286750793
+    },
+    {
+      "episode": 2390,
+      "recon_loss": 17.2861328125,
+      "pred_loss": 1.5812392234802246,
+      "reward_loss": -1131.9189453125,
+      "tau": 1.1809810937189404,
+      "vocab_used": null,
+      "goal_dist": 5.665308952331543,
+      "elapsed_sec": 304.3223924636841
+    },
+    {
+      "episode": 2400,
+      "recon_loss": 17.0328369140625,
+      "pred_loss": 1.4231836795806885,
+      "reward_loss": -1144.236328125,
+      "tau": 1.1798001126252213,
+      "vocab_used": null,
+      "goal_dist": 5.4815897941589355,
+      "elapsed_sec": 305.61223459243774
+    },
+    {
+      "episode": 2410,
+      "recon_loss": 16.97345733642578,
+      "pred_loss": 1.5446159839630127,
+      "reward_loss": -1143.1986083984375,
+      "tau": 1.1786203125125962,
+      "vocab_used": null,
+      "goal_dist": 5.425497055053711,
+      "elapsed_sec": 306.8958296775818
+    },
+    {
+      "episode": 2420,
+      "recon_loss": 16.542987823486328,
+      "pred_loss": 1.5118985176086426,
+      "reward_loss": -1147.750732421875,
+      "tau": 1.1774416922000837,
+      "vocab_used": null,
+      "goal_dist": 5.57978630065918,
+      "elapsed_sec": 308.15599370002747
+    },
+    {
+      "episode": 2430,
+      "recon_loss": 16.808395385742188,
+      "pred_loss": 1.5714994668960571,
+      "reward_loss": -1153.5224609375,
+      "tau": 1.1762642505078835,
+      "vocab_used": null,
+      "goal_dist": 5.446527481079102,
+      "elapsed_sec": 309.4946184158325
+    },
+    {
+      "episode": 2440,
+      "recon_loss": 16.621795654296875,
+      "pred_loss": 1.518082618713379,
+      "reward_loss": -1154.908935546875,
+      "tau": 1.1750879862573758,
+      "vocab_used": null,
+      "goal_dist": 5.460882186889648,
+      "elapsed_sec": 310.8185043334961
+    },
+    {
+      "episode": 2450,
+      "recon_loss": 16.307641983032227,
+      "pred_loss": 1.4961936473846436,
+      "reward_loss": -1154.2884521484375,
+      "tau": 1.1739128982711182,
+      "vocab_used": null,
+      "goal_dist": 5.564970016479492,
+      "elapsed_sec": 312.076069355011
+    },
+    {
+      "episode": 2460,
+      "recon_loss": 16.27642059326172,
+      "pred_loss": 1.435865879058838,
+      "reward_loss": -1155.484375,
+      "tau": 1.1727389853728472,
+      "vocab_used": null,
+      "goal_dist": 5.308428764343262,
+      "elapsed_sec": 313.31745982170105
+    },
+    {
+      "episode": 2470,
+      "recon_loss": 16.654586791992188,
+      "pred_loss": 1.5558373928070068,
+      "reward_loss": -1158.95751953125,
+      "tau": 1.1715662463874743,
+      "vocab_used": null,
+      "goal_dist": 5.288287162780762,
+      "elapsed_sec": 314.6556239128113
+    },
+    {
+      "episode": 2480,
+      "recon_loss": 15.984224319458008,
+      "pred_loss": 1.4194217920303345,
+      "reward_loss": -1163.6990966796875,
+      "tau": 1.170394680141087,
+      "vocab_used": null,
+      "goal_dist": 5.588174819946289,
+      "elapsed_sec": 315.8865556716919
+    },
+    {
+      "episode": 2490,
+      "recon_loss": 16.385486602783203,
+      "pred_loss": 1.5048288106918335,
+      "reward_loss": -1162.0584716796875,
+      "tau": 1.1692242854609458,
+      "vocab_used": null,
+      "goal_dist": 5.554055213928223,
+      "elapsed_sec": 317.10240960121155
+    },
+    {
+      "episode": 2500,
+      "recon_loss": 16.040761947631836,
+      "pred_loss": 1.3694658279418945,
+      "reward_loss": -1161.5579833984375,
+      "tau": 1.1680550611754847,
+      "vocab_used": null,
+      "goal_dist": 5.4828386306762695,
+      "elapsed_sec": 318.41661858558655
+    },
+    {
+      "episode": 2510,
+      "recon_loss": 15.636306762695312,
+      "pred_loss": 1.4407343864440918,
+      "reward_loss": -1161.5048828125,
+      "tau": 1.1668870061143093,
+      "vocab_used": null,
+      "goal_dist": 5.345098495483398,
+      "elapsed_sec": 319.68187975883484
+    },
+    {
+      "episode": 2520,
+      "recon_loss": 15.810256004333496,
+      "pred_loss": 1.4642901420593262,
+      "reward_loss": -1165.849853515625,
+      "tau": 1.1657201191081952,
+      "vocab_used": null,
+      "goal_dist": 5.328334808349609,
+      "elapsed_sec": 320.9989187717438
+    },
+    {
+      "episode": 2530,
+      "recon_loss": 15.514265060424805,
+      "pred_loss": 1.472001314163208,
+      "reward_loss": -1160.307373046875,
+      "tau": 1.1645543989890867,
+      "vocab_used": null,
+      "goal_dist": 5.427395820617676,
+      "elapsed_sec": 322.4465947151184
+    },
+    {
+      "episode": 2540,
+      "recon_loss": 15.372001647949219,
+      "pred_loss": 1.48123300075531,
+      "reward_loss": -1164.6396484375,
+      "tau": 1.1633898445900979,
+      "vocab_used": null,
+      "goal_dist": 5.236763000488281,
+      "elapsed_sec": 323.72631430625916
+    },
+    {
+      "episode": 2550,
+      "recon_loss": 14.987117767333984,
+      "pred_loss": 1.4290940761566162,
+      "reward_loss": -1173.04638671875,
+      "tau": 1.1622264547455077,
+      "vocab_used": null,
+      "goal_dist": 5.412837028503418,
+      "elapsed_sec": 324.94302892684937
+    },
+    {
+      "episode": 2560,
+      "recon_loss": 14.392215728759766,
+      "pred_loss": 1.4332362413406372,
+      "reward_loss": -1174.534912109375,
+      "tau": 1.1610642282907622,
+      "vocab_used": null,
+      "goal_dist": 5.264128684997559,
+      "elapsed_sec": 326.1339089870453
+    },
+    {
+      "episode": 2570,
+      "recon_loss": 13.95064926147461,
+      "pred_loss": 1.3954428434371948,
+      "reward_loss": -1170.1129150390625,
+      "tau": 1.1599031640624713,
+      "vocab_used": null,
+      "goal_dist": 5.18226957321167,
+      "elapsed_sec": 327.3589234352112
+    },
+    {
+      "episode": 2580,
+      "recon_loss": 13.392525672912598,
+      "pred_loss": 1.4883217811584473,
+      "reward_loss": -1172.6839599609375,
+      "tau": 1.158743260898409,
+      "vocab_used": null,
+      "goal_dist": 5.416406631469727,
+      "elapsed_sec": 328.59035634994507
+    },
+    {
+      "episode": 2590,
+      "recon_loss": 13.980033874511719,
+      "pred_loss": 1.5236015319824219,
+      "reward_loss": -1174.6981201171875,
+      "tau": 1.1575845176375106,
+      "vocab_used": null,
+      "goal_dist": 5.193487167358398,
+      "elapsed_sec": 329.93381571769714
+    },
+    {
+      "episode": 2600,
+      "recon_loss": 13.127866744995117,
+      "pred_loss": 1.4696773290634155,
+      "reward_loss": -1169.8216552734375,
+      "tau": 1.156426933119873,
+      "vocab_used": null,
+      "goal_dist": 5.332921028137207,
+      "elapsed_sec": 331.1830577850342
+    },
+    {
+      "episode": 2610,
+      "recon_loss": 84.50943756103516,
+      "pred_loss": 25.13022232055664,
+      "reward_loss": -627.1958618164062,
+      "tau": 1.1552705061867532,
+      "vocab_used": null,
+      "goal_dist": 5.458654403686523,
+      "elapsed_sec": 332.40449500083923
+    },
+    {
+      "episode": 2620,
+      "recon_loss": 55.937034606933594,
+      "pred_loss": 12.874164581298828,
+      "reward_loss": -812.9307861328125,
+      "tau": 1.1541152356805664,
+      "vocab_used": null,
+      "goal_dist": 4.183331489562988,
+      "elapsed_sec": 333.6216952800751
+    },
+    {
+      "episode": 2630,
+      "recon_loss": 45.57998275756836,
+      "pred_loss": 6.97871208190918,
+      "reward_loss": -941.5205688476562,
+      "tau": 1.152961120444886,
+      "vocab_used": null,
+      "goal_dist": 4.3824663162231445,
+      "elapsed_sec": 334.84683537483215
+    },
+    {
+      "episode": 2640,
+      "recon_loss": 31.503660202026367,
+      "pred_loss": 3.721445083618164,
+      "reward_loss": -1039.11181640625,
+      "tau": 1.151808159324441,
+      "vocab_used": null,
+      "goal_dist": 4.483689308166504,
+      "elapsed_sec": 336.1601867675781
+    },
+    {
+      "episode": 2650,
+      "recon_loss": 26.568401336669922,
+      "pred_loss": 2.1390531063079834,
+      "reward_loss": -1102.297607421875,
+      "tau": 1.1506563511651164,
+      "vocab_used": null,
+      "goal_dist": 4.677587509155273,
+      "elapsed_sec": 337.5371835231781
+    },
+    {
+      "episode": 2660,
+      "recon_loss": 22.22361183166504,
+      "pred_loss": 1.554966926574707,
+      "reward_loss": -1130.01513671875,
+      "tau": 1.1495056948139513,
+      "vocab_used": null,
+      "goal_dist": 4.648886680603027,
+      "elapsed_sec": 338.9009039402008
+    },
+    {
+      "episode": 2670,
+      "recon_loss": 20.398048400878906,
+      "pred_loss": 1.5050702095031738,
+      "reward_loss": -1142.4686279296875,
+      "tau": 1.1483561891191374,
+      "vocab_used": null,
+      "goal_dist": 4.530801296234131,
+      "elapsed_sec": 340.2208456993103
+    },
+    {
+      "episode": 2680,
+      "recon_loss": 19.302249908447266,
+      "pred_loss": 1.5749647617340088,
+      "reward_loss": -1149.162841796875,
+      "tau": 1.1472078329300184,
+      "vocab_used": null,
+      "goal_dist": 4.720113277435303,
+      "elapsed_sec": 341.52264189720154
+    },
+    {
+      "episode": 2690,
+      "recon_loss": 18.51190948486328,
+      "pred_loss": 1.5960516929626465,
+      "reward_loss": -1168.8021240234375,
+      "tau": 1.1460606250970882,
+      "vocab_used": null,
+      "goal_dist": 4.763276100158691,
+      "elapsed_sec": 342.76395773887634
+    },
+    {
+      "episode": 2700,
+      "recon_loss": 17.780010223388672,
+      "pred_loss": 1.6128597259521484,
+      "reward_loss": -1167.256591796875,
+      "tau": 1.1449145644719911,
+      "vocab_used": null,
+      "goal_dist": 4.677176475524902,
+      "elapsed_sec": 344.0467891693115
+    },
+    {
+      "episode": 2710,
+      "recon_loss": 17.264854431152344,
+      "pred_loss": 1.6035401821136475,
+      "reward_loss": -1174.645751953125,
+      "tau": 1.1437696499075192,
+      "vocab_used": null,
+      "goal_dist": 4.576725482940674,
+      "elapsed_sec": 345.34244990348816
+    },
+    {
+      "episode": 2720,
+      "recon_loss": 17.608501434326172,
+      "pred_loss": 1.4193304777145386,
+      "reward_loss": -1181.599609375,
+      "tau": 1.1426258802576117,
+      "vocab_used": null,
+      "goal_dist": 4.651510238647461,
+      "elapsed_sec": 346.6157124042511
+    },
+    {
+      "episode": 2730,
+      "recon_loss": 17.487878799438477,
+      "pred_loss": 1.5046600103378296,
+      "reward_loss": -1179.248046875,
+      "tau": 1.1414832543773539,
+      "vocab_used": null,
+      "goal_dist": 4.634731769561768,
+      "elapsed_sec": 347.9462020397186
+    },
+    {
+      "episode": 2740,
+      "recon_loss": 17.78803062438965,
+      "pred_loss": 1.7653520107269287,
+      "reward_loss": -1174.95751953125,
+      "tau": 1.1403417711229766,
+      "vocab_used": null,
+      "goal_dist": 4.606235980987549,
+      "elapsed_sec": 349.2296772003174
+    },
+    {
+      "episode": 2750,
+      "recon_loss": 17.564743041992188,
+      "pred_loss": 1.502727746963501,
+      "reward_loss": -1196.2327880859375,
+      "tau": 1.1392014293518535,
+      "vocab_used": null,
+      "goal_dist": 4.6893768310546875,
+      "elapsed_sec": 350.5430905818939
+    },
+    {
+      "episode": 2760,
+      "recon_loss": 16.849445343017578,
+      "pred_loss": 1.4626052379608154,
+      "reward_loss": -1194.2437744140625,
+      "tau": 1.138062227922502,
+      "vocab_used": null,
+      "goal_dist": 4.632956027984619,
+      "elapsed_sec": 351.76459980010986
+    },
+    {
+      "episode": 2770,
+      "recon_loss": 16.8110408782959,
+      "pred_loss": 1.437082290649414,
+      "reward_loss": -1197.4937744140625,
+      "tau": 1.1369241656945792,
+      "vocab_used": null,
+      "goal_dist": 4.70457649230957,
+      "elapsed_sec": 353.0045077800751
+    },
+    {
+      "episode": 2780,
+      "recon_loss": 16.620311737060547,
+      "pred_loss": 1.546755313873291,
+      "reward_loss": -1193.837158203125,
+      "tau": 1.1357872415288848,
+      "vocab_used": null,
+      "goal_dist": 4.800640106201172,
+      "elapsed_sec": 354.29582047462463
+    },
+    {
+      "episode": 2790,
+      "recon_loss": 15.65053939819336,
+      "pred_loss": 1.4528172016143799,
+      "reward_loss": -1193.0345458984375,
+      "tau": 1.1346514542873558,
+      "vocab_used": null,
+      "goal_dist": 4.673862457275391,
+      "elapsed_sec": 355.5897750854492
+    },
+    {
+      "episode": 2800,
+      "recon_loss": 15.234070777893066,
+      "pred_loss": 1.4113636016845703,
+      "reward_loss": -1201.283935546875,
+      "tau": 1.1335168028330684,
+      "vocab_used": null,
+      "goal_dist": 4.630891799926758,
+      "elapsed_sec": 356.93371295928955
+    },
+    {
+      "episode": 2810,
+      "recon_loss": 15.385944366455078,
+      "pred_loss": 1.4368958473205566,
+      "reward_loss": -1196.534912109375,
+      "tau": 1.1323832860302354,
+      "vocab_used": null,
+      "goal_dist": 4.4812750816345215,
+      "elapsed_sec": 358.15470814704895
+    },
+    {
+      "episode": 2820,
+      "recon_loss": 14.657646179199219,
+      "pred_loss": 1.518656849861145,
+      "reward_loss": -1172.726318359375,
+      "tau": 1.1312509027442053,
+      "vocab_used": null,
+      "goal_dist": 4.808644771575928,
+      "elapsed_sec": 359.47338581085205
+    },
+    {
+      "episode": 2830,
+      "recon_loss": 14.982576370239258,
+      "pred_loss": 1.5392651557922363,
+      "reward_loss": -1198.9537353515625,
+      "tau": 1.1301196518414611,
+      "vocab_used": null,
+      "goal_dist": 4.686931610107422,
+      "elapsed_sec": 360.69076561927795
+    },
+    {
+      "episode": 2840,
+      "recon_loss": 13.729043960571289,
+      "pred_loss": 1.4686803817749023,
+      "reward_loss": -1164.30322265625,
+      "tau": 1.1289895321896195,
+      "vocab_used": null,
+      "goal_dist": 4.535587310791016,
+      "elapsed_sec": 361.9022624492645
+    },
+    {
+      "episode": 2850,
+      "recon_loss": 15.360209465026855,
+      "pred_loss": 1.6575347185134888,
+      "reward_loss": -1200.951416015625,
+      "tau": 1.12786054265743,
+      "vocab_used": null,
+      "goal_dist": 4.6416401863098145,
+      "elapsed_sec": 363.11807680130005
+    },
+    {
+      "episode": 2860,
+      "recon_loss": 15.919309616088867,
+      "pred_loss": 1.49384605884552,
+      "reward_loss": -1202.865966796875,
+      "tau": 1.1267326821147725,
+      "vocab_used": null,
+      "goal_dist": 4.822527885437012,
+      "elapsed_sec": 364.3535075187683
+    },
+    {
+      "episode": 2870,
+      "recon_loss": 14.433752059936523,
+      "pred_loss": 1.5262784957885742,
+      "reward_loss": -1207.766357421875,
+      "tau": 1.1256059494326578,
+      "vocab_used": null,
+      "goal_dist": 4.775459289550781,
+      "elapsed_sec": 365.65244817733765
+    },
+    {
+      "episode": 2880,
+      "recon_loss": 14.950607299804688,
+      "pred_loss": 1.4929375648498535,
+      "reward_loss": -1201.259765625,
+      "tau": 1.1244803434832251,
+      "vocab_used": null,
+      "goal_dist": 4.505030632019043,
+      "elapsed_sec": 366.9023907184601
+    },
+    {
+      "episode": 2890,
+      "recon_loss": 18.18691635131836,
+      "pred_loss": 1.450268268585205,
+      "reward_loss": -1218.991943359375,
+      "tau": 1.123355863139742,
+      "vocab_used": null,
+      "goal_dist": 4.734034061431885,
+      "elapsed_sec": 368.10675501823425
+    },
+    {
+      "episode": 2900,
+      "recon_loss": 15.754488945007324,
+      "pred_loss": 1.4065122604370117,
+      "reward_loss": -1214.852783203125,
+      "tau": 1.1222325072766022,
+      "vocab_used": null,
+      "goal_dist": 4.76572322845459,
+      "elapsed_sec": 369.3427400588989
+    },
+    {
+      "episode": 2910,
+      "recon_loss": 15.719615936279297,
+      "pred_loss": 1.5767974853515625,
+      "reward_loss": -1217.4095458984375,
+      "tau": 1.1211102747693253,
+      "vocab_used": null,
+      "goal_dist": 4.737377166748047,
+      "elapsed_sec": 370.60016226768494
+    },
+    {
+      "episode": 2920,
+      "recon_loss": 15.852470397949219,
+      "pred_loss": 1.4871689081192017,
+      "reward_loss": -1218.414794921875,
+      "tau": 1.119989164494556,
+      "vocab_used": null,
+      "goal_dist": 4.72480583190918,
+      "elapsed_sec": 371.82873034477234
+    },
+    {
+      "episode": 2930,
+      "recon_loss": 14.164837837219238,
+      "pred_loss": 1.4323270320892334,
+      "reward_loss": -1204.510498046875,
+      "tau": 1.1188691753300617,
+      "vocab_used": null,
+      "goal_dist": 4.771847724914551,
+      "elapsed_sec": 373.0465726852417
+    },
+    {
+      "episode": 2940,
+      "recon_loss": 12.587939262390137,
+      "pred_loss": 1.3580234050750732,
+      "reward_loss": -1162.0,
+      "tau": 1.1177503061547316,
+      "vocab_used": null,
+      "goal_dist": 4.565569877624512,
+      "elapsed_sec": 374.27104783058167
+    },
+    {
+      "episode": 2950,
+      "recon_loss": 13.004125595092773,
+      "pred_loss": 1.4222909212112427,
+      "reward_loss": -1188.62744140625,
+      "tau": 1.1166325558485768,
+      "vocab_used": null,
+      "goal_dist": 4.566810131072998,
+      "elapsed_sec": 375.50572657585144
+    },
+    {
+      "episode": 2960,
+      "recon_loss": 12.745609283447266,
+      "pred_loss": 1.439894437789917,
+      "reward_loss": -1185.01513671875,
+      "tau": 1.1155159232927283,
+      "vocab_used": null,
+      "goal_dist": 4.430988311767578,
+      "elapsed_sec": 376.72241950035095
+    },
+    {
+      "episode": 2970,
+      "recon_loss": 13.87092399597168,
+      "pred_loss": 1.4896252155303955,
+      "reward_loss": -1208.4622802734375,
+      "tau": 1.1144004073694356,
+      "vocab_used": null,
+      "goal_dist": 4.712144374847412,
+      "elapsed_sec": 378.0010221004486
+    },
+    {
+      "episode": 2980,
+      "recon_loss": 13.09808349609375,
+      "pred_loss": 1.415131688117981,
+      "reward_loss": -1195.288818359375,
+      "tau": 1.113286006962066,
+      "vocab_used": null,
+      "goal_dist": 4.571495056152344,
+      "elapsed_sec": 379.2351598739624
+    },
+    {
+      "episode": 2990,
+      "recon_loss": 13.886171340942383,
+      "pred_loss": 1.4170684814453125,
+      "reward_loss": -1218.609375,
+      "tau": 1.112172720955104,
+      "vocab_used": null,
+      "goal_dist": 4.621167182922363,
+      "elapsed_sec": 380.5141842365265
+    },
+    {
+      "episode": 3000,
+      "recon_loss": 14.263534545898438,
+      "pred_loss": 1.558823823928833,
+      "reward_loss": -1215.691650390625,
+      "tau": 1.111060548234149,
+      "vocab_used": null,
+      "goal_dist": 4.493614673614502,
+      "elapsed_sec": 381.75340485572815
+    },
+    {
+      "episode": 3010,
+      "recon_loss": 13.278326988220215,
+      "pred_loss": 1.3912726640701294,
+      "reward_loss": -1211.468017578125,
+      "tau": 1.1099494876859146,
+      "vocab_used": null,
+      "goal_dist": 4.484806060791016,
+      "elapsed_sec": 383.00667095184326
+    },
+    {
+      "episode": 3020,
+      "recon_loss": 13.615264892578125,
+      "pred_loss": 1.5263235569000244,
+      "reward_loss": -1212.5230712890625,
+      "tau": 1.1088395381982288,
+      "vocab_used": null,
+      "goal_dist": 4.656800270080566,
+      "elapsed_sec": 384.2584156990051
+    },
+    {
+      "episode": 3030,
+      "recon_loss": 13.428998947143555,
+      "pred_loss": 1.4080989360809326,
+      "reward_loss": -1212.75146484375,
+      "tau": 1.1077306986600306,
+      "vocab_used": null,
+      "goal_dist": 4.637042045593262,
+      "elapsed_sec": 385.5300934314728
+    },
+    {
+      "episode": 3040,
+      "recon_loss": 13.999543190002441,
+      "pred_loss": 1.5189392566680908,
+      "reward_loss": -1221.5523681640625,
+      "tau": 1.1066229679613704,
+      "vocab_used": null,
+      "goal_dist": 4.645802974700928,
+      "elapsed_sec": 386.7620630264282
+    },
+    {
+      "episode": 3050,
+      "recon_loss": 12.724156379699707,
+      "pred_loss": 1.4881376028060913,
+      "reward_loss": -1195.8160400390625,
+      "tau": 1.1055163449934091,
+      "vocab_used": null,
+      "goal_dist": 4.65939998626709,
+      "elapsed_sec": 387.99796748161316
+    },
+    {
+      "episode": 3060,
+      "recon_loss": 14.328187942504883,
+      "pred_loss": 1.5749611854553223,
+      "reward_loss": -1202.787353515625,
+      "tau": 1.1044108286484158,
+      "vocab_used": null,
+      "goal_dist": 4.535837650299072,
+      "elapsed_sec": 389.2098546028137
+    },
+    {
+      "episode": 3070,
+      "recon_loss": 13.243401527404785,
+      "pred_loss": 1.5243701934814453,
+      "reward_loss": -1209.868896484375,
+      "tau": 1.1033064178197673,
+      "vocab_used": null,
+      "goal_dist": 4.529808044433594,
+      "elapsed_sec": 390.43191385269165
+    },
+    {
+      "episode": 3080,
+      "recon_loss": 13.1292085647583,
+      "pred_loss": 1.6827876567840576,
+      "reward_loss": -1214.8717041015625,
+      "tau": 1.1022031114019475,
+      "vocab_used": null,
+      "goal_dist": 4.567424774169922,
+      "elapsed_sec": 391.6630985736847
+    },
+    {
+      "episode": 3090,
+      "recon_loss": 13.317974090576172,
+      "pred_loss": 1.6265748739242554,
+      "reward_loss": -1215.9608154296875,
+      "tau": 1.1011009082905456,
+      "vocab_used": null,
+      "goal_dist": 4.505105018615723,
+      "elapsed_sec": 392.8800160884857
+    },
+    {
+      "episode": 3100,
+      "recon_loss": 13.611516952514648,
+      "pred_loss": 1.5151541233062744,
+      "reward_loss": -1234.703369140625,
+      "tau": 1.0999998073822552,
+      "vocab_used": null,
+      "goal_dist": 4.510377883911133,
+      "elapsed_sec": 394.10108613967896
+    },
+    {
+      "episode": 3110,
+      "recon_loss": 13.34004020690918,
+      "pred_loss": 1.5354115962982178,
+      "reward_loss": -1226.7811279296875,
+      "tau": 1.0988998075748728,
+      "vocab_used": null,
+      "goal_dist": 4.393726348876953,
+      "elapsed_sec": 395.37905502319336
+    },
+    {
+      "episode": 3120,
+      "recon_loss": 13.29818058013916,
+      "pred_loss": 1.5471869707107544,
+      "reward_loss": -1230.610595703125,
+      "tau": 1.097800907767298,
+      "vocab_used": null,
+      "goal_dist": 4.525666236877441,
+      "elapsed_sec": 396.63795495033264
+    },
+    {
+      "episode": 3130,
+      "recon_loss": 13.83563232421875,
+      "pred_loss": 1.6533911228179932,
+      "reward_loss": -1233.41015625,
+      "tau": 1.0967031068595308,
+      "vocab_used": null,
+      "goal_dist": 4.659274101257324,
+      "elapsed_sec": 397.8377380371094
+    },
+    {
+      "episode": 3140,
+      "recon_loss": 13.039360046386719,
+      "pred_loss": 1.5596004724502563,
+      "reward_loss": -1226.892333984375,
+      "tau": 1.0956064037526712,
+      "vocab_used": null,
+      "goal_dist": 4.532771587371826,
+      "elapsed_sec": 399.1149981021881
+    },
+    {
+      "episode": 3150,
+      "recon_loss": 13.360003471374512,
+      "pred_loss": 1.5400390625,
+      "reward_loss": -1240.843505859375,
+      "tau": 1.0945107973489185,
+      "vocab_used": null,
+      "goal_dist": 4.540182113647461,
+      "elapsed_sec": 400.48339772224426
+    },
+    {
+      "episode": 3160,
+      "recon_loss": 13.987358093261719,
+      "pred_loss": 1.5622135400772095,
+      "reward_loss": -1244.37646484375,
+      "tau": 1.0934162865515695,
+      "vocab_used": null,
+      "goal_dist": 4.569126129150391,
+      "elapsed_sec": 401.7459874153137
+    },
+    {
+      "episode": 3170,
+      "recon_loss": 14.054774284362793,
+      "pred_loss": 1.6448187828063965,
+      "reward_loss": -1235.491455078125,
+      "tau": 1.092322870265018,
+      "vocab_used": null,
+      "goal_dist": 4.935683250427246,
+      "elapsed_sec": 402.9621367454529
+    },
+    {
+      "episode": 3180,
+      "recon_loss": 13.341365814208984,
+      "pred_loss": 1.4302139282226562,
+      "reward_loss": -1224.897216796875,
+      "tau": 1.091230547394753,
+      "vocab_used": null,
+      "goal_dist": 4.690990924835205,
+      "elapsed_sec": 404.2055666446686
+    },
+    {
+      "episode": 3190,
+      "recon_loss": 13.352538108825684,
+      "pred_loss": 1.4836294651031494,
+      "reward_loss": -1239.244384765625,
+      "tau": 1.090139316847358,
+      "vocab_used": null,
+      "goal_dist": 4.538628101348877,
+      "elapsed_sec": 405.4542531967163
+    },
+    {
+      "episode": 3200,
+      "recon_loss": 13.423257827758789,
+      "pred_loss": 1.6383262872695923,
+      "reward_loss": -1239.785400390625,
+      "tau": 1.089049177530511,
+      "vocab_used": null,
+      "goal_dist": 4.67581844329834,
+      "elapsed_sec": 406.6445994377136
+    },
+    {
+      "episode": 3210,
+      "recon_loss": 12.715916633605957,
+      "pred_loss": 1.5538560152053833,
+      "reward_loss": -1223.3721923828125,
+      "tau": 1.0879601283529805,
+      "vocab_used": null,
+      "goal_dist": 4.533263206481934,
+      "elapsed_sec": 407.87499046325684
+    },
+    {
+      "episode": 3220,
+      "recon_loss": 12.754106521606445,
+      "pred_loss": 1.6143598556518555,
+      "reward_loss": -1235.454345703125,
+      "tau": 1.0868721682246274,
+      "vocab_used": null,
+      "goal_dist": 4.630692481994629,
+      "elapsed_sec": 409.108793258667
+    },
+    {
+      "episode": 3230,
+      "recon_loss": 13.02612590789795,
+      "pred_loss": 1.513906717300415,
+      "reward_loss": -1239.3974609375,
+      "tau": 1.0857852960564027,
+      "vocab_used": null,
+      "goal_dist": 4.622602462768555,
+      "elapsed_sec": 410.3377661705017
+    },
+    {
+      "episode": 3240,
+      "recon_loss": 13.296327590942383,
+      "pred_loss": 1.5243372917175293,
+      "reward_loss": -1244.7069091796875,
+      "tau": 1.0846995107603463,
+      "vocab_used": null,
+      "goal_dist": 4.6794281005859375,
+      "elapsed_sec": 411.5694627761841
+    },
+    {
+      "episode": 3250,
+      "recon_loss": 13.86721420288086,
+      "pred_loss": 1.7526973485946655,
+      "reward_loss": -1224.091064453125,
+      "tau": 1.083614811249586,
+      "vocab_used": null,
+      "goal_dist": 4.834997653961182,
+      "elapsed_sec": 412.8360044956207
+    },
+    {
+      "episode": 3260,
+      "recon_loss": 13.052927017211914,
+      "pred_loss": 1.5573228597640991,
+      "reward_loss": -1234.25830078125,
+      "tau": 1.0825311964383364,
+      "vocab_used": null,
+      "goal_dist": 4.887828826904297,
+      "elapsed_sec": 414.08515763282776
+    },
+    {
+      "episode": 3270,
+      "recon_loss": 13.874541282653809,
+      "pred_loss": 1.7011665105819702,
+      "reward_loss": -1238.78759765625,
+      "tau": 1.081448665241898,
+      "vocab_used": null,
+      "goal_dist": 4.769890785217285,
+      "elapsed_sec": 415.31940054893494
+    },
+    {
+      "episode": 3280,
+      "recon_loss": 12.287740707397461,
+      "pred_loss": 1.5277884006500244,
+      "reward_loss": -1242.07958984375,
+      "tau": 1.0803672165766562,
+      "vocab_used": null,
+      "goal_dist": 4.696378707885742,
+      "elapsed_sec": 416.50234627723694
+    },
+    {
+      "episode": 3290,
+      "recon_loss": 13.018716812133789,
+      "pred_loss": 1.5398364067077637,
+      "reward_loss": -1246.3873291015625,
+      "tau": 1.0792868493600796,
+      "vocab_used": null,
+      "goal_dist": 5.043098449707031,
+      "elapsed_sec": 417.7381956577301
+    },
+    {
+      "episode": 3300,
+      "recon_loss": 12.20630931854248,
+      "pred_loss": 1.5622446537017822,
+      "reward_loss": -1239.037841796875,
+      "tau": 1.0782075625107195,
+      "vocab_used": null,
+      "goal_dist": 4.817704200744629,
+      "elapsed_sec": 418.9779086112976
+    },
+    {
+      "episode": 3310,
+      "recon_loss": 12.860370635986328,
+      "pred_loss": 1.5382130146026611,
+      "reward_loss": -1250.6292724609375,
+      "tau": 1.0771293549482086,
+      "vocab_used": null,
+      "goal_dist": 4.847414016723633,
+      "elapsed_sec": 420.1654269695282
+    },
+    {
+      "episode": 3320,
+      "recon_loss": 14.322940826416016,
+      "pred_loss": 1.5407332181930542,
+      "reward_loss": -1248.71826171875,
+      "tau": 1.0760522255932603,
+      "vocab_used": null,
+      "goal_dist": 4.887743949890137,
+      "elapsed_sec": 421.3579890727997
+    },
+    {
+      "episode": 3330,
+      "recon_loss": 13.59732437133789,
+      "pred_loss": 1.6280425786972046,
+      "reward_loss": -1249.320556640625,
+      "tau": 1.0749761733676673,
+      "vocab_used": null,
+      "goal_dist": 4.889469146728516,
+      "elapsed_sec": 422.56413888931274
+    },
+    {
+      "episode": 3340,
+      "recon_loss": 12.176748275756836,
+      "pred_loss": 1.5412617921829224,
+      "reward_loss": -1241.463134765625,
+      "tau": 1.0739011971942996,
+      "vocab_used": null,
+      "goal_dist": 4.911288261413574,
+      "elapsed_sec": 423.79865074157715
+    },
+    {
+      "episode": 3350,
+      "recon_loss": 12.610955238342285,
+      "pred_loss": 1.4939473867416382,
+      "reward_loss": -1245.840576171875,
+      "tau": 1.0728272959971052,
+      "vocab_used": null,
+      "goal_dist": 4.738783836364746,
+      "elapsed_sec": 425.03830194473267
+    },
+    {
+      "episode": 3360,
+      "recon_loss": 13.339712142944336,
+      "pred_loss": 1.4748311042785645,
+      "reward_loss": -1239.890380859375,
+      "tau": 1.0717544687011082,
+      "vocab_used": null,
+      "goal_dist": 4.948450088500977,
+      "elapsed_sec": 426.3356182575226
+    },
+    {
+      "episode": 3370,
+      "recon_loss": 12.250894546508789,
+      "pred_loss": 1.4976493120193481,
+      "reward_loss": -1248.6214599609375,
+      "tau": 1.0706827142324071,
+      "vocab_used": null,
+      "goal_dist": 4.904677391052246,
+      "elapsed_sec": 427.6387903690338
+    },
+    {
+      "episode": 3380,
+      "recon_loss": 12.15345573425293,
+      "pred_loss": 1.4156196117401123,
+      "reward_loss": -1247.03857421875,
+      "tau": 1.0696120315181747,
+      "vocab_used": null,
+      "goal_dist": 4.89828634262085,
+      "elapsed_sec": 428.88305616378784
+    },
+    {
+      "episode": 3390,
+      "recon_loss": 12.058586120605469,
+      "pred_loss": 1.4568467140197754,
+      "reward_loss": -1246.549560546875,
+      "tau": 1.0685424194866564,
+      "vocab_used": null,
+      "goal_dist": 5.088738441467285,
+      "elapsed_sec": 430.19689559936523
+    },
+    {
+      "episode": 3400,
+      "recon_loss": 12.238014221191406,
+      "pred_loss": 1.5012954473495483,
+      "reward_loss": -1252.9736328125,
+      "tau": 1.0674738770671697,
+      "vocab_used": null,
+      "goal_dist": 4.9891486167907715,
+      "elapsed_sec": 431.4248836040497
+    },
+    {
+      "episode": 3410,
+      "recon_loss": 12.133321762084961,
+      "pred_loss": 1.6041748523712158,
+      "reward_loss": -1249.951904296875,
+      "tau": 1.0664064031901026,
+      "vocab_used": null,
+      "goal_dist": 4.891668319702148,
+      "elapsed_sec": 432.7646813392639
+    },
+    {
+      "episode": 3420,
+      "recon_loss": 12.131772994995117,
+      "pred_loss": 1.5362608432769775,
+      "reward_loss": -1249.157958984375,
+      "tau": 1.0653399967869126,
+      "vocab_used": null,
+      "goal_dist": 4.940080642700195,
+      "elapsed_sec": 434.04379987716675
+    },
+    {
+      "episode": 3430,
+      "recon_loss": 11.583014488220215,
+      "pred_loss": 1.4523537158966064,
+      "reward_loss": -1251.1048583984375,
+      "tau": 1.0642746567901256,
+      "vocab_used": null,
+      "goal_dist": 5.027471542358398,
+      "elapsed_sec": 435.3191702365875
+    },
+    {
+      "episode": 3440,
+      "recon_loss": 11.017023086547852,
+      "pred_loss": 1.4068864583969116,
+      "reward_loss": -1238.969482421875,
+      "tau": 1.0632103821333354,
+      "vocab_used": null,
+      "goal_dist": 4.952387809753418,
+      "elapsed_sec": 436.6658024787903
+    },
+    {
+      "episode": 3450,
+      "recon_loss": 11.642058372497559,
+      "pred_loss": 1.529578447341919,
+      "reward_loss": -1251.43115234375,
+      "tau": 1.062147171751202,
+      "vocab_used": null,
+      "goal_dist": 5.081188201904297,
+      "elapsed_sec": 438.0898332595825
+    },
+    {
+      "episode": 3460,
+      "recon_loss": 11.434244155883789,
+      "pred_loss": 1.5750151872634888,
+      "reward_loss": -1252.713623046875,
+      "tau": 1.061085024579451,
+      "vocab_used": null,
+      "goal_dist": 5.145232677459717,
+      "elapsed_sec": 439.3810122013092
+    },
+    {
+      "episode": 3470,
+      "recon_loss": 10.824085235595703,
+      "pred_loss": 1.474029302597046,
+      "reward_loss": -1248.01611328125,
+      "tau": 1.0600239395548714,
+      "vocab_used": null,
+      "goal_dist": 4.790417194366455,
+      "elapsed_sec": 440.5790846347809
+    },
+    {
+      "episode": 3480,
+      "recon_loss": 10.892934799194336,
+      "pred_loss": 1.5117043256759644,
+      "reward_loss": -1249.0009765625,
+      "tau": 1.0589639156153168,
+      "vocab_used": null,
+      "goal_dist": 4.86016845703125,
+      "elapsed_sec": 441.82764863967896
+    },
+    {
+      "episode": 3490,
+      "recon_loss": 11.036439895629883,
+      "pred_loss": 1.5219488143920898,
+      "reward_loss": -1239.715087890625,
+      "tau": 1.0579049516997014,
+      "vocab_used": null,
+      "goal_dist": 5.037550449371338,
+      "elapsed_sec": 443.0749797821045
+    },
+    {
+      "episode": 3500,
+      "recon_loss": 10.83474349975586,
+      "pred_loss": 1.55168879032135,
+      "reward_loss": -1248.4725341796875,
+      "tau": 1.0568470467480016,
+      "vocab_used": null,
+      "goal_dist": 5.012539863586426,
+      "elapsed_sec": 444.3428204059601
+    },
+    {
+      "episode": 3510,
+      "recon_loss": 11.121288299560547,
+      "pred_loss": 1.4943301677703857,
+      "reward_loss": -1241.728271484375,
+      "tau": 1.0557901997012535,
+      "vocab_used": null,
+      "goal_dist": 4.992469787597656,
+      "elapsed_sec": 445.7637596130371
+    },
+    {
+      "episode": 3520,
+      "recon_loss": 10.018369674682617,
+      "pred_loss": 1.4576808214187622,
+      "reward_loss": -1243.846435546875,
+      "tau": 1.0547344095015523,
+      "vocab_used": null,
+      "goal_dist": 5.058290958404541,
+      "elapsed_sec": 447.1328239440918
+    },
+    {
+      "episode": 3530,
+      "recon_loss": 10.428666114807129,
+      "pred_loss": 1.4611937999725342,
+      "reward_loss": -1252.025634765625,
+      "tau": 1.053679675092051,
+      "vocab_used": null,
+      "goal_dist": 5.206415176391602,
+      "elapsed_sec": 448.53108739852905
+    },
+    {
+      "episode": 3540,
+      "recon_loss": 10.430790901184082,
+      "pred_loss": 1.5458674430847168,
+      "reward_loss": -1250.316650390625,
+      "tau": 1.0526259954169586,
+      "vocab_used": null,
+      "goal_dist": 5.11323356628418,
+      "elapsed_sec": 449.8427805900574
+    },
+    {
+      "episode": 3550,
+      "recon_loss": 10.349846839904785,
+      "pred_loss": 1.3269433975219727,
+      "reward_loss": -1243.0029296875,
+      "tau": 1.051573369421542,
+      "vocab_used": null,
+      "goal_dist": 5.088475227355957,
+      "elapsed_sec": 451.09121680259705
+    },
+    {
+      "episode": 3560,
+      "recon_loss": 10.009531021118164,
+      "pred_loss": 1.4472861289978027,
+      "reward_loss": -1239.8707275390625,
+      "tau": 1.0505217960521203,
+      "vocab_used": null,
+      "goal_dist": 5.15602970123291,
+      "elapsed_sec": 452.3357753753662
+    },
+    {
+      "episode": 3570,
+      "recon_loss": 9.915266036987305,
+      "pred_loss": 1.4327685832977295,
+      "reward_loss": -1240.50732421875,
+      "tau": 1.0494712742560681,
+      "vocab_used": null,
+      "goal_dist": 5.062775611877441,
+      "elapsed_sec": 453.6679241657257
+    },
+    {
+      "episode": 3580,
+      "recon_loss": 9.414859771728516,
+      "pred_loss": 1.4207614660263062,
+      "reward_loss": -1237.5579833984375,
+      "tau": 1.048421802981812,
+      "vocab_used": null,
+      "goal_dist": 5.081074237823486,
+      "elapsed_sec": 454.99785923957825
+    },
+    {
+      "episode": 3590,
+      "recon_loss": 9.565732955932617,
+      "pred_loss": 1.4907779693603516,
+      "reward_loss": -1227.19091796875,
+      "tau": 1.0473733811788302,
+      "vocab_used": null,
+      "goal_dist": 5.128264427185059,
+      "elapsed_sec": 456.2502043247223
+    },
+    {
+      "episode": 3600,
+      "recon_loss": 9.600247383117676,
+      "pred_loss": 1.4546977281570435,
+      "reward_loss": -1246.5703125,
+      "tau": 1.0463260077976513,
+      "vocab_used": null,
+      "goal_dist": 5.22059965133667,
+      "elapsed_sec": 457.53405475616455
+    },
+    {
+      "episode": 3610,
+      "recon_loss": 9.248651504516602,
+      "pred_loss": 1.432544231414795,
+      "reward_loss": -1234.21142578125,
+      "tau": 1.0452796817898538,
+      "vocab_used": null,
+      "goal_dist": 5.099208354949951,
+      "elapsed_sec": 458.78166341781616
+    },
+    {
+      "episode": 3620,
+      "recon_loss": 9.96359634399414,
+      "pred_loss": 1.6370980739593506,
+      "reward_loss": -1243.65869140625,
+      "tau": 1.0442344021080638,
+      "vocab_used": null,
+      "goal_dist": 5.197230339050293,
+      "elapsed_sec": 460.0314645767212
+    },
+    {
+      "episode": 3630,
+      "recon_loss": 9.637468338012695,
+      "pred_loss": 1.6363184452056885,
+      "reward_loss": -1239.562744140625,
+      "tau": 1.0431901677059559,
+      "vocab_used": null,
+      "goal_dist": 4.902196884155273,
+      "elapsed_sec": 461.2567808628082
+    },
+    {
+      "episode": 3640,
+      "recon_loss": 9.262840270996094,
+      "pred_loss": 1.4766879081726074,
+      "reward_loss": -1247.52392578125,
+      "tau": 1.04214697753825,
+      "vocab_used": null,
+      "goal_dist": 5.230093479156494,
+      "elapsed_sec": 462.57937836647034
+    },
+    {
+      "episode": 3650,
+      "recon_loss": 10.059057235717773,
+      "pred_loss": 1.5121116638183594,
+      "reward_loss": -1233.4326171875,
+      "tau": 1.0411048305607116,
+      "vocab_used": null,
+      "goal_dist": 5.298087120056152,
+      "elapsed_sec": 463.8574526309967
+    },
+    {
+      "episode": 3660,
+      "recon_loss": 9.394891738891602,
+      "pred_loss": 1.4576342105865479,
+      "reward_loss": -1256.629150390625,
+      "tau": 1.040063725730151,
+      "vocab_used": null,
+      "goal_dist": 5.037621974945068,
+      "elapsed_sec": 465.128954410553
+    },
+    {
+      "episode": 3670,
+      "recon_loss": 9.354293823242188,
+      "pred_loss": 1.5107038021087646,
+      "reward_loss": -1259.587890625,
+      "tau": 1.0390236620044209,
+      "vocab_used": null,
+      "goal_dist": 5.165727615356445,
+      "elapsed_sec": 466.34072732925415
+    },
+    {
+      "episode": 3680,
+      "recon_loss": 9.541757583618164,
+      "pred_loss": 1.4967284202575684,
+      "reward_loss": -1266.0384521484375,
+      "tau": 1.0379846383424163,
+      "vocab_used": null,
+      "goal_dist": 5.038972854614258,
+      "elapsed_sec": 467.68165159225464
+    },
+    {
+      "episode": 3690,
+      "recon_loss": 9.274648666381836,
+      "pred_loss": 1.843483328819275,
+      "reward_loss": -1271.0169677734375,
+      "tau": 1.036946653704074,
+      "vocab_used": null,
+      "goal_dist": 5.473705768585205,
+      "elapsed_sec": 469.05432415008545
+    },
+    {
+      "episode": 3700,
+      "recon_loss": 8.945510864257812,
+      "pred_loss": 1.7786962985992432,
+      "reward_loss": -1298.865478515625,
+      "tau": 1.0359097070503698,
+      "vocab_used": null,
+      "goal_dist": 5.588956356048584,
+      "elapsed_sec": 470.2992298603058
+    },
+    {
+      "episode": 3710,
+      "recon_loss": 8.719886779785156,
+      "pred_loss": 1.8831442594528198,
+      "reward_loss": -1306.7568359375,
+      "tau": 1.0348737973433195,
+      "vocab_used": null,
+      "goal_dist": 5.022961616516113,
+      "elapsed_sec": 471.52469396591187
+    },
+    {
+      "episode": 3720,
+      "recon_loss": 8.228679656982422,
+      "pred_loss": 1.450380563735962,
+      "reward_loss": -1316.8592529296875,
+      "tau": 1.0338389235459762,
+      "vocab_used": null,
+      "goal_dist": 4.9916253089904785,
+      "elapsed_sec": 472.75690507888794
+    },
+    {
+      "episode": 3730,
+      "recon_loss": 8.40810775756836,
+      "pred_loss": 1.5273689031600952,
+      "reward_loss": -1309.22314453125,
+      "tau": 1.0328050846224301,
+      "vocab_used": null,
+      "goal_dist": 4.874340057373047,
+      "elapsed_sec": 474.02114486694336
+    },
+    {
+      "episode": 3740,
+      "recon_loss": 8.696756362915039,
+      "pred_loss": 1.559649109840393,
+      "reward_loss": -1326.2939453125,
+      "tau": 1.0317722795378077,
+      "vocab_used": null,
+      "goal_dist": 4.744910717010498,
+      "elapsed_sec": 475.26672983169556
+    },
+    {
+      "episode": 3750,
+      "recon_loss": 7.938323020935059,
+      "pred_loss": 1.4462647438049316,
+      "reward_loss": -1317.95703125,
+      "tau": 1.0307405072582698,
+      "vocab_used": null,
+      "goal_dist": 4.7723798751831055,
+      "elapsed_sec": 476.5295078754425
+    },
+    {
+      "episode": 3760,
+      "recon_loss": 8.22789192199707,
+      "pred_loss": 1.5225613117218018,
+      "reward_loss": -1323.478759765625,
+      "tau": 1.0297097667510116,
+      "vocab_used": null,
+      "goal_dist": 4.851314544677734,
+      "elapsed_sec": 477.7667381763458
+    },
+    {
+      "episode": 3770,
+      "recon_loss": 7.92311429977417,
+      "pred_loss": 1.420488953590393,
+      "reward_loss": -1301.139892578125,
+      "tau": 1.0286800569842607,
+      "vocab_used": null,
+      "goal_dist": 4.9614129066467285,
+      "elapsed_sec": 479.0991690158844
+    },
+    {
+      "episode": 3780,
+      "recon_loss": 8.009364128112793,
+      "pred_loss": 1.5230107307434082,
+      "reward_loss": -1284.956298828125,
+      "tau": 1.0276513769272764,
+      "vocab_used": null,
+      "goal_dist": 4.704761028289795,
+      "elapsed_sec": 480.4214549064636
+    },
+    {
+      "episode": 3790,
+      "recon_loss": 8.751558303833008,
+      "pred_loss": 1.4382178783416748,
+      "reward_loss": -1285.7589111328125,
+      "tau": 1.0266237255503492,
+      "vocab_used": null,
+      "goal_dist": 4.774373531341553,
+      "elapsed_sec": 481.66137313842773
+    },
+    {
+      "episode": 3800,
+      "recon_loss": 8.906678199768066,
+      "pred_loss": 1.5914415121078491,
+      "reward_loss": -1323.6669921875,
+      "tau": 1.0255971018247987,
+      "vocab_used": null,
+      "goal_dist": 4.7484130859375,
+      "elapsed_sec": 482.94276881217957
+    },
+    {
+      "episode": 3810,
+      "recon_loss": 8.09764289855957,
+      "pred_loss": 1.4043641090393066,
+      "reward_loss": -1317.175537109375,
+      "tau": 1.024571504722974,
+      "vocab_used": null,
+      "goal_dist": 4.7862324714660645,
+      "elapsed_sec": 484.2790014743805
+    },
+    {
+      "episode": 3820,
+      "recon_loss": 8.121562004089355,
+      "pred_loss": 1.4685689210891724,
+      "reward_loss": -1326.9039306640625,
+      "tau": 1.023546933218251,
+      "vocab_used": null,
+      "goal_dist": 4.9548540115356445,
+      "elapsed_sec": 485.4977262020111
+    },
+    {
+      "episode": 3830,
+      "recon_loss": 7.811821937561035,
+      "pred_loss": 1.4238359928131104,
+      "reward_loss": -1321.5419921875,
+      "tau": 1.022523386285033,
+      "vocab_used": null,
+      "goal_dist": 4.761358261108398,
+      "elapsed_sec": 486.81222343444824
+    },
+    {
+      "episode": 3840,
+      "recon_loss": 8.505024909973145,
+      "pred_loss": 1.7090625762939453,
+      "reward_loss": -1327.5477294921875,
+      "tau": 1.0215008628987476,
+      "vocab_used": null,
+      "goal_dist": 4.749812602996826,
+      "elapsed_sec": 488.10177302360535
+    },
+    {
+      "episode": 3850,
+      "recon_loss": 8.165926933288574,
+      "pred_loss": 1.4605098962783813,
+      "reward_loss": -1332.68505859375,
+      "tau": 1.0204793620358488,
+      "vocab_used": null,
+      "goal_dist": 4.880846977233887,
+      "elapsed_sec": 489.3010482788086
+    },
+    {
+      "episode": 3860,
+      "recon_loss": 7.8444976806640625,
+      "pred_loss": 1.447955846786499,
+      "reward_loss": -1314.06591796875,
+      "tau": 1.0194588826738131,
+      "vocab_used": null,
+      "goal_dist": 4.822160720825195,
+      "elapsed_sec": 490.6898772716522
+    },
+    {
+      "episode": 3870,
+      "recon_loss": 7.636632919311523,
+      "pred_loss": 1.4611773490905762,
+      "reward_loss": -1316.2890625,
+      "tau": 1.0184394237911392,
+      "vocab_used": null,
+      "goal_dist": 4.8018083572387695,
+      "elapsed_sec": 491.95791029930115
+    },
+    {
+      "episode": 3880,
+      "recon_loss": 7.525409698486328,
+      "pred_loss": 1.3843388557434082,
+      "reward_loss": -1317.3125,
+      "tau": 1.017420984367348,
+      "vocab_used": null,
+      "goal_dist": 4.782375812530518,
+      "elapsed_sec": 493.2096664905548
+    },
+    {
+      "episode": 3890,
+      "recon_loss": 7.993030548095703,
+      "pred_loss": 1.4492954015731812,
+      "reward_loss": -1328.2789306640625,
+      "tau": 1.0164035633829809,
+      "vocab_used": null,
+      "goal_dist": 4.825652122497559,
+      "elapsed_sec": 494.517858505249
+    },
+    {
+      "episode": 3900,
+      "recon_loss": 7.762434959411621,
+      "pred_loss": 1.3922457695007324,
+      "reward_loss": -1320.118896484375,
+      "tau": 1.0153871598195978,
+      "vocab_used": null,
+      "goal_dist": 4.922912120819092,
+      "elapsed_sec": 495.9199924468994
+    },
+    {
+      "episode": 3910,
+      "recon_loss": 7.918341636657715,
+      "pred_loss": 1.436910629272461,
+      "reward_loss": -1317.0740966796875,
+      "tau": 1.0143717726597783,
+      "vocab_used": null,
+      "goal_dist": 4.862059593200684,
+      "elapsed_sec": 497.20462226867676
+    },
+    {
+      "episode": 3920,
+      "recon_loss": 7.123418807983398,
+      "pred_loss": 1.3298251628875732,
+      "reward_loss": -1298.315673828125,
+      "tau": 1.0133574008871185,
+      "vocab_used": null,
+      "goal_dist": 4.896376609802246,
+      "elapsed_sec": 498.4754481315613
+    },
+    {
+      "episode": 3930,
+      "recon_loss": 8.324945449829102,
+      "pred_loss": 1.6477928161621094,
+      "reward_loss": -1318.9910888671875,
+      "tau": 1.0123440434862314,
+      "vocab_used": null,
+      "goal_dist": 4.924484729766846,
+      "elapsed_sec": 499.83808851242065
+    },
+    {
+      "episode": 3940,
+      "recon_loss": 8.373485565185547,
+      "pred_loss": 1.6388895511627197,
+      "reward_loss": -1331.1295166015625,
+      "tau": 1.011331699442745,
+      "vocab_used": null,
+      "goal_dist": 4.975309371948242,
+      "elapsed_sec": 501.18571305274963
+    },
+    {
+      "episode": 3950,
+      "recon_loss": 7.876655101776123,
+      "pred_loss": 1.4778488874435425,
+      "reward_loss": -1300.715087890625,
+      "tau": 1.0103203677433024,
+      "vocab_used": null,
+      "goal_dist": 4.770813941955566,
+      "elapsed_sec": 502.4567606449127
+    },
+    {
+      "episode": 3960,
+      "recon_loss": 8.081365585327148,
+      "pred_loss": 1.6098923683166504,
+      "reward_loss": -1336.086181640625,
+      "tau": 1.0093100473755592,
+      "vocab_used": null,
+      "goal_dist": 4.9391279220581055,
+      "elapsed_sec": 503.65910601615906
+    },
+    {
+      "episode": 3970,
+      "recon_loss": 7.059115886688232,
+      "pred_loss": 1.3656394481658936,
+      "reward_loss": -1297.435302734375,
+      "tau": 1.0083007373281836,
+      "vocab_used": null,
+      "goal_dist": 4.948017597198486,
+      "elapsed_sec": 504.9910776615143
+    },
+    {
+      "episode": 3980,
+      "recon_loss": 7.2635345458984375,
+      "pred_loss": 1.3964567184448242,
+      "reward_loss": -1320.0775146484375,
+      "tau": 1.0072924365908553,
+      "vocab_used": null,
+      "goal_dist": 5.070888519287109,
+      "elapsed_sec": 506.21480107307434
+    },
+    {
+      "episode": 3990,
+      "recon_loss": 7.523917198181152,
+      "pred_loss": 1.4456961154937744,
+      "reward_loss": -1316.19091796875,
+      "tau": 1.0062851441542646,
+      "vocab_used": null,
+      "goal_dist": 5.086118698120117,
+      "elapsed_sec": 507.43041038513184
+    },
+    {
+      "episode": 4000,
+      "recon_loss": 7.476652145385742,
+      "pred_loss": 1.4091026782989502,
+      "reward_loss": -1327.0238037109375,
+      "tau": 1.0052788590101103,
+      "vocab_used": null,
+      "goal_dist": 4.959994316101074,
+      "elapsed_sec": 508.6286120414734
+    },
+    {
+      "episode": 4010,
+      "recon_loss": 7.047098159790039,
+      "pred_loss": 1.2834904193878174,
+      "reward_loss": -1285.5479736328125,
+      "tau": 1.0042735801511,
+      "vocab_used": null,
+      "goal_dist": 5.109573841094971,
+      "elapsed_sec": 509.8747432231903
+    },
+    {
+      "episode": 4020,
+      "recon_loss": 6.920858383178711,
+      "pred_loss": 1.3694145679473877,
+      "reward_loss": -1309.332275390625,
+      "tau": 1.003269306570949,
+      "vocab_used": null,
+      "goal_dist": 5.0295209884643555,
+      "elapsed_sec": 511.2194347381592
+    },
+    {
+      "episode": 4030,
+      "recon_loss": 8.760627746582031,
+      "pred_loss": 1.9489432573318481,
+      "reward_loss": -1318.27001953125,
+      "tau": 1.002266037264378,
+      "vocab_used": null,
+      "goal_dist": 4.674816608428955,
+      "elapsed_sec": 512.4559988975525
+    },
+    {
+      "episode": 4040,
+      "recon_loss": 7.699586868286133,
+      "pred_loss": 1.4144898653030396,
+      "reward_loss": -1326.305419921875,
+      "tau": 1.0012637712271135,
+      "vocab_used": null,
+      "goal_dist": 4.703046798706055,
+      "elapsed_sec": 513.7223446369171
+    },
+    {
+      "episode": 4050,
+      "recon_loss": 7.435768127441406,
+      "pred_loss": 1.4456055164337158,
+      "reward_loss": -1330.4306640625,
+      "tau": 1.0002625074558866,
+      "vocab_used": null,
+      "goal_dist": 4.870654106140137,
+      "elapsed_sec": 514.9771192073822
+    },
+    {
+      "episode": 4060,
+      "recon_loss": 7.125208854675293,
+      "pred_loss": 1.3828622102737427,
+      "reward_loss": -1324.0870361328125,
+      "tau": 0.9992622449484305,
+      "vocab_used": null,
+      "goal_dist": 4.672030925750732,
+      "elapsed_sec": 516.3002588748932
+    },
+    {
+      "episode": 4070,
+      "recon_loss": 7.4422221183776855,
+      "pred_loss": 1.4179362058639526,
+      "reward_loss": -1343.9859619140625,
+      "tau": 0.9982629827034822,
+      "vocab_used": null,
+      "goal_dist": 4.96523380279541,
+      "elapsed_sec": 517.5316393375397
+    },
+    {
+      "episode": 4080,
+      "recon_loss": 7.392477989196777,
+      "pred_loss": 1.3892184495925903,
+      "reward_loss": -1353.302734375,
+      "tau": 0.9972647197207787,
+      "vocab_used": null,
+      "goal_dist": 4.862011909484863,
+      "elapsed_sec": 518.7664442062378
+    },
+    {
+      "episode": 4090,
+      "recon_loss": 7.17202091217041,
+      "pred_loss": 1.3719508647918701,
+      "reward_loss": -1335.799560546875,
+      "tau": 0.996267455001058,
+      "vocab_used": null,
+      "goal_dist": 5.034585952758789,
+      "elapsed_sec": 519.9861009120941
+    },
+    {
+      "episode": 4100,
+      "recon_loss": 7.148955821990967,
+      "pred_loss": 1.3539376258850098,
+      "reward_loss": -1347.8055419921875,
+      "tau": 0.9952711875460569,
+      "vocab_used": null,
+      "goal_dist": 5.093292236328125,
+      "elapsed_sec": 521.2122113704681
+    },
+    {
+      "episode": 4110,
+      "recon_loss": 7.2656097412109375,
+      "pred_loss": 1.3718266487121582,
+      "reward_loss": -1340.6494140625,
+      "tau": 0.9942759163585109,
+      "vocab_used": null,
+      "goal_dist": 4.801745414733887,
+      "elapsed_sec": 522.4733908176422
+    },
+    {
+      "episode": 4120,
+      "recon_loss": 7.093186378479004,
+      "pred_loss": 1.366754412651062,
+      "reward_loss": -1335.1146240234375,
+      "tau": 0.9932816404421523,
+      "vocab_used": null,
+      "goal_dist": 4.83418083190918,
+      "elapsed_sec": 523.6969113349915
+    },
+    {
+      "episode": 4130,
+      "recon_loss": 6.923497200012207,
+      "pred_loss": 1.3932654857635498,
+      "reward_loss": -1337.9244384765625,
+      "tau": 0.9922883588017102,
+      "vocab_used": null,
+      "goal_dist": 4.955714225769043,
+      "elapsed_sec": 524.9467906951904
+    },
+    {
+      "episode": 4140,
+      "recon_loss": 6.93062686920166,
+      "pred_loss": 1.3351640701293945,
+      "reward_loss": -1320.906982421875,
+      "tau": 0.9912960704429086,
+      "vocab_used": null,
+      "goal_dist": 4.684165000915527,
+      "elapsed_sec": 526.2380890846252
+    },
+    {
+      "episode": 4150,
+      "recon_loss": 7.60573673248291,
+      "pred_loss": 1.4955296516418457,
+      "reward_loss": -1348.74609375,
+      "tau": 0.9903047743724656,
+      "vocab_used": null,
+      "goal_dist": 5.05179500579834,
+      "elapsed_sec": 527.6159484386444
+    },
+    {
+      "episode": 4160,
+      "recon_loss": 8.187385559082031,
+      "pred_loss": 1.387558937072754,
+      "reward_loss": -1335.0638427734375,
+      "tau": 0.9893144695980931,
+      "vocab_used": null,
+      "goal_dist": 4.845267295837402,
+      "elapsed_sec": 528.9472081661224
+    },
+    {
+      "episode": 4170,
+      "recon_loss": 7.444910049438477,
+      "pred_loss": 1.3419848680496216,
+      "reward_loss": -1321.49560546875,
+      "tau": 0.988325155128495,
+      "vocab_used": null,
+      "goal_dist": 4.8937530517578125,
+      "elapsed_sec": 530.1910696029663
+    },
+    {
+      "episode": 4180,
+      "recon_loss": 8.68580436706543,
+      "pred_loss": 1.3590631484985352,
+      "reward_loss": -1329.0692138671875,
+      "tau": 0.9873368299733665,
+      "vocab_used": null,
+      "goal_dist": 4.997467041015625,
+      "elapsed_sec": 531.4140820503235
+    },
+    {
+      "episode": 4190,
+      "recon_loss": 8.368989944458008,
+      "pred_loss": 1.330314040184021,
+      "reward_loss": -1330.97265625,
+      "tau": 0.9863494931433932,
+      "vocab_used": null,
+      "goal_dist": 4.9727606773376465,
+      "elapsed_sec": 532.612274646759
+    },
+    {
+      "episode": 4200,
+      "recon_loss": 7.167314529418945,
+      "pred_loss": 1.3631645441055298,
+      "reward_loss": -1312.08154296875,
+      "tau": 0.9853631436502497,
+      "vocab_used": null,
+      "goal_dist": 4.82468318939209,
+      "elapsed_sec": 533.8742537498474
+    },
+    {
+      "episode": 4210,
+      "recon_loss": 6.860269546508789,
+      "pred_loss": 1.3283734321594238,
+      "reward_loss": -1296.3934326171875,
+      "tau": 0.9843777805065994,
+      "vocab_used": null,
+      "goal_dist": 4.883809566497803,
+      "elapsed_sec": 535.1640613079071
+    },
+    {
+      "episode": 4220,
+      "recon_loss": 7.177231788635254,
+      "pred_loss": 1.3968276977539062,
+      "reward_loss": -1331.2413330078125,
+      "tau": 0.9833934027260929,
+      "vocab_used": null,
+      "goal_dist": 4.852341175079346,
+      "elapsed_sec": 536.523035287857
+    },
+    {
+      "episode": 4230,
+      "recon_loss": 6.866088390350342,
+      "pred_loss": 1.3200775384902954,
+      "reward_loss": -1327.55908203125,
+      "tau": 0.9824100093233669,
+      "vocab_used": null,
+      "goal_dist": 4.800593376159668,
+      "elapsed_sec": 537.8380315303802
+    },
+    {
+      "episode": 4240,
+      "recon_loss": 6.925992965698242,
+      "pred_loss": 1.3864009380340576,
+      "reward_loss": -1342.2646484375,
+      "tau": 0.9814275993140436,
+      "vocab_used": null,
+      "goal_dist": 4.868438243865967,
+      "elapsed_sec": 539.1194899082184
+    },
+    {
+      "episode": 4250,
+      "recon_loss": 7.07424259185791,
+      "pred_loss": 1.3333423137664795,
+      "reward_loss": -1334.3447265625,
+      "tau": 0.9804461717147293,
+      "vocab_used": null,
+      "goal_dist": 4.849543571472168,
+      "elapsed_sec": 540.5046865940094
+    },
+    {
+      "episode": 4260,
+      "recon_loss": 7.1999616622924805,
+      "pred_loss": 1.4251606464385986,
+      "reward_loss": -1344.63134765625,
+      "tau": 0.9794657255430146,
+      "vocab_used": null,
+      "goal_dist": 4.96169376373291,
+      "elapsed_sec": 541.7350370883942
+    },
+    {
+      "episode": 4270,
+      "recon_loss": 6.646805286407471,
+      "pred_loss": 1.3461840152740479,
+      "reward_loss": -1334.0386962890625,
+      "tau": 0.9784862598174715,
+      "vocab_used": null,
+      "goal_dist": 4.842302322387695,
+      "elapsed_sec": 543.046906709671
+    },
+    {
+      "episode": 4280,
+      "recon_loss": 6.855170249938965,
+      "pred_loss": 1.3602914810180664,
+      "reward_loss": -1328.624267578125,
+      "tau": 0.9775077735576542,
+      "vocab_used": null,
+      "goal_dist": 5.028022766113281,
+      "elapsed_sec": 544.2880592346191
+    },
+    {
+      "episode": 4290,
+      "recon_loss": 6.329694747924805,
+      "pred_loss": 1.3155194520950317,
+      "reward_loss": -1300.168212890625,
+      "tau": 0.9765302657840964,
+      "vocab_used": null,
+      "goal_dist": 4.942953109741211,
+      "elapsed_sec": 545.565990447998
+    },
+    {
+      "episode": 4300,
+      "recon_loss": 7.694934368133545,
+      "pred_loss": 1.9090498685836792,
+      "reward_loss": -1279.1864013671875,
+      "tau": 0.9755537355183125,
+      "vocab_used": null,
+      "goal_dist": 4.55434513092041,
+      "elapsed_sec": 546.9251019954681
+    },
+    {
+      "episode": 4310,
+      "recon_loss": 7.135904312133789,
+      "pred_loss": 1.440887212753296,
+      "reward_loss": -1283.29052734375,
+      "tau": 0.9745781817827941,
+      "vocab_used": null,
+      "goal_dist": 4.536163806915283,
+      "elapsed_sec": 548.2833187580109
+    },
+    {
+      "episode": 4320,
+      "recon_loss": 7.9327569007873535,
+      "pred_loss": 1.8291220664978027,
+      "reward_loss": -1313.773193359375,
+      "tau": 0.9736036036010113,
+      "vocab_used": null,
+      "goal_dist": 4.557450771331787,
+      "elapsed_sec": 549.6732897758484
+    },
+    {
+      "episode": 4330,
+      "recon_loss": 8.178980827331543,
+      "pred_loss": 1.5409185886383057,
+      "reward_loss": -1327.847412109375,
+      "tau": 0.9726299999974102,
+      "vocab_used": null,
+      "goal_dist": 4.502829551696777,
+      "elapsed_sec": 550.95117354393
+    },
+    {
+      "episode": 4340,
+      "recon_loss": 7.120832443237305,
+      "pred_loss": 1.4364521503448486,
+      "reward_loss": -1327.6561279296875,
+      "tau": 0.9716573699974129,
+      "vocab_used": null,
+      "goal_dist": 4.391204833984375,
+      "elapsed_sec": 552.2045681476593
+    },
+    {
+      "episode": 4350,
+      "recon_loss": 6.974025726318359,
+      "pred_loss": 1.4427471160888672,
+      "reward_loss": -1354.236083984375,
+      "tau": 0.9706857126274155,
+      "vocab_used": null,
+      "goal_dist": 4.62639045715332,
+      "elapsed_sec": 553.4158399105072
+    },
+    {
+      "episode": 4360,
+      "recon_loss": 6.6106767654418945,
+      "pred_loss": 1.3406720161437988,
+      "reward_loss": -1340.1744384765625,
+      "tau": 0.9697150269147881,
+      "vocab_used": null,
+      "goal_dist": 4.7218217849731445,
+      "elapsed_sec": 554.7692906856537
+    },
+    {
+      "episode": 4370,
+      "recon_loss": 6.733273506164551,
+      "pred_loss": 1.4750785827636719,
+      "reward_loss": -1316.4149169921875,
+      "tau": 0.9687453118878733,
+      "vocab_used": null,
+      "goal_dist": 4.529538631439209,
+      "elapsed_sec": 556.0200486183167
+    },
+    {
+      "episode": 4380,
+      "recon_loss": 6.5093092918396,
+      "pred_loss": 1.3060646057128906,
+      "reward_loss": -1317.46728515625,
+      "tau": 0.9677765665759854,
+      "vocab_used": null,
+      "goal_dist": 4.49672794342041,
+      "elapsed_sec": 557.3358905315399
+    },
+    {
+      "episode": 4390,
+      "recon_loss": 6.871607780456543,
+      "pred_loss": 1.450639247894287,
+      "reward_loss": -1332.4833984375,
+      "tau": 0.9668087900094094,
+      "vocab_used": null,
+      "goal_dist": 4.557831764221191,
+      "elapsed_sec": 558.714230298996
+    },
+    {
+      "episode": 4400,
+      "recon_loss": 6.49777364730835,
+      "pred_loss": 1.3688747882843018,
+      "reward_loss": -1332.079345703125,
+      "tau": 0.9658419812194,
+      "vocab_used": null,
+      "goal_dist": 4.565420150756836,
+      "elapsed_sec": 559.9880938529968
+    },
+    {
+      "episode": 4410,
+      "recon_loss": 6.841745376586914,
+      "pred_loss": 1.4151992797851562,
+      "reward_loss": -1349.4197998046875,
+      "tau": 0.9648761392381806,
+      "vocab_used": null,
+      "goal_dist": 4.660499572753906,
+      "elapsed_sec": 561.4274430274963
+    },
+    {
+      "episode": 4420,
+      "recon_loss": 7.0798749923706055,
+      "pred_loss": 1.4965691566467285,
+      "reward_loss": -1353.1820068359375,
+      "tau": 0.9639112630989424,
+      "vocab_used": null,
+      "goal_dist": 4.699028015136719,
+      "elapsed_sec": 562.7839510440826
+    },
+    {
+      "episode": 4430,
+      "recon_loss": 7.042231559753418,
+      "pred_loss": 1.4364784955978394,
+      "reward_loss": -1319.3265380859375,
+      "tau": 0.9629473518358433,
+      "vocab_used": null,
+      "goal_dist": 4.408365726470947,
+      "elapsed_sec": 564.0531992912292
+    },
+    {
+      "episode": 4440,
+      "recon_loss": 7.657428741455078,
+      "pred_loss": 1.5514857769012451,
+      "reward_loss": -1350.7421875,
+      "tau": 0.9619844044840077,
+      "vocab_used": null,
+      "goal_dist": 4.787447929382324,
+      "elapsed_sec": 565.4377355575562
+    },
+    {
+      "episode": 4450,
+      "recon_loss": 7.005967140197754,
+      "pred_loss": 1.5571446418762207,
+      "reward_loss": -1350.8388671875,
+      "tau": 0.9610224200795237,
+      "vocab_used": null,
+      "goal_dist": 4.582601070404053,
+      "elapsed_sec": 566.6871252059937
+    },
+    {
+      "episode": 4460,
+      "recon_loss": 7.333807945251465,
+      "pred_loss": 1.601715087890625,
+      "reward_loss": -1369.52099609375,
+      "tau": 0.9600613976594441,
+      "vocab_used": null,
+      "goal_dist": 4.573044776916504,
+      "elapsed_sec": 567.9307963848114
+    },
+    {
+      "episode": 4470,
+      "recon_loss": 6.916058540344238,
+      "pred_loss": 1.4631848335266113,
+      "reward_loss": -1366.2333984375,
+      "tau": 0.9591013362617846,
+      "vocab_used": null,
+      "goal_dist": 4.701643943786621,
+      "elapsed_sec": 569.1068136692047
+    },
+    {
+      "episode": 4480,
+      "recon_loss": 7.00123405456543,
+      "pred_loss": 1.4896459579467773,
+      "reward_loss": -1339.4395751953125,
+      "tau": 0.9581422349255229,
+      "vocab_used": null,
+      "goal_dist": 4.502046585083008,
+      "elapsed_sec": 570.4220623970032
+    },
+    {
+      "episode": 4490,
+      "recon_loss": 7.235867023468018,
+      "pred_loss": 1.5067415237426758,
+      "reward_loss": -1319.9666748046875,
+      "tau": 0.9571840926905972,
+      "vocab_used": null,
+      "goal_dist": 4.621212959289551,
+      "elapsed_sec": 571.6681931018829
+    },
+    {
+      "episode": 4500,
+      "recon_loss": 7.682339668273926,
+      "pred_loss": 1.730682373046875,
+      "reward_loss": -1369.664306640625,
+      "tau": 0.9562269085979067,
+      "vocab_used": null,
+      "goal_dist": 4.602852821350098,
+      "elapsed_sec": 573.0024919509888
+    },
+    {
+      "episode": 4510,
+      "recon_loss": 7.076330184936523,
+      "pred_loss": 1.5477259159088135,
+      "reward_loss": -1371.3868408203125,
+      "tau": 0.9552706816893088,
+      "vocab_used": null,
+      "goal_dist": 4.597602844238281,
+      "elapsed_sec": 574.3399193286896
+    },
+    {
+      "episode": 4520,
+      "recon_loss": 6.625506401062012,
+      "pred_loss": 1.4417381286621094,
+      "reward_loss": -1363.450439453125,
+      "tau": 0.9543154110076195,
+      "vocab_used": null,
+      "goal_dist": 4.588978290557861,
+      "elapsed_sec": 575.6043164730072
+    },
+    {
+      "episode": 4530,
+      "recon_loss": 7.134533405303955,
+      "pred_loss": 1.6227772235870361,
+      "reward_loss": -1364.5643310546875,
+      "tau": 0.9533610955966119,
+      "vocab_used": null,
+      "goal_dist": 4.768106937408447,
+      "elapsed_sec": 576.9091548919678
+    },
+    {
+      "episode": 4540,
+      "recon_loss": 6.757650375366211,
+      "pred_loss": 1.3978996276855469,
+      "reward_loss": -1355.233154296875,
+      "tau": 0.9524077345010153,
+      "vocab_used": null,
+      "goal_dist": 4.65461540222168,
+      "elapsed_sec": 578.1089577674866
+    },
+    {
+      "episode": 4550,
+      "recon_loss": 7.110654830932617,
+      "pred_loss": 1.454128623008728,
+      "reward_loss": -1355.954833984375,
+      "tau": 0.9514553267665142,
+      "vocab_used": null,
+      "goal_dist": 4.415151596069336,
+      "elapsed_sec": 579.3044583797455
+    },
+    {
+      "episode": 4560,
+      "recon_loss": 6.535313606262207,
+      "pred_loss": 1.3772258758544922,
+      "reward_loss": -1354.57373046875,
+      "tau": 0.9505038714397477,
+      "vocab_used": null,
+      "goal_dist": 4.7813262939453125,
+      "elapsed_sec": 580.5083446502686
+    },
+    {
+      "episode": 4570,
+      "recon_loss": 6.987968921661377,
+      "pred_loss": 1.4898953437805176,
+      "reward_loss": -1377.428466796875,
+      "tau": 0.9495533675683081,
+      "vocab_used": null,
+      "goal_dist": 4.435391902923584,
+      "elapsed_sec": 581.7357656955719
+    },
+    {
+      "episode": 4580,
+      "recon_loss": 6.572693824768066,
+      "pred_loss": 1.464867353439331,
+      "reward_loss": -1350.489501953125,
+      "tau": 0.9486038142007397,
+      "vocab_used": null,
+      "goal_dist": 4.626757621765137,
+      "elapsed_sec": 582.9684665203094
+    },
+    {
+      "episode": 4590,
+      "recon_loss": 6.690335273742676,
+      "pred_loss": 1.5056815147399902,
+      "reward_loss": -1354.02880859375,
+      "tau": 0.947655210386539,
+      "vocab_used": null,
+      "goal_dist": 4.625309944152832,
+      "elapsed_sec": 584.2339508533478
+    },
+    {
+      "episode": 4600,
+      "recon_loss": 6.853165149688721,
+      "pred_loss": 1.7314479351043701,
+      "reward_loss": -1359.6351318359375,
+      "tau": 0.9467075551761523,
+      "vocab_used": null,
+      "goal_dist": 4.409734725952148,
+      "elapsed_sec": 585.5184123516083
+    },
+    {
+      "episode": 4610,
+      "recon_loss": 6.7237043380737305,
+      "pred_loss": 1.6223070621490479,
+      "reward_loss": -1392.7379150390625,
+      "tau": 0.9457608476209762,
+      "vocab_used": null,
+      "goal_dist": 4.571944236755371,
+      "elapsed_sec": 586.6995420455933
+    },
+    {
+      "episode": 4620,
+      "recon_loss": 6.487994194030762,
+      "pred_loss": 1.5222305059432983,
+      "reward_loss": -1417.5587158203125,
+      "tau": 0.9448150867733554,
+      "vocab_used": null,
+      "goal_dist": 4.614781856536865,
+      "elapsed_sec": 587.922105550766
+    },
+    {
+      "episode": 4630,
+      "recon_loss": 6.85582971572876,
+      "pred_loss": 1.5829384326934814,
+      "reward_loss": -1426.10302734375,
+      "tau": 0.943870271686582,
+      "vocab_used": null,
+      "goal_dist": 4.619797229766846,
+      "elapsed_sec": 589.1792290210724
+    },
+    {
+      "episode": 4640,
+      "recon_loss": 6.412358283996582,
+      "pred_loss": 1.3818806409835815,
+      "reward_loss": -1436.6787109375,
+      "tau": 0.9429264014148954,
+      "vocab_used": null,
+      "goal_dist": 4.6860198974609375,
+      "elapsed_sec": 590.448634147644
+    },
+    {
+      "episode": 4650,
+      "recon_loss": 6.632378101348877,
+      "pred_loss": 1.5199741125106812,
+      "reward_loss": -1425.396484375,
+      "tau": 0.9419834750134806,
+      "vocab_used": null,
+      "goal_dist": 4.663942813873291,
+      "elapsed_sec": 591.6703114509583
+    },
+    {
+      "episode": 4660,
+      "recon_loss": 7.207837104797363,
+      "pred_loss": 1.8670638799667358,
+      "reward_loss": -1417.24658203125,
+      "tau": 0.941041491538467,
+      "vocab_used": null,
+      "goal_dist": 4.657200336456299,
+      "elapsed_sec": 592.8720419406891
+    },
+    {
+      "episode": 4670,
+      "recon_loss": 6.892629146575928,
+      "pred_loss": 1.6861369609832764,
+      "reward_loss": -1447.537109375,
+      "tau": 0.9401004500469284,
+      "vocab_used": null,
+      "goal_dist": 4.902760028839111,
+      "elapsed_sec": 594.1072058677673
+    },
+    {
+      "episode": 4680,
+      "recon_loss": 6.60412073135376,
+      "pred_loss": 1.76100492477417,
+      "reward_loss": -1445.644775390625,
+      "tau": 0.9391603495968814,
+      "vocab_used": null,
+      "goal_dist": 4.66000509262085,
+      "elapsed_sec": 595.3445925712585
+    },
+    {
+      "episode": 4690,
+      "recon_loss": 6.692571640014648,
+      "pred_loss": 1.5328874588012695,
+      "reward_loss": -1415.1619873046875,
+      "tau": 0.9382211892472847,
+      "vocab_used": null,
+      "goal_dist": 4.862778186798096,
+      "elapsed_sec": 596.5597944259644
+    },
+    {
+      "episode": 4700,
+      "recon_loss": 6.53173828125,
+      "pred_loss": 1.487372875213623,
+      "reward_loss": -1445.5574951171875,
+      "tau": 0.9372829680580375,
+      "vocab_used": null,
+      "goal_dist": 5.025892734527588,
+      "elapsed_sec": 597.8043792247772
+    },
+    {
+      "episode": 4710,
+      "recon_loss": 6.496633529663086,
+      "pred_loss": 1.5709370374679565,
+      "reward_loss": -1456.711669921875,
+      "tau": 0.9363456850899794,
+      "vocab_used": null,
+      "goal_dist": 4.809046745300293,
+      "elapsed_sec": 599.0194947719574
+    },
+    {
+      "episode": 4720,
+      "recon_loss": 6.6793212890625,
+      "pred_loss": 1.609937071800232,
+      "reward_loss": -1445.677001953125,
+      "tau": 0.9354093394048894,
+      "vocab_used": null,
+      "goal_dist": 4.739889144897461,
+      "elapsed_sec": 600.2406933307648
+    },
+    {
+      "episode": 4730,
+      "recon_loss": 6.459156513214111,
+      "pred_loss": 1.4753913879394531,
+      "reward_loss": -1434.23046875,
+      "tau": 0.9344739300654845,
+      "vocab_used": null,
+      "goal_dist": 4.893705368041992,
+      "elapsed_sec": 601.4946064949036
+    },
+    {
+      "episode": 4740,
+      "recon_loss": 5.988990783691406,
+      "pred_loss": 1.3239693641662598,
+      "reward_loss": -1414.6910400390625,
+      "tau": 0.933539456135419,
+      "vocab_used": null,
+      "goal_dist": 4.993858337402344,
+      "elapsed_sec": 602.7253196239471
+    },
+    {
+      "episode": 4750,
+      "recon_loss": 6.560396194458008,
+      "pred_loss": 1.5956237316131592,
+      "reward_loss": -1441.1923828125,
+      "tau": 0.9326059166792835,
+      "vocab_used": null,
+      "goal_dist": 4.959877967834473,
+      "elapsed_sec": 603.9265270233154
+    },
+    {
+      "episode": 4760,
+      "recon_loss": 6.516388893127441,
+      "pred_loss": 1.5359296798706055,
+      "reward_loss": -1451.36865234375,
+      "tau": 0.9316733107626043,
+      "vocab_used": null,
+      "goal_dist": 4.680000305175781,
+      "elapsed_sec": 605.1837954521179
+    },
+    {
+      "episode": 4770,
+      "recon_loss": 6.522968769073486,
+      "pred_loss": 1.5444777011871338,
+      "reward_loss": -1440.486083984375,
+      "tau": 0.9307416374518416,
+      "vocab_used": null,
+      "goal_dist": 4.824557304382324,
+      "elapsed_sec": 606.4339716434479
+    },
+    {
+      "episode": 4780,
+      "recon_loss": 6.3974928855896,
+      "pred_loss": 1.5302895307540894,
+      "reward_loss": -1443.4053955078125,
+      "tau": 0.9298108958143899,
+      "vocab_used": null,
+      "goal_dist": 4.801351547241211,
+      "elapsed_sec": 607.6478190422058
+    },
+    {
+      "episode": 4790,
+      "recon_loss": 6.590453147888184,
+      "pred_loss": 1.583431363105774,
+      "reward_loss": -1443.336181640625,
+      "tau": 0.9288810849185755,
+      "vocab_used": null,
+      "goal_dist": 4.887709617614746,
+      "elapsed_sec": 608.8831210136414
+    },
+    {
+      "episode": 4800,
+      "recon_loss": 6.468874454498291,
+      "pred_loss": 1.6067893505096436,
+      "reward_loss": -1444.75390625,
+      "tau": 0.927952203833657,
+      "vocab_used": null,
+      "goal_dist": 4.823013782501221,
+      "elapsed_sec": 610.1385622024536
+    },
+    {
+      "episode": 4810,
+      "recon_loss": 6.449369430541992,
+      "pred_loss": 1.643249750137329,
+      "reward_loss": -1448.7236328125,
+      "tau": 0.9270242516298232,
+      "vocab_used": null,
+      "goal_dist": 4.7451629638671875,
+      "elapsed_sec": 611.3819763660431
+    },
+    {
+      "episode": 4820,
+      "recon_loss": 5.975315570831299,
+      "pred_loss": 1.325988531112671,
+      "reward_loss": -1413.86376953125,
+      "tau": 0.9260972273781934,
+      "vocab_used": null,
+      "goal_dist": 4.517244815826416,
+      "elapsed_sec": 612.6969780921936
+    },
+    {
+      "episode": 4830,
+      "recon_loss": 6.184523582458496,
+      "pred_loss": 1.5686904191970825,
+      "reward_loss": -1445.70751953125,
+      "tau": 0.9251711301508152,
+      "vocab_used": null,
+      "goal_dist": 4.768372535705566,
+      "elapsed_sec": 613.9946372509003
+    },
+    {
+      "episode": 4840,
+      "recon_loss": 6.306729793548584,
+      "pred_loss": 1.5036420822143555,
+      "reward_loss": -1435.79052734375,
+      "tau": 0.9242459590206643,
+      "vocab_used": null,
+      "goal_dist": 4.739156723022461,
+      "elapsed_sec": 615.3359642028809
+    },
+    {
+      "episode": 4850,
+      "recon_loss": 5.960970878601074,
+      "pred_loss": 1.446789264678955,
+      "reward_loss": -1433.390869140625,
+      "tau": 0.9233217130616438,
+      "vocab_used": null,
+      "goal_dist": 4.700226306915283,
+      "elapsed_sec": 616.598797082901
+    },
+    {
+      "episode": 4860,
+      "recon_loss": 6.397556781768799,
+      "pred_loss": 1.52870512008667,
+      "reward_loss": -1436.144775390625,
+      "tau": 0.922398391348582,
+      "vocab_used": null,
+      "goal_dist": 4.791534423828125,
+      "elapsed_sec": 617.8278248310089
+    },
+    {
+      "episode": 4870,
+      "recon_loss": 6.822142601013184,
+      "pred_loss": 1.646960735321045,
+      "reward_loss": -1445.313720703125,
+      "tau": 0.9214759929572336,
+      "vocab_used": null,
+      "goal_dist": 4.996824264526367,
+      "elapsed_sec": 619.046942949295
+    },
+    {
+      "episode": 4880,
+      "recon_loss": 6.354578495025635,
+      "pred_loss": 1.6041429042816162,
+      "reward_loss": -1457.39697265625,
+      "tau": 0.9205545169642764,
+      "vocab_used": null,
+      "goal_dist": 4.836343765258789,
+      "elapsed_sec": 620.2806153297424
+    },
+    {
+      "episode": 4890,
+      "recon_loss": 6.256904602050781,
+      "pred_loss": 1.5539054870605469,
+      "reward_loss": -1446.03857421875,
+      "tau": 0.919633962447312,
+      "vocab_used": null,
+      "goal_dist": 4.934822082519531,
+      "elapsed_sec": 621.5807139873505
+    },
+    {
+      "episode": 4900,
+      "recon_loss": 6.588555335998535,
+      "pred_loss": 1.6913161277770996,
+      "reward_loss": -1454.503662109375,
+      "tau": 0.9187143284848647,
+      "vocab_used": null,
+      "goal_dist": 4.840249061584473,
+      "elapsed_sec": 622.7651836872101
+    },
+    {
+      "episode": 4910,
+      "recon_loss": 6.153170585632324,
+      "pred_loss": 1.4442042112350464,
+      "reward_loss": -1434.15771484375,
+      "tau": 0.9177956141563797,
+      "vocab_used": null,
+      "goal_dist": 4.603656768798828,
+      "elapsed_sec": 624.0200402736664
+    },
+    {
+      "episode": 4920,
+      "recon_loss": 6.2258429527282715,
+      "pred_loss": 1.541402816772461,
+      "reward_loss": -1458.785888671875,
+      "tau": 0.9168778185422234,
+      "vocab_used": null,
+      "goal_dist": 4.936955451965332,
+      "elapsed_sec": 625.2996048927307
+    },
+    {
+      "episode": 4930,
+      "recon_loss": 6.593575477600098,
+      "pred_loss": 1.524430274963379,
+      "reward_loss": -1457.2109375,
+      "tau": 0.9159609407236813,
+      "vocab_used": null,
+      "goal_dist": 4.855888843536377,
+      "elapsed_sec": 626.5593223571777
+    },
+    {
+      "episode": 4940,
+      "recon_loss": 6.281027793884277,
+      "pred_loss": 1.5265769958496094,
+      "reward_loss": -1451.830322265625,
+      "tau": 0.9150449797829576,
+      "vocab_used": null,
+      "goal_dist": 5.004426002502441,
+      "elapsed_sec": 627.8371105194092
+    },
+    {
+      "episode": 4950,
+      "recon_loss": 6.278841018676758,
+      "pred_loss": 1.4601655006408691,
+      "reward_loss": -1470.55224609375,
+      "tau": 0.9141299348031745,
+      "vocab_used": null,
+      "goal_dist": 4.894675254821777,
+      "elapsed_sec": 629.1152451038361
+    },
+    {
+      "episode": 4960,
+      "recon_loss": 6.030971527099609,
+      "pred_loss": 1.3756356239318848,
+      "reward_loss": -1453.6934814453125,
+      "tau": 0.9132158048683714,
+      "vocab_used": null,
+      "goal_dist": 4.704078197479248,
+      "elapsed_sec": 630.3533003330231
+    },
+    {
+      "episode": 4970,
+      "recon_loss": 6.135641098022461,
+      "pred_loss": 1.4928960800170898,
+      "reward_loss": -1482.223388671875,
+      "tau": 0.912302589063503,
+      "vocab_used": null,
+      "goal_dist": 4.761638164520264,
+      "elapsed_sec": 631.6134309768677
+    },
+    {
+      "episode": 4980,
+      "recon_loss": 5.838380813598633,
+      "pred_loss": 1.4639315605163574,
+      "reward_loss": -1472.403076171875,
+      "tau": 0.9113902864744394,
+      "vocab_used": null,
+      "goal_dist": 4.785534858703613,
+      "elapsed_sec": 632.8444800376892
+    },
+    {
+      "episode": 4990,
+      "recon_loss": 6.067233085632324,
+      "pred_loss": 1.47664475440979,
+      "reward_loss": -1462.97802734375,
+      "tau": 0.9104788961879651,
+      "vocab_used": null,
+      "goal_dist": 4.812628746032715,
+      "elapsed_sec": 634.103453874588
     }
   ],
-  "evaluations": [],
+  "evaluations": [
+    {
+      "episode": 500,
+      "vocab_used": 64,
+      "top_symbols": [
+        [
+          "37",
+          2207
+        ],
+        [
+          "61",
+          2192
+        ],
+        [
+          "56",
+          2134
+        ],
+        [
+          "48",
+          2041
+        ],
+        [
+          "55",
+          1864
+        ]
+      ],
+      "hub_counts": {
+        "4": 14,
+        "7": 2,
+        "16": 2,
+        "22": 13,
+        "17": 1
+      },
+      "recon_loss": 8.479984283447266,
+      "pred_loss": 401.0374450683594,
+      "current_k": 7
+    },
+    {
+      "episode": 1000,
+      "vocab_used": 64,
+      "top_symbols": [
+        [
+          "37",
+          3100
+        ],
+        [
+          "48",
+          2109
+        ],
+        [
+          "61",
+          1918
+        ],
+        [
+          "56",
+          1903
+        ],
+        [
+          "51",
+          1650
+        ]
+      ],
+      "hub_counts": {
+        "4": 12,
+        "9": 1,
+        "16": 4,
+        "13": 1,
+        "22": 8,
+        "17": 1,
+        "24": 5
+      },
+      "recon_loss": 53.282981872558594,
+      "pred_loss": 437.8580322265625,
+      "current_k": 6
+    },
+    {
+      "episode": 1500,
+      "vocab_used": 64,
+      "top_symbols": [
+        [
+          "37",
+          2860
+        ],
+        [
+          "48",
+          1967
+        ],
+        [
+          "61",
+          1940
+        ],
+        [
+          "56",
+          1839
+        ],
+        [
+          "51",
+          1814
+        ]
+      ],
+      "hub_counts": {
+        "4": 10,
+        "14": 7,
+        "16": 1,
+        "13": 2,
+        "24": 7,
+        "22": 1,
+        "26": 3
+      },
+      "recon_loss": 127.61836242675781,
+      "pred_loss": 500.8035888671875,
+      "current_k": 5
+    },
+    {
+      "episode": 2000,
+      "vocab_used": 64,
+      "top_symbols": [
+        [
+          "61",
+          2670
+        ],
+        [
+          "37",
+          2230
+        ],
+        [
+          "36",
+          2087
+        ],
+        [
+          "48",
+          1761
+        ],
+        [
+          "62",
+          1751
+        ]
+      ],
+      "hub_counts": {
+        "4": 8,
+        "3": 1,
+        "10": 1,
+        "14": 8,
+        "13": 1,
+        "22": 2,
+        "24": 8,
+        "1": 1,
+        "2": 2
+      },
+      "recon_loss": 184.74215698242188,
+      "pred_loss": 495.23150634765625,
+      "current_k": 4
+    },
+    {
+      "episode": 2500,
+      "vocab_used": 64,
+      "top_symbols": [
+        [
+          "61",
+          2899
+        ],
+        [
+          "37",
+          2716
+        ],
+        [
+          "36",
+          2089
+        ],
+        [
+          "48",
+          1774
+        ],
+        [
+          "51",
+          1759
+        ]
+      ],
+      "hub_counts": {
+        "1": 3,
+        "4": 5,
+        "3": 1,
+        "5": 1,
+        "10": 3,
+        "13": 1,
+        "15": 6,
+        "14": 1,
+        "20": 1,
+        "19": 1,
+        "24": 2,
+        "25": 6,
+        "31": 1
+      },
+      "recon_loss": 184.83502197265625,
+      "pred_loss": 445.5659484863281,
+      "current_k": 3
+    },
+    {
+      "episode": 3000,
+      "vocab_used": 64,
+      "top_symbols": [
+        [
+          "61",
+          3315
+        ],
+        [
+          "37",
+          2919
+        ],
+        [
+          "36",
+          2071
+        ],
+        [
+          "51",
+          1799
+        ],
+        [
+          "47",
+          1775
+        ]
+      ],
+      "hub_counts": {
+        "1": 3,
+        "2": 2,
+        "4": 2,
+        "3": 1,
+        "5": 1,
+        "7": 1,
+        "11": 1,
+        "8": 1,
+        "10": 2,
+        "15": 3,
+        "14": 1,
+        "19": 3,
+        "21": 1,
+        "20": 2,
+        "25": 4,
+        "24": 1,
+        "29": 2,
+        "27": 1
+      },
+      "recon_loss": 216.5648193359375,
+      "pred_loss": 460.1719665527344,
+      "current_k": 2
+    },
+    {
+      "episode": 3500,
+      "vocab_used": 64,
+      "top_symbols": [
+        [
+          "37",
+          3618
+        ],
+        [
+          "61",
+          3473
+        ],
+        [
+          "36",
+          2615
+        ],
+        [
+          "32",
+          2306
+        ],
+        [
+          "47",
+          1706
+        ]
+      ],
+      "hub_counts": {
+        "1": 3,
+        "2": 2,
+        "4": 2,
+        "3": 1,
+        "5": 1,
+        "7": 1,
+        "11": 1,
+        "8": 1,
+        "10": 1,
+        "13": 1,
+        "15": 3,
+        "14": 1,
+        "19": 3,
+        "21": 1,
+        "20": 2,
+        "25": 4,
+        "24": 1,
+        "30": 1,
+        "27": 1,
+        "29": 1
+      },
+      "recon_loss": 237.75601196289062,
+      "pred_loss": 472.205078125,
+      "current_k": 2
+    },
+    {
+      "episode": 4000,
+      "vocab_used": 64,
+      "top_symbols": [
+        [
+          "61",
+          3508
+        ],
+        [
+          "37",
+          3399
+        ],
+        [
+          "36",
+          2842
+        ],
+        [
+          "32",
+          2599
+        ],
+        [
+          "55",
+          1691
+        ]
+      ],
+      "hub_counts": {
+        "1": 3,
+        "2": 2,
+        "4": 2,
+        "3": 1,
+        "5": 1,
+        "7": 1,
+        "11": 1,
+        "8": 1,
+        "10": 1,
+        "13": 1,
+        "15": 3,
+        "14": 1,
+        "19": 4,
+        "17": 1,
+        "20": 1,
+        "25": 4,
+        "24": 1,
+        "30": 2,
+        "29": 1
+      },
+      "recon_loss": 247.31591796875,
+      "pred_loss": 496.9190979003906,
+      "current_k": 2
+    },
+    {
+      "episode": 4500,
+      "vocab_used": 64,
+      "top_symbols": [
+        [
+          "61",
+          3462
+        ],
+        [
+          "47",
+          2836
+        ],
+        [
+          "37",
+          2234
+        ],
+        [
+          "36",
+          1976
+        ],
+        [
+          "51",
+          1769
+        ]
+      ],
+      "hub_counts": {
+        "1": 3,
+        "2": 2,
+        "4": 2,
+        "3": 1,
+        "5": 1,
+        "10": 2,
+        "11": 1,
+        "8": 1,
+        "13": 1,
+        "15": 3,
+        "14": 1,
+        "19": 3,
+        "21": 1,
+        "20": 2,
+        "25": 4,
+        "24": 1,
+        "30": 2,
+        "29": 1
+      },
+      "recon_loss": 257.3367919921875,
+      "pred_loss": 486.66552734375,
+      "current_k": 2
+    }
+  ],
   "final_metrics": {
-    "final_recon": 29.984725952148438,
-    "final_pred": 16.242401123046875,
-    "final_reward": -6.43867630428738,
-    "total_episodes": 50
+    "final_recon": 6.067233085632324,
+    "final_pred": 1.47664475440979,
+    "final_reward": -258.1123112572564,
+    "total_episodes": 5000
   },
-  "end_time": "2025-12-27T23:00:38.571797",
-  "total_duration_sec": 4.572923421859741
+  "end_time": "2025-12-28T01:00:30.858041",
+  "total_duration_sec": 635.2316501140594
 }

@@ -365,19 +365,41 @@ def run_llm_interpretation(
     swarm.reset_hidden(device)
     
     # Needs some constants from environment/config
-    from main import BATCH_SIZE, LATENT_DIM, OBS_DIM, NUM_AGENTS, VOCAB_SIZE
+    # Needs some constants from environment/config
+    from main import BATCH_SIZE, LATENT_DIM, OBS_DIM, NUM_AGENTS, VOCAB_SIZE, MSG_DIM
+    from topology import get_topology, get_topology_mask
+    
+    # Setup topology for test
+    # Just use k=neighbors if passed, or default
+    # neighbors arg in this function is Dict? main.py passes actual neighbors indices.
+    # Let's assume neighbors is the indices tensor (N, k).
+    try:
+        topology_mask = get_topology_mask(neighbors, NUM_AGENTS, device)
+    except:
+        # Fallback if neighbors is not what we expect
+        topology_mask = torch.ones(NUM_AGENTS, NUM_AGENTS, device=device).bool()
     
     z_t = torch.randn(BATCH_SIZE, LATENT_DIM, device=device)
     symbol_sequences = [[] for _ in range(NUM_AGENTS)]
+    
+    # Init last_msgs (Silence)
+    last_msgs = torch.zeros(NUM_AGENTS, BATCH_SIZE, MSG_DIM, VOCAB_SIZE, device=device)
+    last_msgs[..., 0] = 1.0
     
     with torch.no_grad():
         for t in range(5):
             current_world, _, _, _, _ = env.generate_world_batch(BATCH_SIZE, None, z_t)
             obs = torch.stack([env.get_partial_obs(current_world, i, OBS_DIM) for i in range(NUM_AGENTS)])
             
-            msgs_hard, _, _ = swarm.forward_policy(obs, tau, temperature=1.0)
+            msgs_hard, _, _ = swarm.forward_policy(
+                obs, last_msgs, topology_mask, tau, temperature=1.0
+            )
+            
+            # Update last_msgs
+            last_msgs = msgs_hard
+            
             # msgs_hard: (N, B, msg_dim, vocab_size)
-            symbols = msgs_hard[0, 0].argmax().item() # Just sample first batch/agent for text sequence
+            # Just sample first batch/agent for text sequence
             
             # Actually, let's get sequences for first 5 agents
             for i in range(min(5, NUM_AGENTS)):

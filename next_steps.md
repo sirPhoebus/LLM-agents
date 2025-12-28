@@ -33,3 +33,7 @@ config.yaml
 models.py
 .
 The Goal: Achieve a system capable of recursive self-optimization, where the LLM guides the swarm architecture through bottlenecks discovered during training.
+
+Phase 9: Curriculum Annealing (Gradually reduce the verification probability from 5% to 0% to see if High Trust persists)?
+Optimization: Analyze the vocabulary to see what "Truth" looks like?
+New Task: Deploy this robust swarm to a harder environment?

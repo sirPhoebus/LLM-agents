@@ -3,12 +3,14 @@ import numpy as np
 
 
 class WorldSimulator:
-    def __init__(self, world_dim, latent_dim, num_agents, action_dim, device):
+    def __init__(self, world_dim, latent_dim, num_agents, action_dim, device, num_scouts=2, proximity_weight=1.0):
         self.world_dim = world_dim
         self.latent_dim = latent_dim
         self.num_agents = num_agents
         self.action_dim = action_dim
         self.device = device
+        self.num_scouts = num_scouts
+        self.proximity_weight = proximity_weight
         
         # Projection matrix from latent to world
         self.projection_mat = torch.randn(latent_dim, world_dim).to(device)
@@ -75,8 +77,18 @@ class WorldSimulator:
         delta = cohesion + separation + oscillatory_force + self.noise_factor * torch.randn_like(positions) + action_forces
         new_positions = positions + delta
         
-        # Compute reward: negative variance (encourage clustering)
-        reward = -new_positions.var(dim=1).mean(dim=-1)
+        # --- Task Reward (Grounded) ---
+        # Centroid distance to target
+        centroid = new_positions.mean(dim=1) # (B, 2)
+        dist_to_target = torch.norm(centroid - self.target_pos, dim=-1) # (B,)
+        
+        # Progressive reward: closer is better
+        task_reward = torch.exp(-dist_to_target / 2.0) * self.proximity_weight
+        
+        # Original clustering reward
+        clustering_reward = -new_positions.var(dim=1).mean(dim=-1)
+        
+        reward = clustering_reward + task_reward
         
         return new_positions.view(-1, self.latent_dim), reward
     
@@ -91,13 +103,26 @@ class WorldSimulator:
     
     def get_partial_obs(self, world, agent_id, obs_dim):
         """
-        Complementary observability.
-        Each agent sees a different slice of the world state (wraps around).
-        Communication is REQUIRED to reconstruct the full world.
+        Complementary observability + Task grounding.
+        First 2 dimensions are reserved for target info (Scouts only).
         """
-        start = (agent_id * obs_dim) % world.shape[1]
-        indices = torch.arange(start, start + obs_dim, device=self.device) % world.shape[1]
-        return world.index_select(1, indices)
+        # World slice (obs_dim - 2 dimensions)
+        real_obs_dim = obs_dim - 2
+        start = (agent_id * real_obs_dim) % world.shape[1]
+        indices = torch.arange(start, start + real_obs_dim, device=self.device) % world.shape[1]
+        world_obs = world.index_select(1, indices)
+        
+        # Target info (Scout only)
+        # We use the swarm centroid relative to target for simplicity, or agent pos
+        # Let's say relative to swarm centroid (shared knowledge of scouts)
+        if agent_id < self.num_scouts:
+            # Scouts see the target vector
+            target_info = self.target_pos # (B, 2)
+        else:
+            # Followers see zeros
+            target_info = torch.zeros(world.shape[0], 2, device=self.device)
+            
+        return torch.cat([target_info, world_obs], dim=1)
     
     def reset_time(self):
         """Reset the global time step for oscillatory forces."""
@@ -107,6 +132,11 @@ class WorldSimulator:
         """Initialize environment state."""
         self.reset_time()
         self.last_z = torch.randn(batch_size, self.latent_dim, device=self.device)
+        
+        # Randomize target position for each batch element
+        # Range [-5, 5]
+        self.target_pos = (torch.rand(batch_size, 2, device=self.device) - 0.5) * 10.0
+        
         world = self.last_z @ self.projection_mat
         obs = torch.stack([self.get_partial_obs(world, i, obs_dim) for i in range(self.num_agents)])
         return obs, self.last_z

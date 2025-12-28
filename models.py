@@ -1,9 +1,12 @@
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 import torch.optim as optim
 import math
 import numpy as np
 import utils
+
+print("LOADING MODELS.PY WITH CURRICULUM SUPPORT")
 
 
 class SpeciesLinear(nn.Module):
@@ -114,6 +117,16 @@ class SwarmAttention(nn.Module):
         
         self.attention = nn.MultiheadAttention(hidden_dim, num_heads, batch_first=True)
         self.out_proj = SpeciesLinear(num_species, hidden_dim, hidden_dim)
+        
+        # Sender Recognition: Embed the identity of the sender into the Key
+        # This allows the receiver (Query) to learn "trust weights" for specific agents.
+        # We use a SpeciesLinear to allow each species to embed identities differently if needed,
+        # but a shared embedding is also fine. Let's use SpeciesLinear for consistency.
+        # Input dim is 1 (Agent ID), but we can't input an index to Linear.
+        # So we use nn.Embedding then potentially project. Or just nn.Embedding.
+        # Let's use a simple shared nn.Embedding for identity.
+        # Max agents = 100 (safe upper bound)
+        self.sender_embedding = nn.Embedding(100, hidden_dim)
     
     def forward(self, key_msgs, species_indices, query_msgs=None, mask=None):
         """
@@ -132,6 +145,15 @@ class SwarmAttention(nn.Module):
         q = self.norm_query(self.query_proj(query_msgs, species_indices))
         k = self.norm_key(self.key_proj(key_msgs, species_indices))
         v = self.norm_value(self.value_proj(key_msgs, species_indices))
+        
+        # Inject Sender Identity into Key
+        # sender_indices: (num_agents,) -> (num_agents, hidden_dim)
+        # We assume sender_indices are [0, 1, ..., N-1] usually.
+        sender_indices = torch.arange(num_agents, device=key_msgs.device)
+        sender_emb = self.sender_embedding(sender_indices).unsqueeze(1) # (N, 1, H)
+        
+        # Add to K: (N, B, H) + (N, 1, H) -> (N, B, H) broadcast
+        k = k + sender_emb
         
         # Multihead attention expects (B, N, D)
         q = q.transpose(0, 1)
@@ -178,6 +200,8 @@ class SwarmWorldModel(nn.Module):
         n, b, m, v = all_msgs.shape
         msgs_flat = all_msgs.view(n, b, -1)
         
+        # World Model doesn't strictly need sender recognition for transitions, 
+        # but for consistency we use the updated attention which handles it internally now (auto-generating indices)
         attended, _ = self.attention(msgs_flat, species_indices, mask=mask)
         
         # Apply sequential species blocks manually since nn.Sequential doesn't handle extra args
@@ -285,20 +309,42 @@ class Swarm(nn.Module):
     Supports multiple species for Population-Based Training.
     """
     def __init__(self, obs_dim, msg_dim, vocab_size, hidden_dim, latent_dim, 
-                 total_agents, action_dim, batch_size, learning_rate, num_species=1, composition_config=None):
+                 total_agents, action_dim, batch_size, learning_rate, num_species=1, composition_config=None,
+                 num_scouts=2, num_adversaries=0, adversarial_cfg=None):
         super(Swarm, self).__init__()
         self.total_agents = total_agents
         self.batch_size = batch_size
         self.vocab_size = vocab_size
         self.latent_dim = latent_dim
         self.num_species = num_species
+        self.adversarial_cfg = adversarial_cfg
         
         # Identity per agent
         self.register_buffer("species_indices", torch.arange(total_agents) % num_species)
         
+        # Adversary mask (0 for helpful, 1 for deceptive)
+        adv_mask = torch.zeros(total_agents)
+        if num_adversaries > 0:
+            # Assign first N_adv agents starting from index N_scouts as adversaries
+            start = num_scouts
+            end = min(total_agents, num_scouts + num_adversaries)
+            adv_mask[start:end] = 1.0
+        self.register_buffer("adversary_mask", adv_mask)
+        
         # Heterogeneous components
         self.policy_encoder = LSTMEncoder(num_species, obs_dim, hidden_dim, msg_dim, vocab_size)
         self.action_head = ActionHead(num_species, obs_dim, hidden_dim, action_dim)
+        
+        self.policy_encoder = LSTMEncoder(num_species, obs_dim, hidden_dim, msg_dim, vocab_size)
+        self.action_head = ActionHead(num_species, obs_dim, hidden_dim, action_dim)
+        
+        # --- NEW: Policy Attention (Hearing) ---
+        # Attention to aggregate messages from neighbors
+        # Input to attention is flattened messages (msg_dim * vocab_size)
+        self.policy_attention = SwarmAttention(num_species, msg_dim, vocab_size, hidden_dim)
+        
+        # Proj from Obs+Attn to Input
+        self.policy_input_proj = nn.Linear(obs_dim + hidden_dim, obs_dim) 
         
         self.world_model = SwarmWorldModel(num_species, msg_dim, vocab_size, hidden_dim, latent_dim)
         
@@ -332,13 +378,35 @@ class Swarm(nn.Module):
     def reset_hidden(self, device):
         self.hidden_state = self.policy_encoder.init_hidden(self.total_agents, self.batch_size, device)
 
-    def forward_policy(self, obs, tau, temperature=1.0, exploration_std=0.1):
+    def forward_policy(self, obs, last_msgs_hard, topology_mask, tau, temperature=1.0, exploration_std=0.1):
         """
         obs: (total_agents, batch_size, obs_dim)
+        last_msgs_hard: (total_agents, batch_size, msg_dim, vocab_size) One-hot
+        topology_mask: (total_agents, total_agents) bool mask (True = attend)
         Returns: msgs_hard, msgs_soft, actions
         """
-        msg_logits, self.hidden_state = self.policy_encoder(obs, self.species_indices, self.hidden_state)
-        action_mean = self.action_head(obs, self.species_indices)
+        # 1. Process received messages
+        # Flatten: (N, B, M, V) -> (N, B, M*V)
+        n, b, m, v = last_msgs_hard.shape
+        flat_msgs = last_msgs_hard.reshape(n, b, m * v)
+        
+        # 2. Attend to neighbors
+        # query_msgs=None (defaults to zeros/self depending on impl)
+        # We pass topology_mask as mask.
+        context, self.last_attn_weights = self.policy_attention(flat_msgs, self.species_indices, query_msgs=None, mask=topology_mask)
+        
+        # 3. Fuse Context with Obs
+        
+        # 3. Fuse Context with Obs
+        # obs: (N, B, O)
+        # context: (N, B, H)
+        # cat = [obs, context] -> (N, B, O+H)
+        # fused = self.policy_input_proj(cat) -> (N, B, O)
+        fused = self.policy_input_proj(torch.cat([obs, context], dim=-1))
+        
+        # 4. Pass to Policy Encoder (LSTM)
+        msg_logits, self.hidden_state = self.policy_encoder(fused, self.species_indices, self.hidden_state)
+        action_mean = self.action_head(fused, self.species_indices)
         
         # Messages
         scaled_logits = msg_logits / temperature
@@ -351,17 +419,17 @@ class Swarm(nn.Module):
         return msgs_hard, msgs_soft, actions
 
     def compute_loss(self, obs, msgs_hard, msgs_soft, returns, target_z, mask, 
-                     entropy_weight, comm_cost_weight):
+                     entropy_weight, comm_cost_weight, adversarial_weight_override=None):
         """
         obs: (N, B, obs_dim)
         msgs_hard/soft: (N, B, msg_dim, vocab_size)
-        returns: (N, B)
+        returns: (B,) swarm reward
         target_z: (B, latent_dim)
-        mask: (N, N)
+        mask: (N, N) topology mask
         """
         device = obs.device
         
-        # 1. SSL Losses
+        # 1. SSL Losses (Standard Collective Goals)
         recon, self.last_attn_weights = self.decoder(msgs_hard, self.species_indices, mask)
         recon_loss = nn.MSELoss()(recon, obs)
         
@@ -369,7 +437,7 @@ class Swarm(nn.Module):
         target_z_exp = target_z.unsqueeze(0).expand(self.total_agents, -1, -1)
         pred_loss = nn.MSELoss()(hat_z_next, target_z_exp)
         
-        # Penalty/Regularization
+        # Regularization
         entropy = -torch.mean(msgs_soft * torch.log(msgs_soft + 1e-10))
         entropy_loss = -entropy_weight * entropy
         comm_cost = comm_cost_weight * torch.mean(torch.abs(msgs_soft))
@@ -377,19 +445,43 @@ class Swarm(nn.Module):
         ssl_loss = recon_loss + pred_loss + entropy_loss + comm_cost
         
         # 2. RL Loss (REINFORCE)
+        # log_probs: (N, B)
+        # Note: CrossEntropyLoss expects (..., C) as input and (...) as target
         log_probs = -nn.CrossEntropyLoss(reduction='none')(
-            msgs_soft.view(-1, self.vocab_size),
-            msgs_hard.argmax(-1).view(-1)
+            msgs_soft.reshape(-1, self.vocab_size),
+            msgs_hard.argmax(-1).reshape(-1)
         ).view(self.total_agents, self.batch_size, -1).mean(dim=-1)
         
-        if returns.dim() == 1:
-            returns = returns.unsqueeze(0)
+        # Final Returns Modification for Adversaries
+        # Helpful agents want higher returns. 
+        # Adversaries want lower returns (or different signal).
+        
+        # Ensure returns is (N, B)
+        if returns.ndim == 1:
+            # (B,) -> (N, B)
+            modified_returns = returns.unsqueeze(0).expand(self.total_agents, -1).clone()
+        else:
+            # Already (N, B)
+            modified_returns = returns.clone()
+        
+        if self.adversarial_cfg and self.adversarial_cfg.get('enabled'):
+            # Flip return for adversaries: they want to REDUCE swarm reward
+            # Scale by adversarial_weight
+            adv_weight = self.adversarial_cfg.get('adversarial_weight', 1.0)
+            if adversarial_weight_override is not None:
+                adv_weight = adversarial_weight_override
             
-        rl_loss = -torch.mean(log_probs * returns)
+            # Mask: 1.0 for adversaries, 0.0 for others
+            m = self.adversary_mask.unsqueeze(1) # (N, 1)
+            
+            # Modified return: (1-m)*R - m*R*weight
+            # This makes the gradient aim away from high-reward trajectories for adversaries
+            modified_returns = modified_returns * (1.0 - m) - modified_returns * m * adv_weight
+            
+        rl_loss = -torch.mean(log_probs * modified_returns)
         
         total_loss = ssl_loss + rl_loss
         
-        # Aggregate stats (weighted by agent performance if needed, but mean is fine for scalar return)
         return total_loss, recon_loss.item(), pred_loss.item()
 
     def mutate_species(self, target_species_id, source_species_id, mutation_rate=0.01):
