@@ -1,0 +1,75 @@
+:root {
+  --bg-dark: #0f172a;
+  --bg-card: rgba(30, 41, 59, 0.7);
+  --accent-primary: #38bdf8;
+  --accent-secondary: #818cf8;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --wall-color: #334155;
+  --hider-color: #4ade80;
+  --seeker-color: #f87171;
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  max-width: 1200px;
+  padding: 2rem;
+}
+
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 1rem;
+  box-shadow: var(--glass-shadow);
+}
+
+.button-primary {
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  border: none;
+  padding: 0.75rem 1.5rem;
+  color: white;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.button-primary:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+.button-secondary {
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  padding: 0.75rem 1.5rem;
+  color: var(--text-main);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.button-secondary:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
